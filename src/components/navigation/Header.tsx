@@ -8,7 +8,7 @@ const Header = () => {
     <Bar>
       <NameWrapper>
         <Logo src={LogoImg} />
-        <Name>DnDTome</Name>
+        <Name>SkirmishTome</Name>
       </NameWrapper>
       <HomeCredits>v{packageJson.version}</HomeCredits>
     </Bar>

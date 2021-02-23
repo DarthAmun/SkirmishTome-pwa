@@ -5,8 +5,8 @@ import { CompleteLoadingSpinner } from "./components/Loading";
 import AppWrapper from "./components/AppWrapper";
 import { HashRouter } from "react-router-dom";
 
-const ToEntity = lazy(() => import("./components/general_elements/details/ToEntity"));
-const EntityOverview = lazy(() => import("./components/general_elements/EntityOverview"));
+// const ToEntity = lazy(() => import("./components/general_elements/details/ToEntity"));
+// const EntityOverview = lazy(() => import("./components/general_elements/EntityOverview"));
 
 const Help = lazy(() => import("./components/help/Help"));
 const Home = lazy(() => import("./components/home/Home"));

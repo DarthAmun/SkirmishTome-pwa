@@ -31,7 +31,7 @@ const SpellView = ({ spell }: $Props) => {
   useEffect(() => {
     if (webhook !== undefined) {
       let newJson = {
-        username: webhook.name + " (DnDTome)",
+        username: webhook.name + " (SkirmishTome)",
         embeds: [
           {
             author: {

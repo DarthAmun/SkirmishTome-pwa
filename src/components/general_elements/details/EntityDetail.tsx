@@ -18,42 +18,8 @@ import IconButton from "../../form_elements/IconButton";
 import { EditToggle, ToggleLeft, ToggleRight } from "../ToggleStyle";
 import Dialog from "../Dialog";
 
-import CampaignEditView from "../../entities/campaigns/details/CampaignEditView";
-import CampaignView from "../../entities/campaigns/details/CampaignView";
-import ClasseEditView from "../../entities/classes/details/ClasseEditView";
-import ClasseView from "../../entities/classes/details/ClasseView";
-import EventEditView from "../../entities/events/details/EventEditView";
-import EventView from "../../entities/events/details/EventView";
-import GearEditView from "../../entities/gear/details/GearEditView";
-import GearView from "../../entities/gear/details/GearView";
-import GroupEditView from "../../entities/groups/details/GroupEditView";
-import GroupView from "../../entities/groups/details/GroupView";
-import ItemEditView from "../../entities/items/details/ItemEditView";
-import ItemView from "../../entities/items/details/ItemView";
-import BookEditView from "../../entities/library/details/BookEditView";
-import BookView from "../../entities/library/details/BookView";
-import LocationEditView from "../../entities/locations/details/LocationEditView";
-import LocationView from "../../entities/locations/details/LocationView";
-import MonsterEditView from "../../entities/monsters/details/MonsterEditView";
-import MonsterView from "../../entities/monsters/details/MonsterView";
-import NpcEditView from "../../entities/npcs/details/NpcEditView";
-import NpcView from "../../entities/npcs/details/NpcView";
-import QuestEditView from "../../entities/quests/details/QuestEditView";
-import QuestView from "../../entities/quests/details/QuestView";
-import RaceEditView from "../../entities/races/details/RaceEditView";
-import RaceView from "../../entities/races/details/RaceView";
-import RandomTableEditView from "../../entities/random_tables/details/RandomTableEditView";
-import RandomTableView from "../../entities/random_tables/details/RandomTableView";
-import SelectionEditView from "../../entities/selections/details/SelectionEditView";
-import SelectionView from "../../entities/selections/details/SelectionView";
 import SpellEditView from "../../entities/spells/details/SpellEditView";
 import SpellView from "../../entities/spells/details/SpellView";
-import SubclasseEditView from "../../entities/subclasses/details/SubclasseEditView";
-import SubclasseView from "../../entities/subclasses/details/SubclasseView";
-import SubraceEditView from "../../entities/subraces/details/SubraceEditView";
-import SubraceView from "../../entities/subraces/details/SubraceView";
-import WorldEditView from "../../entities/worlds/details/WorldEditView";
-import WorldView from "../../entities/worlds/details/WorldView";
 
 interface $Props {
   entity: IEntity;
@@ -113,43 +79,12 @@ const EntityDetail = ({ entity, tableName, isNew, view }: $Props) => {
     updateEntity(entity, msg);
   };
 
-  const views = {
-    CampaignView: CampaignView,
-    CampaignEditView: CampaignEditView,
-    ClasseView: ClasseView,
-    ClasseEditView: ClasseEditView,
-    EventView: EventView,
-    EventEditView: EventEditView,
-    GearView: GearView,
-    GearEditView: GearEditView,
-    GroupView: GroupView,
-    GroupEditView: GroupEditView,
-    ItemView: ItemView,
-    ItemEditView: ItemEditView,
-    BookView: BookView,
-    BookEditView: BookEditView,
-    LocationView: LocationView,
-    LocationEditView: LocationEditView,
-    MonsterView: MonsterView,
-    MonsterEditView: MonsterEditView,
-    NpcView: NpcView,
-    NpcEditView: NpcEditView,
-    QuestView: QuestView,
-    QuestEditView: QuestEditView,
-    RaceView: RaceView,
-    RaceEditView: RaceEditView,
-    RandomTableView: RandomTableView,
-    RandomTableEditView: RandomTableEditView,
-    SelectionView: SelectionView,
-    SelectionEditView: SelectionEditView,
+  type viewOptions = {
+    [key: string]: (props:any) => JSX.Element;
+  };
+  const views: viewOptions = {
     SpellView: SpellView,
     SpellEditView: SpellEditView,
-    SubclasseView: SubclasseView,
-    SubclasseEditView: SubclasseEditView,
-    SubraceView: SubraceView,
-    SubraceEditView: SubraceEditView,
-    WorldView: WorldView,
-    WorldEditView: WorldEditView,
   };
 
   return (

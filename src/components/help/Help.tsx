@@ -18,14 +18,14 @@ const Help = () => {
         {activeTab === "Install" && (
           <>
             <HelpSection>
-              <SelectionTitle>How to install DnDTome on desktop</SelectionTitle>
+              <SelectionTitle>How to install SkirmishTome on desktop</SelectionTitle>
               <SectionText>
                 To install this webapp as an app use chrome and click on the plus in your navigation
                 bar right next to the favorite star icon.
               </SectionText>
             </HelpSection>
             <HelpSection>
-              <SelectionTitle>How to install DnDTome on mobile</SelectionTitle>
+              <SelectionTitle>How to install SkirmishTome on mobile</SelectionTitle>
               <SectionText>
                 To install this webapp as an app on mobile find and click the "Add to home screen"
                 option in your firefox, chrome or safari.
@@ -78,7 +78,7 @@ const Help = () => {
             <HelpSection>
               <SelectionTitle>How to import from other sources</SelectionTitle>
               <SectionText>
-                As of now only dndtome and 5eTools .json files are supported.
+                As of now only SkirmishTome and 5eTools .json files are supported.
               </SectionText>
             </HelpSection>
           </>
@@ -115,7 +115,7 @@ const Help = () => {
             </HelpSection>
             <HelpSection>
               <SelectionTitle>How to export to other sources</SelectionTitle>
-              <SectionText>As of now you can only export to dndtome .json files.</SectionText>
+              <SectionText>As of now you can only export to SkirmishTome .json files.</SectionText>
             </HelpSection>
           </>
         )}

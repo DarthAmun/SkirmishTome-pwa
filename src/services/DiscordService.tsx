@@ -8,7 +8,7 @@ export const sendMessage = (
     request.open("POST", webhook.hook);
     request.setRequestHeader("Content-type", "application/json");
     let params = {
-      username: webhook.name !== "" ? webhook.name : "DnDTome",
+      username: webhook.name !== "" ? webhook.name : "SkirmishTome",
       avatar_url: avatar !== undefined ? avatar : "",
       content: content,
     };

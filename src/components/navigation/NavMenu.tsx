@@ -3,32 +3,9 @@ import styled from "styled-components";
 import { Link, useLocation } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faMeteor,
-  faCog,
-  faDragon,
-  faIdCard,
-  faChartPie,
-  faHome,
-  faTable,
-  faMapMarkedAlt,
-} from "@fortawesome/free-solid-svg-icons";
-import {
-  GiBackpack,
-  GiWomanElfFace,
-  GiCrystalWand,
-  GiPlagueDoctorProfile,
-  GiSwordClash,
-  GiBookmarklet,
-  GiBookshelf,
-  GiSolarSystem,
-  GiScrollUnfurled,
-  GiDjinn,
-} from "react-icons/gi";
-import { BiSelectMultiple } from "react-icons/bi";
-import { HiUserGroup } from "react-icons/hi";
+import { faMeteor, faCog, faChartPie, faHome } from "@fortawesome/free-solid-svg-icons";
+
 import { RightTooltip } from "../SearchbarStyle";
-import { MdEvent } from "react-icons/md";
 
 interface $Props {
   open: boolean;
@@ -50,140 +27,14 @@ const NavMenu = ({ open }: $Props) => {
           <RightTooltip>Home</RightTooltip>
         </Link>
         <Seperator />
+        <Link
+          to="/spell-overview"
+          className={location.pathname === "/spell-overview" ? "menuItemActiv" : ""}
+        >
+          <FontAwesomeIcon icon={faMeteor} />
+          <RightTooltip>Spells</RightTooltip>
+        </Link>
       </TopSide>
-      <MiddleSide>
-        <LeftSide>
-          <Link
-            to="/campaign-overview"
-            className={location.pathname === "/campaign-overview" ? "menuItemActiv" : ""}
-          >
-            <GiBookmarklet />
-            <RightTooltip>Campaigns</RightTooltip>
-          </Link>
-          <Link
-            to="/quest-overview"
-            className={location.pathname === "/quest-overview" ? "menuItemActiv" : ""}
-          >
-            <GiScrollUnfurled />
-            <RightTooltip>Quests</RightTooltip>
-          </Link>
-           <Link
-            to="/group-overview"
-            className={location.pathname === "/group-overview" ? "menuItemActiv" : ""}
-          >
-            <HiUserGroup />
-            <RightTooltip>Groups</RightTooltip>
-          </Link>
-          <Link
-            to="/npc-overview"
-            className={location.pathname === "/npc-overview" ? "menuItemActiv" : ""}
-          >
-            <GiDjinn />
-            <RightTooltip>Npc's</RightTooltip>
-          </Link>
-          <Seperator />
-          <Link
-            to="/world-overview"
-            className={location.pathname === "/world-overview" ? "menuItemActiv" : ""}
-          >
-            <GiSolarSystem />
-            <RightTooltip>Worlds</RightTooltip>
-          </Link>
-          <Link
-            to="/location-overview"
-            className={location.pathname === "/location-overview" ? "menuItemActiv" : ""}
-          >
-            <FontAwesomeIcon icon={faMapMarkedAlt} />
-            <RightTooltip>Locations</RightTooltip>
-          </Link>
-          <Link
-            to="/event-overview"
-            className={location.pathname === "/event-overview" ? "menuItemActiv" : ""}
-          >
-            <MdEvent />
-            <RightTooltip>Events</RightTooltip>
-          </Link>
-          <Seperator />
-          <Link
-            to="/randomTable-overview"
-            className={location.pathname === "/randomTable-overview" ? "menuItemActiv" : ""}
-          >
-            <FontAwesomeIcon icon={faTable} />
-            <RightTooltip>Random Tables</RightTooltip>
-          </Link>
-          <Seperator />
-          <Link to="/book-overview" className={location.pathname === "/book-overview" ? "menuItemActiv" : ""}>
-            <GiBookshelf />
-            <RightTooltip>Library</RightTooltip>
-          </Link>
-        </LeftSide>
-        <RightSide>
-          <Link
-            to="/spell-overview"
-            className={location.pathname === "/spell-overview" ? "menuItemActiv" : ""}
-          >
-            <FontAwesomeIcon icon={faMeteor} />
-            <RightTooltip>Spells</RightTooltip>
-          </Link>
-          <Link
-            to="/item-overview"
-            className={location.pathname === "/item-overview" ? "menuItemActiv" : ""}
-          >
-            <GiCrystalWand />
-            <RightTooltip>Magic Items</RightTooltip>
-          </Link>
-          <Link
-            to="/gear-overview"
-            className={location.pathname === "/gear-overview" ? "menuItemActiv" : ""}
-          >
-            <GiBackpack />
-            <RightTooltip>Gear</RightTooltip>
-          </Link>
-          <Link
-            to="/race-overview"
-            className={location.pathname === "/race-overview" ? "menuItemActiv" : ""}
-          >
-            <GiWomanElfFace />
-            <RightTooltip>Races</RightTooltip>
-          </Link>
-          <Link
-            to="/classe-overview"
-            className={location.pathname === "/classe-overview" ? "menuItemActiv" : ""}
-          >
-            <GiPlagueDoctorProfile />
-            <RightTooltip>Classes</RightTooltip>
-          </Link>
-          <Link
-            to="/selection-overview"
-            className={location.pathname === "/selection-overview" ? "menuItemActiv" : ""}
-          >
-            <BiSelectMultiple />
-            <RightTooltip>Selections</RightTooltip>
-          </Link>
-          <Link
-            to="/char-overview"
-            className={location.pathname === "/char-overview" ? "menuItemActiv" : ""}
-          >
-            <FontAwesomeIcon icon={faIdCard} />
-            <RightTooltip>Chars</RightTooltip>
-          </Link>
-          <Seperator />
-          <Link
-            to="/monster-overview"
-            className={location.pathname === "/monster-overview" ? "menuItemActiv" : ""}
-          >
-            <FontAwesomeIcon icon={faDragon} />
-            <RightTooltip>Monsters</RightTooltip>
-          </Link>
-          <Link
-            to="/encounter-overview"
-            className={location.pathname === "/encounter-overview" ? "menuItemActiv" : ""}
-          >
-            <GiSwordClash />
-            <RightTooltip>Encounters</RightTooltip>
-          </Link>
-        </RightSide>
-      </MiddleSide>
       <BottomSide>
         <Seperator />
         <Link
@@ -283,14 +134,14 @@ const TopSide = styled.div`
     color: ${({ theme }) => theme.main.highlight};
   }
 `;
-const MiddleSide = styled.div``;
+// const MiddleSide = styled.div``;
 const BottomSide = styled(TopSide)``;
-const LeftSide = styled(TopSide)`
-  width: 32px;
-  float: left;
-`;
-const RightSide = styled(LeftSide)`
-  margin-left: 5px;
-  padding-left: 5px;
-  border-left: 2px solid ${({ theme }) => theme.tile.backgroundColor};
-`;
+// const LeftSide = styled(TopSide)`
+//   width: 32px;
+//   float: left;
+// `;
+// const RightSide = styled(LeftSide)`
+//   margin-left: 5px;
+//   padding-left: 5px;
+//   border-left: 2px solid ${({ theme }) => theme.tile.backgroundColor};
+// `;

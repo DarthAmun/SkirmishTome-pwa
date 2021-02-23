@@ -166,7 +166,7 @@ const SpellSearchBar = () => {
   };
 
   const exportFiltered = () => {
-    exportFilteredFromTable("spells", filters, "DnDTome_filtered_spells.json");
+    exportFilteredFromTable("spells", filters, "SkirmishTome_filtered_spells.json");
   };
 
   return (

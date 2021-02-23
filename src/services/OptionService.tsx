@@ -1,22 +1,6 @@
 import { reciveAll, reciveAllPromise, saveNew } from "./DatabaseService";
 import { IndexableType } from "dexie";
-import Char, { isChar } from "../data/chars/Char";
-import Class, { isClass } from "../data/classes/Class";
-import Subclass, { isSubclass } from "../data/classes/Subclass";
-import Encounter, { isEncounter } from "../data/encounter/Encounter";
-import Gear, { isGear } from "../data/Gear";
-import Item, { isItem } from "../data/Item";
-import Monster, { isMonster } from "../data/Monster";
-import Race, { isRace } from "../data/races/Race";
-import Subrace, { isSubrace } from "../data/races/Subrace";
-import Selection, { isSelection } from "../data/Selection";
 import Spell, { isSpell } from "../data/Spell";
-import Campaign, { isCampaign } from "../data/campaign/Campaign";
-import Quest, { isQuest } from "../data/campaign/Quest";
-import Npc, { isNpc } from "../data/campaign/Npc";
-import Location, { isLocation } from "../data/world/Location";
-import Event, { isEvent } from "../data/world/Event";
-import World, { isWorld } from "../data/world/World";
 
 export const scanImportFileTest = async (json: any, fileName: string, callback: () => void) => {
   let promList: Promise<any>[] = [];
@@ -26,40 +10,8 @@ export const scanImportFileTest = async (json: any, fileName: string, callback: 
   }
 
   json.forEach((obj: any) => {
-    if (isClass(obj)) {
-      promList.push(saveNew("classes", obj as Class, fileName));
-    } else if (isSubclass(obj)) {
-      promList.push(saveNew("subclasses", obj as Subclass, fileName));
-    } else if (isRace(obj)) {
-      promList.push(saveNew("races", obj as Race, fileName));
-    } else if (isSubrace(obj)) {
-      promList.push(saveNew("subraces", obj as Subrace, fileName));
-    } else if (isMonster(obj)) {
-      promList.push(saveNew("monsters", obj as Monster, fileName));
-    } else if (isSpell(obj)) {
+    if (isSpell(obj)) {
       promList.push(saveNew("spells", obj as Spell, fileName));
-    } else if (isGear(obj)) {
-      promList.push(saveNew("gears", obj as Gear, fileName));
-    } else if (isItem(obj)) {
-      promList.push(saveNew("items", obj as Item, fileName));
-    } else if (isEncounter(obj)) {
-      promList.push(saveNew("encounters", obj as Encounter, fileName));
-    } else if (isSelection(obj)) {
-      promList.push(saveNew("selections", obj as Selection, fileName));
-    } else if (isCampaign(obj)) {
-      promList.push(saveNew("campaigns", obj as Campaign, fileName));
-    } else if (isQuest(obj)) {
-      promList.push(saveNew("quests", obj as Quest, fileName));
-    } else if (isNpc(obj)) {
-      promList.push(saveNew("npcs", obj as Npc, fileName));
-    } else if (isWorld(obj)) {
-      promList.push(saveNew("worlds", obj as World, fileName));
-    } else if (isLocation(obj)) {
-      promList.push(saveNew("locations", obj as Location, fileName));
-    } else if (isEvent(obj)) {
-      promList.push(saveNew("events", obj as Event, fileName));
-    } else if (isChar(obj)) {
-      promList.push(saveNew("chars", obj as Char, fileName));
     }
   });
   await Promise.all(promList);
@@ -248,45 +200,9 @@ export const exportAllFromTable = (tableName: string, filename: string) => {
 
 export const exportAll = async (filename: string) => {
   const spells = await reciveAllPromise("spells");
-  let items = await reciveAllPromise("items");
-  let gears = await reciveAllPromise("gears");
-  let monsters = await reciveAllPromise("monsters");
-  let races = await reciveAllPromise("races");
-  let subraces = await reciveAllPromise("subraces");
-  let classes = await reciveAllPromise("classes");
-  let subclasses = await reciveAllPromise("subclasses");
-  let chars = await reciveAllPromise("chars");
-  let encounters = await reciveAllPromise("encounters");
-  let selections = await reciveAllPromise("selections");
-  let randomTables = await reciveAllPromise("randomTables");
-  let campaigns = await reciveAllPromise("campaigns");
-  let quests = await reciveAllPromise("quests");
-  let npcs = await reciveAllPromise("npcs");
-  let worlds = await reciveAllPromise("worlds");
-  let locations = await reciveAllPromise("locations");
-  let events = await reciveAllPromise("events");
-  let groups = await reciveAllPromise("groups");
 
   let all: any = {
     spells: spells,
-    items: items,
-    gears: gears,
-    monsters: monsters,
-    races: races,
-    subraces: subraces,
-    classes: classes,
-    subclasses: subclasses,
-    chars: chars,
-    encounters: encounters,
-    selections: selections,
-    randomTables: randomTables,
-    campaigns: campaigns,
-    quests: quests,
-    npcs: npcs,
-    worlds: worlds,
-    locations: locations,
-    events: events,
-    groups: groups,
   };
 
   let contentType = "application/json;charset=utf-8;";
