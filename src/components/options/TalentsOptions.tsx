@@ -12,7 +12,7 @@ interface $Props {
   triggerDeleteAll: (tableName: string) => void;
 }
 
-const SpellsOptions = ({ amount, triggerDeleteAll }: $Props) => {
+const TalentsOptions = ({ amount, triggerDeleteAll }: $Props) => {
   const [send, setSend] = useState<boolean>(false);
 
   return (
@@ -20,38 +20,38 @@ const SpellsOptions = ({ amount, triggerDeleteAll }: $Props) => {
       <OptionSection>
         <SelectionTitle>Export</SelectionTitle>
         <SectionRow>
-          <SectionText>Export all Spells?</SectionText>
+          <SectionText>Export all Talents?</SectionText>
           <IconButton
             icon={faFileExport}
-            onClick={() => exportAllFromTable("spells", "SkirmishTome_spells.json")}
+            onClick={() => exportAllFromTable("talents", "SkirmishTome_talents.json")}
           />
         </SectionRow>
       </OptionSection>
       <OptionSection>
         <SelectionTitle>Delete</SelectionTitle>
         <SectionRow>
-          <SectionText>Delete all {amount} Spells?</SectionText>
+          <SectionText>Delete all {amount} Talents?</SectionText>
           <IconButton
             icon={faTrashAlt}
-            onClick={() => triggerDeleteAll("spells")}
+            onClick={() => triggerDeleteAll("talents")}
           />
         </SectionRow>
       </OptionSection>
       <OptionSection>
         {!send && (
           <TextButton
-            text={`Send all spells`}
+            text={`Send all talents`}
             icon={faPaperPlane}
             onClick={() => setSend(true)}
           />
         )}
-        {!!send && <P2PSender data={"spells"} mode={"ALL"} />}
+        {!!send && <P2PSender data={"talents"} mode={"ALL"} />}
       </OptionSection>
     </OptionTab>
   );
 };
 
-export default SpellsOptions;
+export default TalentsOptions;
 
 const General = styled.div`
   flex: 1 1 auto;

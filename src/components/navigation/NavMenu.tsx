@@ -3,9 +3,10 @@ import styled from "styled-components";
 import { Link, useLocation } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMeteor, faCog, faChartPie, faHome } from "@fortawesome/free-solid-svg-icons";
+import { faMeteor, faCog, faChartPie, faHome, faTable } from "@fortawesome/free-solid-svg-icons";
 
 import { RightTooltip } from "../SearchbarStyle";
+import { GiSwordsPower } from "react-icons/gi";
 
 interface $Props {
   open: boolean;
@@ -26,15 +27,27 @@ const NavMenu = ({ open }: $Props) => {
           <FontAwesomeIcon icon={faHome} />
           <RightTooltip>Home</RightTooltip>
         </Link>
-        <Seperator />
-        <Link
-          to="/spell-overview"
-          className={location.pathname === "/spell-overview" ? "menuItemActiv" : ""}
-        >
-          <FontAwesomeIcon icon={faMeteor} />
-          <RightTooltip>Spells</RightTooltip>
-        </Link>
       </TopSide>
+      <MiddleSide>
+        <LeftSide>
+          <Link
+            to="/randomTable-overview"
+            className={location.pathname === "/randomTable-overview" ? "menuItemActiv" : ""}
+          >
+            <FontAwesomeIcon icon={faTable} />
+            <RightTooltip>Random Tables</RightTooltip>
+          </Link>
+        </LeftSide>
+        <RightSide>
+          <Link
+            to="/talent-overview"
+            className={location.pathname === "/talent-overview" ? "menuItemActiv" : ""}
+          >
+            <GiSwordsPower />
+            <RightTooltip>Talents</RightTooltip>
+          </Link>
+        </RightSide>
+      </MiddleSide>
       <BottomSide>
         <Seperator />
         <Link
@@ -134,14 +147,14 @@ const TopSide = styled.div`
     color: ${({ theme }) => theme.main.highlight};
   }
 `;
-// const MiddleSide = styled.div``;
+const MiddleSide = styled.div``;
 const BottomSide = styled(TopSide)``;
-// const LeftSide = styled(TopSide)`
-//   width: 32px;
-//   float: left;
-// `;
-// const RightSide = styled(LeftSide)`
-//   margin-left: 5px;
-//   padding-left: 5px;
-//   border-left: 2px solid ${({ theme }) => theme.tile.backgroundColor};
-// `;
+const LeftSide = styled(TopSide)`
+  width: 32px;
+  float: left;
+`;
+const RightSide = styled(LeftSide)`
+  margin-left: 5px;
+  padding-left: 5px;
+  border-left: 2px solid ${({ theme }) => theme.tile.backgroundColor};
+`;

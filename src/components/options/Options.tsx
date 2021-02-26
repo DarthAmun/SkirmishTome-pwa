@@ -5,29 +5,29 @@ import { deleteAll, reciveCount } from "../../services/DatabaseService";
 import IEntity from "../../data/IEntity";
 import P2PReciver from "../p2p/P2PReciver";
 
-import { isSpell } from "../../data/Spell";
+import { isTalent } from "../../data/Talent";
 
 import { faFileExport } from "@fortawesome/free-solid-svg-icons";
 import TabBar from "../general_elements/TabBar";
 import IconButton from "../form_elements/IconButton";
-import SpellTile from "../entities/spells/SpellTile";
+import TalentTile from "../entities/talents/TalentTile";
 import GeneralOptions from "./GeneralOptions";
-import SpellsOptions from "./SpellsOptions";
+import TalentsOptions from "./TalentsOptions";
 import ImportField, { ImportModus } from "../form_elements/ImportField";
 import DiscordOptions from "./DiscordOptions";
 
 const Options = () => {
   const [activeTab, setTab] = useState<string>("General");
 
-  const [spellAmount, setSpellAmount] = useState<number>(0);
+  const [talentAmount, setTalentAmount] = useState<number>(0);
 
   const [reload, isReload] = useState<boolean>(true);
   const [data, setData] = useState<IEntity[] | IEntity>();
 
   useEffect(() => {
     if (reload) {
-      reciveCount("spells", (result: number) => {
-        setSpellAmount(result);
+      reciveCount("talents", (result: number) => {
+        setTalentAmount(result);
       });
       isReload(false);
     }
@@ -39,8 +39,8 @@ const Options = () => {
   };
 
   const returnTile = (entity: IEntity, index: number) => {
-    if (isSpell(entity)) {
-      return <SpellTile key={index} spell={entity} />;
+    if (isTalent(entity)) {
+      return <TalentTile key={index} talent={entity} />;
     } else {
       return <OptionSection key={index}>{entity.name}</OptionSection>;
     }
@@ -60,13 +60,13 @@ const Options = () => {
         </SectionRow>
       </OptionSection>
       <TabBar
-        children={["General", "Spells", "Discord", "Receive"]}
+        children={["General", "Talents", "Discord", "Receive"]}
         onChange={(tab: string) => setTab(tab)}
         activeTab={activeTab}
       />
       {activeTab === "General" && <GeneralOptions />}
-      {activeTab === "Spells" && (
-        <SpellsOptions amount={spellAmount} triggerDeleteAll={triggerDeleteAll} />
+      {activeTab === "Talents" && (
+        <TalentsOptions amount={talentAmount} triggerDeleteAll={triggerDeleteAll} />
       )}
       {activeTab === "Discord" && <DiscordOptions />}
       {activeTab === "Receive" && (

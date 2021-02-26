@@ -11,7 +11,8 @@ import {
 } from "../../../services/DatabaseService";
 import IEntity from "../../../data/IEntity";
 import { useCallback } from "react";
-import Spell from "../../../data/Spell";
+import Talent from "../../../data/Talent";
+import RandomTable from "../../../data/RandomTable";
 
 type TParams = { id?: string; name?: string };
 
@@ -68,7 +69,8 @@ const ToEntity = ({ match }: RouteComponentProps<TParams>) => {
   };
 
   const entities: entityOptions = {
-    spell: new Spell(match.params.name),
+    talent: new Talent(0, match.params.name),
+    randomTables: new RandomTable(0, match.params.name),
   };
 
   const createNewEntity = () => {

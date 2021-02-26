@@ -18,8 +18,10 @@ import IconButton from "../../form_elements/IconButton";
 import { EditToggle, ToggleLeft, ToggleRight } from "../ToggleStyle";
 import Dialog from "../Dialog";
 
-import SpellEditView from "../../entities/spells/details/SpellEditView";
-import SpellView from "../../entities/spells/details/SpellView";
+import RandomTableEditView from "../../entities/random_tables/details/RandomTableEditView";
+import RandomTableView from "../../entities/random_tables/details/RandomTableView";
+import TalentEditView from "../../entities/talents/details/TalentEditView";
+import TalentView from "../../entities/talents/details/TalentView";
 
 interface $Props {
   entity: IEntity;
@@ -83,8 +85,10 @@ const EntityDetail = ({ entity, tableName, isNew, view }: $Props) => {
     [key: string]: (props:any) => JSX.Element;
   };
   const views: viewOptions = {
-    SpellView: SpellView,
-    SpellEditView: SpellEditView,
+    TalentView: TalentView,
+    TalentEditView: TalentEditView,
+    RandomTableView: RandomTableView,
+    RandomTableEditView: RandomTableEditView,
   };
 
   return (

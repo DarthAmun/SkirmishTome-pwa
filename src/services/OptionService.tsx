@@ -1,6 +1,6 @@
 import { reciveAll, reciveAllPromise, saveNew } from "./DatabaseService";
 import { IndexableType } from "dexie";
-import Spell, { isSpell } from "../data/Spell";
+import Talent, { isTalent } from "../data/Talent";
 
 export const scanImportFileTest = async (json: any, fileName: string, callback: () => void) => {
   let promList: Promise<any>[] = [];
@@ -10,8 +10,8 @@ export const scanImportFileTest = async (json: any, fileName: string, callback: 
   }
 
   json.forEach((obj: any) => {
-    if (isSpell(obj)) {
-      promList.push(saveNew("spells", obj as Spell, fileName));
+    if (isTalent(obj)) {
+      promList.push(saveNew("talents", obj as Talent, fileName));
     }
   });
   await Promise.all(promList);

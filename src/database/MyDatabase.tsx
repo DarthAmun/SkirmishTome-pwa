@@ -1,16 +1,19 @@
 import Dexie from "dexie";
-import Spell from "../data/Spell";
+import RandomTable from "../data/RandomTable";
+import Talent from "../data/Talent";
 
 export class MyAppDatabase extends Dexie {
-  spells: Dexie.Table<Spell, number>;
+  randomTables: Dexie.Table<RandomTable, number>; // number = type of the primkey
+  talents: Dexie.Table<Talent, number>;
 
   constructor() {
     super("SkirmishTomeDB");
     this.version(1).stores({
-      spells:
-        "++id, name, classes, sources, level, school, time, range, components, duration, ritual, text, pic",
+      talents: "++id, name, isFlaw, cost, prerequisite, effect, type, stress",
+      randomTables: "++id, name, rows, header, filename",
     });
    
-    this.spells = this.table("spells");
+    this.talents = this.table("talents");
+    this.randomTables = this.table("randomTables");
   }
 }

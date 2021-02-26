@@ -8,9 +8,11 @@ import { reciveAllFiltered } from "../../services/DatabaseService";
 import { LoadingSpinner } from "../Loading";
 import InfiniteScroll from "react-infinite-scroll-component";
 
-import SpellSearchBar from "../entities/spells/SpellSearchBar";
-import SpellTile from "../entities/spells/SpellTile";
 import { useQuery } from "../../hooks/QueryHook";
+import TalentSearchBar from "../entities/talents/TalentSearchBar";
+import TalentTile from "../entities/talents/TalentTile";
+import RandomTableSearchBar from "../entities/random_tables/RandomTableSearchBar";
+import RandomTableTile from "../entities/random_tables/RandomTableTile";
 
 const EntityOverview = ({ match }: RouteComponentProps) => {
   const rawFilters = useQuery().get("filter");
@@ -81,14 +83,16 @@ const EntityOverview = ({ match }: RouteComponentProps) => {
     [key: string]: () => JSX.Element;
   };
   const searchbars: searchOptions = {
-    spell: SpellSearchBar,
+    talent: TalentSearchBar,
+    randomTable: RandomTableSearchBar,
   };
 
   type tileOptions = {
     [key: string]: (props: any) => JSX.Element;
   };
   const tiles: tileOptions = {
-    spell: SpellTile,
+    talent: TalentTile,
+    randomTable: RandomTableTile,
   };
 
   return (
