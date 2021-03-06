@@ -1,41 +1,19 @@
-import { faDiscord } from "@fortawesome/free-brands-svg-icons";
 import React, { useEffect, useState, useCallback } from "react";
 import { useHistory } from "react-router";
 import styled from "styled-components";
 import { useWebhook } from "../../hooks/webhookHook";
 import { rollCommand } from "../../services/DiceService";
-import { formatDiscordText, sendEmbedMessage, sendMessage } from "../../services/DiscordService";
-import IconButton from "../form_elements/IconButton";
+import { sendMessage } from "../../services/DiscordService";
 import LinkCheck from "./LinkCheck";
 
 interface $Props {
   text: string;
 }
 
-const FormatedText = ({ text }: $Props) => {
+const SmallFormatedText = ({ text }: $Props) => {
   let webhook = useWebhook();
-  const [json, setJson] = useState<string>("");
   const [formatedText, setFormatedText] = useState<JSX.Element>();
   let history = useHistory();
-
-  useEffect(() => {
-    if (webhook !== undefined) {
-      let newJson = {
-        username: webhook.name + " (SkirmishTome)",
-        embeds: [
-          {
-            fields: [
-              {
-                name: "Text",
-                value: formatDiscordText(text),
-              },
-            ],
-          },
-        ],
-      };
-      setJson(JSON.stringify(newJson));
-    }
-  }, [text, webhook]);
 
   const cut = (str: string, cutStart: number, cutEnd: number) => {
     return str.substr(0, cutStart) + str.substr(cutEnd + 1);
@@ -190,27 +168,14 @@ const FormatedText = ({ text }: $Props) => {
     }
   }, [text, history, formatText]);
 
-  return (
-    <FormatedTextContainer>
-      {webhook !== undefined && text !== "" && (
-        <IconButton
-          style={{
-            backgroundColor: "#7289da",
-            float: "right",
-            padding: "5px",
-          }}
-          icon={faDiscord}
-          onClick={() => sendEmbedMessage(webhook, json)}
-        />
-      )}
-      {formatedText}
-    </FormatedTextContainer>
-  );
+  return <FormatedTextContainer>{formatedText}</FormatedTextContainer>;
 };
 
-export default FormatedText;
+export default SmallFormatedText;
 
-const FormatedTextContainer = styled.div``;
+const FormatedTextContainer = styled.div`
+  padding: 5px;
+`;
 
 const Link = styled.span`
   display: inline-block;

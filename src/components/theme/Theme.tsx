@@ -95,30 +95,30 @@ export const lightTheme: Theme = {
 export const darkTheme: Theme = {
   buttons: {
     color: "#fff",
-    backgroundColor: "#F55C5C",
+    backgroundColor: "#202020",
     disabled: "#E1D0E5",
     hoverColor: "#191D38",
     height: "20px",
   },
   input: {
-    color: "lightgrey",
-    backgroundColor: "#1A1F3B",
+    color: "#435E70",
+    backgroundColor: "#202020",
   },
   main: {
-    backgroundColor: "#191D38",
+    backgroundColor: "#222222",
     color: "",
-    highlight: "#F55C5C",
+    highlight: "#435E70",
   },
   header: {
     color: "white",
-    backgroundColor: "#191D38",
-    highlight: "#8000ff",
+    backgroundColor: "#222222",
+    highlight: "#435E70",
   },
   tile: {
-    backgroundColor: "#1F2340",
-    backgroundColorLink: "#E45D68",
-    headerColor: "#CACBDB",
-    color: "lightslategray",
+    backgroundColor: "#3E3E3E",
+    backgroundColorLink: "#435E70",
+    headerColor: "#222222",
+    color: "white",
     boxShadow: "",
   },
   nav: {

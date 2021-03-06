@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Link, useLocation } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMeteor, faCog, faChartPie, faHome, faTable } from "@fortawesome/free-solid-svg-icons";
+import { faCog, faChartPie, faHome, faTable } from "@fortawesome/free-solid-svg-icons";
 
 import { RightTooltip } from "../SearchbarStyle";
 import { GiSwordsPower } from "react-icons/gi";

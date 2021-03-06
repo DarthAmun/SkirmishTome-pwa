@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Talent from "../../../../data/Talent";
+import Talent, { TalentCategory } from "../../../../data/Talent";
 
 import StringField from "../../../form_elements/StringField";
 import NumberField from "../../../form_elements/NumberField";
@@ -8,6 +8,7 @@ import TextField from "../../../form_elements/TextField";
 import CheckField from "../../../form_elements/CheckField";
 
 import { faBookOpen } from "@fortawesome/free-solid-svg-icons";
+import SelectField from "../../../form_elements/SelectField";
 
 interface $Props {
   talent: Talent;
@@ -42,10 +43,16 @@ const TalentEditView = ({ talent, onEdit }: $Props) => {
             onChange={(type) => onEdit({ ...talent, type: type })}
           />
         </FieldGroup>
-        <StringField
-          value={talent.stress}
-          label="Stress"
-          onChange={(stress) => onEdit({ ...talent, stress: stress })}
+        <SelectField
+          value={{ value: talent.category, label: talent.category }}
+          options={[
+            { value: TalentCategory.magical, label: TalentCategory.magical },
+            { value: TalentCategory.mental, label: TalentCategory.mental },
+            { value: TalentCategory.physical, label: TalentCategory.physical },
+            { value: TalentCategory.social, label: TalentCategory.social },
+          ]}
+          label={"Category"}
+          onChange={(category: string) => onEdit({ ...talent, category: category })}
         />
         <TextField
           value={talent.prerequisite}
@@ -59,6 +66,30 @@ const TalentEditView = ({ talent, onEdit }: $Props) => {
           icon={faBookOpen}
           onChange={(effect) => onEdit({ ...talent, effect: effect })}
         />
+        {talent.isFlaw && talent.type && (
+          <>
+            <TextField
+              value={talent.trigger}
+              label="Trigger"
+              icon={faBookOpen}
+              onChange={(trigger) => onEdit({ ...talent, trigger: trigger })}
+            />
+            <StringField
+              value={talent.triggerFrequency}
+              label="Trigger Frequency"
+              onChange={(triggerFrequency) =>
+                onEdit({ ...talent, triggerFrequency: triggerFrequency })
+              }
+            />
+          </>
+        )}
+        {!talent.isFlaw && talent.type && (
+          <StringField
+            value={talent.stress}
+            label="Stress"
+            onChange={(stress) => onEdit({ ...talent, stress: stress })}
+          />
+        )}
       </View>
     </CenterWrapper>
   );

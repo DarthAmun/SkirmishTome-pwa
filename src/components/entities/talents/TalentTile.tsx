@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 import Talent from "../../../data/Talent";
+import SmallFormatedText from "../../general_elements/SmallFormatedText";
 
 interface $Props {
   talent: Talent;
@@ -10,7 +11,7 @@ interface $Props {
 
 const TalentTile = ({ talent }: $Props) => {
   return (
-    <Tile to={"/talent-detail/id/" + talent.id} isFlaw={talent.isFlaw}>
+    <Tile to={"/talent-detail/id/" + talent.id} $isflaw={talent.isFlaw}>
       <Cost>
         <b>{talent.cost}</b>
       </Cost>
@@ -21,7 +22,7 @@ const TalentTile = ({ talent }: $Props) => {
 
       <PropWrapper>
         <Prop>{talent.type ? talent.stress : "Passive"}</Prop>
-        <WideProp>{talent.prerequisite}</WideProp>
+        <SmallFormatedText text={talent.prerequisite} />
       </PropWrapper>
     </Tile>
   );
@@ -30,20 +31,18 @@ const TalentTile = ({ talent }: $Props) => {
 export default TalentTile;
 
 type type = {
-  isFlaw?: boolean;
+  $isflaw: boolean;
 };
 
 const Tile = styled(Link)<type>`
   flex: 1 1 15em;
   color: ${({ theme }) => theme.tile.color};
   ${(props) => {
-    if (props.isFlaw) {
+    if (props.$isflaw) {
       return `background-color: ${props.theme.input.backgroundColor};`;
-    }
-    if (!props.isFlaw) {
+    } else {
       return `background-color: ${props.theme.tile.backgroundColor};`;
     }
-    return "";
   }}
   margin: 0.5em;
   border-radius: 10px;
@@ -105,9 +104,4 @@ const Prop = styled.div`
   margin: 0 0 5px 0px;
   }
 }
-`;
-
-const WideProp = styled(Prop)`
-  margin: 0 0 5px 0px;
-  width: calc(100% - 20px);
 `;

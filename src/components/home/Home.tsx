@@ -100,7 +100,7 @@ const SelectionTitle = styled.div`
   text-algin: center;
   border-radius: 5px;
   color: ${({ theme }) => theme.input.color};
-  background-color: ${({ theme }) => theme.input.backgroundColor};
+  background-color: ${({ theme }) => theme.tile.headerColor};
 `;
 
 const SectionText = styled.div`

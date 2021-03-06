@@ -67,7 +67,8 @@ const TalentView = ({ talent }: $Props) => {
         </Name>
 
         <PropWrapper>
-          <Prop>{talent.type ? talent.stress : "Passive"}</Prop>
+          <Prop>{talent.category}</Prop>
+          <Prop>{talent.type ? (talent.isFlaw ? "trigger" : "active") : "Passive"}</Prop>
         </PropWrapper>
         <Text>
           <FormatedText text={talent.prerequisite} />
@@ -75,6 +76,21 @@ const TalentView = ({ talent }: $Props) => {
         <Text>
           <FormatedText text={talent.effect} />
         </Text>
+        {talent.isFlaw && talent.type && (
+          <>
+            <Text>
+              <FormatedText text={talent.trigger} />
+            </Text>
+            <PropWrapper>
+              <Prop>{talent.triggerFrequency}</Prop>
+            </PropWrapper>
+          </>
+        )}
+        {!talent.isFlaw && talent.type && (
+          <PropWrapper>
+            <Prop>{talent.stress}</Prop>
+          </PropWrapper>
+        )}
         <PropWrapper>
           {webhook !== undefined && (
             <TextButton
