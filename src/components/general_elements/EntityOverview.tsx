@@ -13,6 +13,8 @@ import TalentSearchBar from "../entities/talents/TalentSearchBar";
 import TalentTile from "../entities/talents/TalentTile";
 import RandomTableSearchBar from "../entities/random_tables/RandomTableSearchBar";
 import RandomTableTile from "../entities/random_tables/RandomTableTile";
+import RaceSearchBar from "../entities/races/RaceSearchBar";
+import RaceTile from "../entities/races/RaceTile";
 
 const EntityOverview = ({ match }: RouteComponentProps) => {
   const rawFilters = useQuery().get("filter");
@@ -84,6 +86,7 @@ const EntityOverview = ({ match }: RouteComponentProps) => {
   };
   const searchbars: searchOptions = {
     talent: TalentSearchBar,
+    race: RaceSearchBar,
     randomTable: RandomTableSearchBar,
   };
 
@@ -92,6 +95,7 @@ const EntityOverview = ({ match }: RouteComponentProps) => {
   };
   const tiles: tileOptions = {
     talent: TalentTile,
+    race: RaceTile,
     randomTable: RandomTableTile,
   };
 

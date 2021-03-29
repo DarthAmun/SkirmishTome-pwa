@@ -13,6 +13,7 @@ import IEntity from "../../../data/IEntity";
 import { useCallback } from "react";
 import Talent from "../../../data/Talent";
 import RandomTable from "../../../data/RandomTable";
+import Race from "../../../data/Race";
 
 type TParams = { id?: string; name?: string };
 
@@ -70,6 +71,7 @@ const ToEntity = ({ match }: RouteComponentProps<TParams>) => {
 
   const entities: entityOptions = {
     talent: new Talent(0, match.params.name),
+    race: new Race(0, match.params.name),
     randomTables: new RandomTable(0, match.params.name),
   };
 

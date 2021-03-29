@@ -22,6 +22,8 @@ import RandomTableEditView from "../../entities/random_tables/details/RandomTabl
 import RandomTableView from "../../entities/random_tables/details/RandomTableView";
 import TalentEditView from "../../entities/talents/details/TalentEditView";
 import TalentView from "../../entities/talents/details/TalentView";
+import RaceView from "../../entities/races/details/RaceView";
+import RaceEditView from "../../entities/races/details/RaceEditView";
 
 interface $Props {
   entity: IEntity;
@@ -82,11 +84,13 @@ const EntityDetail = ({ entity, tableName, isNew, view }: $Props) => {
   };
 
   type viewOptions = {
-    [key: string]: (props:any) => JSX.Element;
+    [key: string]: (props: any) => JSX.Element;
   };
   const views: viewOptions = {
     TalentView: TalentView,
     TalentEditView: TalentEditView,
+    RaceView: RaceView,
+    RaceEditView: RaceEditView,
     RandomTableView: RandomTableView,
     RandomTableEditView: RandomTableEditView,
   };
