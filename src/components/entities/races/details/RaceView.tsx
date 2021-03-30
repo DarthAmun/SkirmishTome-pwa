@@ -10,7 +10,7 @@ import { sendEmbedMessage } from "../../../../services/DiscordService";
 import { faDiscord } from "@fortawesome/free-brands-svg-icons";
 import { useHistory } from "react-router";
 import Talent from "../../../../data/Talent";
-import { reciveAll, reciveAllFiltered } from "../../../../services/DatabaseService";
+import { reciveAll } from "../../../../services/DatabaseService";
 
 interface $Props {
   race: Race;
@@ -133,9 +133,19 @@ const Name = styled.div`
   padding: 10px;
   margin: 5px 5px 10px 5px;
   width: calc(100% - 30px);
-  color: var(--card-title-color);
+  color: white;
   text-align: center;
-  border-radius: 5px;
+
+  --notchSize: 15px;
+  clip-path: polygon(
+    0% var(--notchSize),
+    var(--notchSize) 0%,
+    100% 0%,
+    100% calc(100% - var(--notchSize)),
+    calc(100% - var(--notchSize)) 100%,
+    0 100%
+  );
+
   background-color: ${({ theme }) => theme.tile.backgroundColor};
 `;
 
@@ -156,14 +166,34 @@ const Prop = styled.div`
   margin: 2px;
   float: left;
   padding: 10px;
-  border-radius: 5px;
+
+  --notchSize: 15px;
+  clip-path: polygon(
+    0% var(--notchSize),
+    var(--notchSize) 0%,
+    100% 0%,
+    100% calc(100% - var(--notchSize)),
+    calc(100% - var(--notchSize)) 100%,
+    0 100%
+  );
+
   background-color: ${({ theme }) => theme.tile.backgroundColor};
 `;
 
 const TalentLink = styled.span`
   display: inline-block;
   background-color: ${({ theme }) => theme.tile.backgroundColorLink};
-  border-radius: 5px;
+
+  --notchSize: 15px;
+  clip-path: polygon(
+    0% var(--notchSize),
+    var(--notchSize) 0%,
+    100% 0%,
+    100% calc(100% - var(--notchSize)),
+    calc(100% - var(--notchSize)) 100%,
+    0 100%
+  );
+
   text-decoration: none;
   color: ${({ theme }) => theme.tile.backgroundColor};
   font-size: 16px;

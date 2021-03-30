@@ -15,13 +15,7 @@ interface $Props {
   onChange: (value: string[]) => void;
 }
 
-const MultipleSelectField = ({
-  options,
-  label,
-  icon,
-  transform,
-  onChange,
-}: $Props) => {
+const MultipleSelectField = ({ options, label, icon, transform, onChange }: $Props) => {
   const handleChange = (
     options: {
       value: string;
@@ -29,11 +23,9 @@ const MultipleSelectField = ({
     }[]
   ) => {
     if (options !== null && options !== undefined) {
-      let result: string[] = options.map(
-        (opt: { value: string; label: string }) => {
-          return opt.value;
-        }
-      );
+      let result: string[] = options.map((opt: { value: string; label: string }) => {
+        return opt.value;
+      });
       onChange(result);
     }
   };
@@ -67,7 +59,16 @@ const Field = styled.label`
   flex: 1 1 auto;
   padding: 5px;
   margin: 5px;
-  border-radius: 5px;
+
+  --notchSize: 15px;
+  clip-path: polygon(
+    0% var(--notchSize),
+    var(--notchSize) 0%,
+    100% 0%,
+    100% calc(100% - var(--notchSize)),
+    calc(100% - var(--notchSize)) 100%,
+    0 100%
+  );
 
   display: flex;
   justify-content: center;

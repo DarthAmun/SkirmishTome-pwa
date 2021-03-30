@@ -36,7 +36,16 @@ const Field = styled.label`
   flex: 3 3 auto;
   padding: 5px;
   margin: 5px;
-  border-radius: 5px;
+
+  --notchSize: 15px;
+  clip-path: polygon(
+    0% var(--notchSize),
+    var(--notchSize) 0%,
+    100% 0%,
+    100% calc(100% - var(--notchSize)),
+    calc(100% - var(--notchSize)) 100%,
+    0 100%
+  );
 
   display: flex;
   flex-wrap: wrap;

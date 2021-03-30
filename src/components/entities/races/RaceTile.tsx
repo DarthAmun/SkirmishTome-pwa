@@ -35,6 +35,16 @@ const Tile = styled(Link)`
   box-shadow: ${({ theme }) => theme.tile.boxShadow};
   overflow: hidden;
   cursor: pointer;
+
+  --notchSize: 15px;
+  clip-path: polygon(
+    0% var(--notchSize),
+    var(--notchSize) 0%,
+    100% 0%,
+    100% calc(100% - var(--notchSize)),
+    calc(100% - var(--notchSize)) 100%,
+    0 100%
+  );
 `;
 
 const Name = styled.div`
@@ -44,7 +54,7 @@ const Name = styled.div`
   margin: 0 5px 5px 5px;
   font-size: 14px;
   width: calc(100% - 30px);
-  color: ${({ theme }) => theme.tile.headerColor};
+  color: white;
   text-align: center;
   border-radius: 5px;
 `;

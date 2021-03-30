@@ -74,9 +74,18 @@ const HomeSection = styled.div`
   color: ${({ theme }) => theme.tile.color};
   background-color: ${({ theme }) => theme.tile.backgroundColor};
   margin: 0.5em;
-  border-radius: 10px;
   box-shadow: ${({ theme }) => theme.tile.boxShadow};
   overflow: hidden;
+
+  --notchSize: 15px;
+  clip-path: polygon(
+    0% var(--notchSize),
+    var(--notchSize) 0%,
+    100% 0%,
+    100% calc(100% - var(--notchSize)),
+    calc(100% - var(--notchSize)) 100%,
+    0 100%
+  );
 
   display: flex;
   flex-wrap: nowrap;
@@ -92,14 +101,13 @@ const WideHomeSection = styled(HomeSection)`
 
 const SelectionTitle = styled.div`
   flex: 1 1 auto;
-  padding: 5px;
-  margin: 5px;
+  padding: 5px 5px 5px 15px;
   min-width: calc(100% - 20px);
   max-height: 20px;
   font-weight: bold;
   text-algin: center;
   border-radius: 5px;
-  color: ${({ theme }) => theme.input.color};
+  color: white;
   background-color: ${({ theme }) => theme.tile.headerColor};
 `;
 

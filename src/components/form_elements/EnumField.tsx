@@ -16,15 +16,7 @@ interface $Props {
   onChange: (value: string) => void;
 }
 
-const EnumField = ({
-  options,
-  value,
-  label,
-  icon,
-  transform,
-  onChange,
-}: $Props) => {
-
+const EnumField = ({ options, value, label, icon, transform, onChange }: $Props) => {
   const handleChange = (option: { value: string; label: string }) => {
     if (option !== null && option !== undefined) {
       onChange(option.value);
@@ -40,9 +32,7 @@ const EnumField = ({
         classNamePrefix="react-select"
         value={value}
         options={options}
-        onChange={(option: { value: string; label: string }) =>
-          handleChange(option)
-        }
+        onChange={(option: { value: string; label: string }) => handleChange(option)}
       />
     </Field>
   );
@@ -57,7 +47,16 @@ const Field = styled.label`
   flex: 1 1 auto;
   padding: 5px;
   margin: 5px;
-  border-radius: 5px;
+
+  --notchSize: 15px;
+  clip-path: polygon(
+    0% var(--notchSize),
+    var(--notchSize) 0%,
+    100% 0%,
+    100% calc(100% - var(--notchSize)),
+    calc(100% - var(--notchSize)) 100%,
+    0 100%
+  );
 
   display: flex;
   justify-content: center;
@@ -86,7 +85,7 @@ const StyledSelect = styled(Select)`
   background-color: ${({ theme }) => theme.input.backgroundColor};
   color: ${({ theme }) => theme.input.color};
   margin-left: 5px;
-  
+
   .react-select__single-value {
     color: ${({ theme }) => theme.buttons.color};
   }

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Link, useLocation } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCog, faChartPie, faHome, faTable } from "@fortawesome/free-solid-svg-icons";
+import { faCog, faChartPie, faHome, faTable, faMeteor } from "@fortawesome/free-solid-svg-icons";
 
 import { RightTooltip } from "../SearchbarStyle";
 import { GiSwordsPower, GiWomanElfFace } from "react-icons/gi";
@@ -39,6 +39,13 @@ const NavMenu = ({ open }: $Props) => {
           </Link>
         </LeftSide>
         <RightSide>
+          <Link
+            to="/spell-overview"
+            className={location.pathname === "/spell-overview" ? "menuItemActiv" : ""}
+          >
+            <FontAwesomeIcon icon={faMeteor} />
+            <RightTooltip>Spells</RightTooltip>
+          </Link>
           <Link
             to="/talent-overview"
             className={location.pathname === "/talent-overview" ? "menuItemActiv" : ""}

@@ -16,20 +16,8 @@ interface $Props {
   onChange: (value: string) => void;
 }
 
-const SelectField = ({
-  value,
-  options,
-  label,
-  icon,
-  transform,
-  onChange,
-}: $Props) => {
-  const handleChange = (
-    options: {
-      value: string;
-      label: string;
-    }
-  ) => {
+const SelectField = ({ value, options, label, icon, transform, onChange }: $Props) => {
+  const handleChange = (options: { value: string; label: string }) => {
     if (options !== null && options !== undefined) {
       onChange(options.value);
     }
@@ -45,12 +33,7 @@ const SelectField = ({
         defaultValue={value}
         classNamePrefix="react-select"
         options={options}
-        onChange={(
-          options: {
-            value: string;
-            label: string;
-          }
-        ) => handleChange(options)}
+        onChange={(options: { value: string; label: string }) => handleChange(options)}
       />
     </Field>
   );
@@ -65,7 +48,16 @@ const Field = styled.label`
   flex: 1 1 auto;
   padding: 5px;
   margin: 5px;
-  border-radius: 5px;
+
+  --notchSize: 15px;
+  clip-path: polygon(
+    0% var(--notchSize),
+    var(--notchSize) 0%,
+    100% 0%,
+    100% calc(100% - var(--notchSize)),
+    calc(100% - var(--notchSize)) 100%,
+    0 100%
+  );
 
   display: flex;
   justify-content: center;

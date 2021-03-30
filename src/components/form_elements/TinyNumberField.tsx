@@ -8,12 +8,7 @@ interface $Props {
   onChange: (value: number) => void;
 }
 
-const TinyNumberField = ({
-  value,
-  max,
-  showMax,
-  onChange,
-}: $Props) => {
+const TinyNumberField = ({ value, max, showMax, onChange }: $Props) => {
   return (
     <Field>
       {max !== undefined && (
@@ -33,11 +28,7 @@ const TinyNumberField = ({
         </>
       )}
       {max === undefined && (
-        <Input
-          type="number"
-          value={value}
-          onChange={(e) => onChange(+e.target.value)}
-        />
+        <Input type="number" value={value} onChange={(e) => onChange(+e.target.value)} />
       )}
     </Field>
   );
@@ -55,7 +46,16 @@ const Field = styled.label`
   flex: 1 1 auto;
   padding: 5px;
   margin: 2px;
-  border-radius: 5px;
+
+  --notchSize: 15px;
+  clip-path: polygon(
+    0% var(--notchSize),
+    var(--notchSize) 0%,
+    100% 0%,
+    100% calc(100% - var(--notchSize)),
+    calc(100% - var(--notchSize)) 100%,
+    0 100%
+  );
 
   display: flex;
   justify-content: center;

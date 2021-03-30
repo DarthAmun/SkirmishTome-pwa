@@ -14,14 +14,7 @@ interface $Props {
   onChange: (value: FileList | null) => void;
 }
 
-const FileField = ({
-  label,
-  accept,
-  isMulti,
-  icon,
-  transform,
-  onChange,
-}: $Props) => {
+const FileField = ({ label, accept, isMulti, icon, transform, onChange }: $Props) => {
   return (
     <Field>
       <LabelText>
@@ -36,11 +29,7 @@ const FileField = ({
         ></Input>
       )}
       {!isMulti && (
-        <Input
-          onChange={(e) => onChange(e.target.files)}
-          accept={accept}
-          type="file"
-        ></Input>
+        <Input onChange={(e) => onChange(e.target.files)} accept={accept} type="file"></Input>
       )}
     </Field>
   );
@@ -58,7 +47,16 @@ const Field = styled.label`
   flex: 1 1 auto;
   padding: 5px;
   margin: 5px;
-  border-radius: 5px;
+
+  --notchSize: 15px;
+  clip-path: polygon(
+    0% var(--notchSize),
+    var(--notchSize) 0%,
+    100% 0%,
+    100% calc(100% - var(--notchSize)),
+    calc(100% - var(--notchSize)) 100%,
+    0 100%
+  );
 
   display: flex;
   justify-content: center;

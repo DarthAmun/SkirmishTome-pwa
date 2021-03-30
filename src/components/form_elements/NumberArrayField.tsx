@@ -14,14 +14,7 @@ interface $Props {
   onChange: (value: number[]) => void;
 }
 
-const NumberArrayField = ({
-  values,
-  label,
-  icon,
-  transform,
-  max,
-  onChange,
-}: $Props) => {
+const NumberArrayField = ({ values, label, icon, transform, max, onChange }: $Props) => {
   const [array, setArray] = useState<number[]>(values);
 
   const handleValueChange = (index: number, value: number) => {
@@ -74,7 +67,16 @@ const Field = styled.label`
   flex: 1 1 auto;
   padding: 5px 5px 5px 5px;
   margin: 5px;
-  border-radius: 5px;
+
+  --notchSize: 15px;
+  clip-path: polygon(
+    0% var(--notchSize),
+    var(--notchSize) 0%,
+    100% 0%,
+    100% calc(100% - var(--notchSize)),
+    calc(100% - var(--notchSize)) 100%,
+    0 100%
+  );
 
   display: flex;
   flex-wrap: wrap;

@@ -2,19 +2,19 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
-import Talent from "../../../../data/Talent";
-import FormatedText from "../../../general_elements/FormatedText";
+import Spell from "../../../../data/Spell";
 import P2PSender from "../../../p2p/P2PSender";
 import TextButton from "../../../form_elements/TextButton";
 import { useWebhook } from "../../../../hooks/webhookHook";
-import { formatDiscordText, sendEmbedMessage } from "../../../../services/DiscordService";
+import { sendEmbedMessage } from "../../../../services/DiscordService";
 import { faDiscord } from "@fortawesome/free-brands-svg-icons";
+import FormatedText from "../../../general_elements/FormatedText";
 
 interface $Props {
-  talent: Talent;
+  spell: Spell;
 }
 
-const TalentView = ({ talent }: $Props) => {
+const SpellView = ({ spell }: $Props) => {
   let webhook = useWebhook();
   const [json, setJson] = useState<string>("");
   const [send, setSend] = useState<boolean>(false);
@@ -26,26 +26,18 @@ const TalentView = ({ talent }: $Props) => {
         embeds: [
           {
             author: {
-              name: talent.name,
+              name: spell.name,
             },
             fields: [
               {
-                name: "Cost",
-                value: talent.cost ? talent.cost : "-",
+                name: "Source",
+                value: spell.source ? spell.source : "-",
                 inline: true,
               },
               {
-                name: "Stress",
-                value: talent.type ? talent.stress : "passive",
+                name: "Casting Time",
+                value: spell.castTime ? spell.castTime : "-",
                 inline: true,
-              },
-              {
-                name: "Prerequisite",
-                value: formatDiscordText(talent.prerequisite),
-              },
-              {
-                name: "Effect",
-                value: formatDiscordText(talent.effect),
               },
             ],
           },
@@ -53,70 +45,65 @@ const TalentView = ({ talent }: $Props) => {
       };
       setJson(JSON.stringify(newJson));
     }
-  }, [talent, webhook]);
+  }, [spell, webhook]);
 
   return (
     <CenterWrapper>
       <View>
-        <Cost>
-          <b>{talent.cost}</b>
-        </Cost>
+        <School school={spell.school}>{spell.school}</School>
+
+        <Drain>
+          <b>{spell.drain}</b>
+        </Drain>
 
         <Name>
-          <b>{talent.name}</b>
+          <b>{spell.name}</b>
         </Name>
 
         <PropWrapper>
-          <Prop>{talent.category}</Prop>
-          <Prop>{talent.type ? (talent.isFlaw ? "trigger" : "active") : "Passive"}</Prop>
+          <Prop>Source{spell.source}</Prop>
+          <Prop>Casting Time: {spell.castTime}</Prop>
+          <Prop>Rite: {spell.rite}</Prop>
+          <Prop>Range: {spell.range}</Prop>
         </PropWrapper>
         <Text>
-          <FormatedText text={talent.prerequisite} />
+          <FormatedText text={spell.effect} />
         </Text>
         <Text>
-          <FormatedText text={talent.effect} />
+          <FormatedText text={spell.damage} />
         </Text>
-        {talent.isFlaw && talent.type && (
-          <>
-            <Text>
-              <FormatedText text={talent.trigger} />
-            </Text>
-            <PropWrapper>
-              <Prop>{talent.triggerFrequency}</Prop>
-            </PropWrapper>
-          </>
-        )}
-        {!talent.isFlaw && talent.type && (
-          <PropWrapper>
-            <Prop>{talent.stress}</Prop>
-          </PropWrapper>
-        )}
+        <Text>
+          <FormatedText text={spell.mastery} />
+        </Text>
+        <Text>
+          <FormatedText text={spell.resist} />
+        </Text>
         <PropWrapper>
           {webhook !== undefined && (
             <TextButton
               style={{
                 backgroundColor: "#7289da",
               }}
-              text={`Cast ${talent.name}`}
+              text={`Cast ${spell.name}`}
               icon={faDiscord}
               onClick={() => sendEmbedMessage(webhook, json)}
             />
           )}
           {!send && (
             <TextButton
-              text={`Send ${talent.name}`}
+              text={`Send ${spell.name}`}
               icon={faPaperPlane}
               onClick={() => setSend(true)}
             />
           )}
-          {!!send && <P2PSender data={talent} mode={"THIS"} />}
+          {!!send && <P2PSender data={spell} mode={"THIS"} />}
         </PropWrapper>
       </View>
     </CenterWrapper>
   );
 };
 
-export default TalentView;
+export default SpellView;
 
 const CenterWrapper = styled.div`
   overflow: hidden;
@@ -131,20 +118,6 @@ const View = styled.div`
   padding: 5px;
   margin-left: auto;
   margin-right: auto;
-`;
-
-const Cost = styled.div`
-  height: auto;
-  padding: 10px;
-  width: 20px;
-  height: 20px;
-  line-height: 20px;
-  float: left;
-  text-align: center;
-  border-top-right-radius: 3px;
-  border-radius: 30px;
-  margin: 0px 5px 5px 5px;
-  background-color: ${({ theme }) => theme.tile.backgroundColor};
 `;
 
 const Name = styled.div`
@@ -193,6 +166,62 @@ const Prop = styled.div`
     calc(100% - var(--notchSize)) 100%,
     0 100%
   );
+  background-color: ${({ theme }) => theme.tile.backgroundColor};
+`;
+
+type SchoolType = {
+  school?: string;
+};
+
+const School = styled.div<SchoolType>`
+  height: auto;
+  float: left;
+  padding: 5px 10px 7px 10px;
+  line-height: 30px;
+  --notchSize: 15px;
+  clip-path: polygon(
+    0% var(--notchSize),
+    var(--notchSize) 0%,
+    100% 0%,
+    100% calc(100% - var(--notchSize)),
+    calc(100% - var(--notchSize)) 100%,
+    0 100%
+  );
+  background-color: ${({ theme }) => theme.tile.backgroundColor};
+  color: ${(props) => {
+    if (props.school === "Necromancy") {
+      return "#bef28e";
+    } else if (props.school === "Conjuration") {
+      return "#fce97a";
+    } else if (props.school === "Evocation") {
+      return "#db5740";
+    } else if (props.school === "Divination") {
+      return "#9ebed2";
+    } else if (props.school === "Enchantment") {
+      return "#ce90ca";
+    } else if (props.school === "Transmutation") {
+      return "#e19c60";
+    } else if (props.school === "Abjuration") {
+      return "#278ae4";
+    } else if (props.school === "Illusion") {
+      return "#8b42f9";
+    } else {
+      return "white";
+    }
+  }};
+`;
+
+const Drain = styled.div`
+  height: auto;
+  padding: 10px;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  float: left;
+  text-align: center;
+  border-top-right-radius: 3px;
+  border-radius: 30px;
+  margin: 0px 5px 5px 5px;
   background-color: ${({ theme }) => theme.tile.backgroundColor};
 `;
 
