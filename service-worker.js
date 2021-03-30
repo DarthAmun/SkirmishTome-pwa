@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/SkirmishTome-pwa/precache-manifest.8c4af9ec624b095ff33b169054ce1b32.js"
+  "/SkirmishTome-pwa/precache-manifest.7b0822220538821eae29e7c0bc7be286.js"
 );
 
 self.addEventListener('message', (event) => {
