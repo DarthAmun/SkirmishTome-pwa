@@ -56,7 +56,7 @@ const SpellEditView = ({ spell, onEdit }: $Props) => {
             { value: SpellRite.somatic, label: SpellRite.somatic },
             { value: SpellRite.verbal, label: SpellRite.verbal },
           ]}
-          label={"Source"}
+          label={"Rite"}
           onChange={(category: string) => onEdit({ ...spell, rite: category })}
         />
         <SelectField
@@ -67,7 +67,7 @@ const SpellEditView = ({ spell, onEdit }: $Props) => {
             { value: SpellDuration.instantaneous, label: SpellDuration.instantaneous },
             { value: SpellDuration.permanent, label: SpellDuration.permanent },
           ]}
-          label={"Source"}
+          label={"Duration"}
           onChange={(category: string) => onEdit({ ...spell, duration: category })}
         />
         {spell.duration === SpellDuration.fixed && (
@@ -93,7 +93,7 @@ const SpellEditView = ({ spell, onEdit }: $Props) => {
             { value: SpellSchool.necromancy, label: SpellSchool.necromancy },
             { value: SpellSchool.transmutation, label: SpellSchool.transmutation },
           ]}
-          label={"Source"}
+          label={"School"}
           onChange={(category: string) => onEdit({ ...spell, school: category })}
         />
         <TextField

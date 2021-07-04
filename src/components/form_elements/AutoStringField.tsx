@@ -102,16 +102,6 @@ const Field = styled.label`
   position: relative;
   overflow: visible;
 
-  --notchSize: 15px;
-  clip-path: polygon(
-    0% var(--notchSize),
-    var(--notchSize) 0%,
-    100% 0%,
-    100% calc(100% - var(--notchSize)),
-    calc(100% - var(--notchSize)) 100%,
-    0 100%
-  );
-
   display: flex;
   justify-content: center;
   align-items: center;

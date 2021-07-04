@@ -53,8 +53,22 @@ const RaceEditView = ({ race, onEdit }: $Props) => {
           label="Name"
           onChange={(name) => onEdit({ ...race, name: name })}
         />
-        <NumberField value={race.hp} label="Hp" onChange={(hp) => onEdit({ ...race, hp: hp })} />
         <NumberField
+          value={race.hp}
+          label="Hp"
+          onChange={(value) => onEdit({ ...race, hp: value })}
+        />
+        <NumberField
+          value={race.stamina}
+          label="Stamina"
+          onChange={(value) => onEdit({ ...race, stamina: value })}
+        />
+        <StringField
+          value={race.size}
+          label="Size"
+          onChange={(value) => onEdit({ ...race, size: value })}
+        />
+        <StringField
           value={race.abilityModifier}
           label="Ability Modifier"
           onChange={(abilityModifier) => onEdit({ ...race, abilityModifier: abilityModifier })}

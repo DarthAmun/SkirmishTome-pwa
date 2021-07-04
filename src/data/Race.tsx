@@ -4,7 +4,9 @@ export default class Race implements IEntity {
   id?: number;
   name: string;
   hp: number;
-  abilityModifier: number;
+  abilityModifier: string;
+  size: string;
+  stamina: number;
   talents: string[];
   flaws: string[];
 
@@ -12,14 +14,18 @@ export default class Race implements IEntity {
     id?: number,
     name?: string,
     hp?: number,
-    abilityModifier?: number,
+    abilityModifier?: string,
+    size?: string,
+    stamina?: number,
     talents?: string[],
     flaws?: string[]
   ) {
     this.id = id;
     this.name = name || "";
     this.hp = hp || 0;
-    this.abilityModifier = abilityModifier || 0;
+    this.abilityModifier = abilityModifier || "";
+    this.size = size || "";
+    this.stamina = stamina || 0;
     this.talents = talents || [];
     this.flaws = flaws || [];
   }

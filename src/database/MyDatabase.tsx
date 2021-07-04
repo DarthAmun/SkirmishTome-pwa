@@ -28,6 +28,13 @@ export class MyAppDatabase extends Dexie {
       spells:
         "++id, name, source, castTime, rite, duration, durationText, range, school, effect, damage, mastery,resist, drain",
     });
+    this.version(4).stores({
+      talents: "++id, name, isFlaw, cost, prerequisite, effect, type, stress",
+      races: "++id, name, hp, abilityModifier, size, stamina, talents, flaws",
+      randomTables: "++id, name, rows, header",
+      spells:
+        "++id, name, source, castTime, rite, duration, durationText, range, school, effect, damage, mastery,resist, drain",
+    });
 
     this.talents = this.table("talents");
     this.spells = this.table("spells");
