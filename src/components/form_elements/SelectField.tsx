@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -6,10 +6,11 @@ import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import { Transform } from "@fortawesome/fontawesome-svg-core";
 
 import Select from "react-select";
+import { useEffect } from "react";
 
 interface $Props {
-  value: { value: string; label: string };
-  options: { value: string; label: string }[];
+  value: string;
+  options: string[];
   label: string;
   icon?: IconDefinition;
   transform?: string | Transform;
@@ -17,24 +18,33 @@ interface $Props {
 }
 
 const SelectField = ({ value, options, label, icon, transform, onChange }: $Props) => {
-  const handleChange = (options: { value: string; label: string }) => {
-    if (options !== null && options !== undefined) {
-      onChange(options.value);
+  const [opts, setOptions] = useState<{ value: string; label: string }[]>([]);
+  const handleChange = (option: string) => {
+    if (option !== null && option !== undefined) {
+      onChange(option);
     }
   };
+
+  useEffect(() => {
+    let newOptions: { value: string; label: string }[] = [];
+    options.forEach((option: string) => newOptions.push({ value: option, label: option }));
+    setOptions(newOptions);
+  }, [options]);
 
   return (
     <Field>
       <LabelText>
         {icon ? <Icon icon={icon} transform={transform} /> : ""} {label}
       </LabelText>
-      <StyledSelect
-        isMulti={false}
-        defaultValue={value}
-        classNamePrefix="react-select"
-        options={options}
-        onChange={(options: { value: string; label: string }) => handleChange(options)}
-      />
+      {opts.length > 0 && (
+        <StyledSelect
+          isMulti={false}
+          defaultValue={{ value: value, label: value }}
+          classNamePrefix="react-select"
+          options={opts}
+          onChange={(options: { value: string; label: string }) => handleChange(options.value)}
+        />
+      )}
     </Field>
   );
 };
@@ -77,6 +87,9 @@ const StyledSelect = styled(Select)`
   color: ${({ theme }) => theme.input.color};
   margin-left: 5px;
 
+  .react-select__single-value {
+    color: ${({ theme }) => theme.input.color};
+  }
   .react-select__control {
     background-color: ${({ theme }) => theme.input.backgroundColor};
     border: none;

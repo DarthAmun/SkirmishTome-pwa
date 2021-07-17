@@ -44,12 +44,12 @@ const TalentEditView = ({ talent, onEdit }: $Props) => {
           />
         </FieldGroup>
         <SelectField
-          value={{ value: talent.category, label: talent.category }}
+          value={talent.category}
           options={[
-            { value: TalentCategory.magical, label: TalentCategory.magical },
-            { value: TalentCategory.mental, label: TalentCategory.mental },
-            { value: TalentCategory.physical, label: TalentCategory.physical },
-            { value: TalentCategory.social, label: TalentCategory.social },
+            TalentCategory.magical,
+            TalentCategory.mental,
+            TalentCategory.physical,
+            TalentCategory.social,
           ]}
           label={"Category"}
           onChange={(category: string) => onEdit({ ...talent, category: category })}

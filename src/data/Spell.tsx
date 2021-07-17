@@ -1,6 +1,5 @@
 import IEntity from "./IEntity";
 
-//["earth", "frost", "air", "fire", "arcane", "divine", "demonic", "druidic", "psychic"],
 export enum SpellSource {
   earth = "earth",
   frost = "frost",
@@ -13,12 +12,16 @@ export enum SpellSource {
   psychic = "psychic",
 }
 
-//["5 + 3 ticks", "7 + 3 ticks", "9 + 3 ticks", "5 ticks", "drain + 3 ticks"],
-// export enum SpellCastTime {
-//   earth = "earth",
-// }
+export enum SpellRange {
+  touch = "touch",
+  sonic = "sonic",
+  radius = "Radius 90° around Caster",
+  radiusPlus = "Radius 90°+ around Caster",
+  losAura = "Line of Sight Aura or Projectile",
+  losManipulate = "Line of Sight Manipulate",
+  losPoint = "Line of Sight Spawn At Point",
+}
 
-//["verbal", "somatic", "mental", "ritual"],
 export enum SpellRite {
   verbal = "verbal",
   somatic = "somatic",
@@ -26,15 +29,26 @@ export enum SpellRite {
   ritual = "ritual",
 }
 
-//["concentration", "instantaneous", "permanent", "fixed duration"],
+export enum SpellTarget {
+  single = "Single Target",
+  daoe = "Diminishing Area Of Effect ",
+  multi = "Multiple Targets",
+  aoe = "Area Of Effect",
+  caster = "Caster",
+  target = "Caster Or Target",
+  line = "Straight Line",
+}
+
 export enum SpellDuration {
   concentration = "concentration",
   instantaneous = "instantaneous",
   permanent = "permanent",
-  fixed = "fixed",
+  fixedTicks = "fixed # of ticks",
+  fixedRounds = "fixed # of rounds",
+  fixedHours = "fixed # of hours",
+  channel = "channel",
 }
 
-//["Transmutation", "Evocation", "Fortification", "Hex", "Illusion", "Conjuration", "Necromancy"],
 export enum SpellSchool {
   transmutation = "Transmutation",
   evocation = "Evocation",
@@ -43,6 +57,7 @@ export enum SpellSchool {
   illusion = "Illusion",
   conjuration = "Conjuration",
   necromancy = "Necromancy",
+  enchantment = "Enchantment",
 }
 
 export default class Spell implements IEntity {
@@ -53,7 +68,7 @@ export default class Spell implements IEntity {
   rite: string;
   duration: string;
   durationText: string;
-  range: number;
+  range: string;
   school: string;
   effect: string;
   damage: string;
@@ -69,7 +84,7 @@ export default class Spell implements IEntity {
     rite?: string,
     duration?: string,
     durationText?: string,
-    range?: number,
+    range?: string,
     school?: string,
     effect?: string,
     damage?: string,
@@ -80,11 +95,11 @@ export default class Spell implements IEntity {
     this.id = id;
     this.name = name || "";
     this.source = source || SpellSource.air;
-    this.castTime = castTime || "";
+    this.castTime = castTime || "4 - Mystb Rounds";
     this.rite = rite || SpellRite.mental;
     this.duration = duration || SpellDuration.instantaneous;
     this.durationText = durationText || "";
-    this.range = range || 0;
+    this.range = range || SpellRange.touch;
     this.school = school || SpellSchool.conjuration;
     this.effect = effect || "";
     this.damage = damage || "";
