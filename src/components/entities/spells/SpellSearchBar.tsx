@@ -60,7 +60,11 @@ const SpellSearchBar = () => {
   };
 
   const createNewSpell = () => {
-    history.push(`/spell-builder`);
+    let newSpell = new Spell();
+    delete newSpell.id;
+    createNewWithId("spells", newSpell, (id) => {
+      history.push(`/spell-detail/id/${id}`);
+    });
   };
 
   const exportFiltered = () => {

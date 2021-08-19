@@ -4,7 +4,6 @@ import { MyThemeProvider } from "./components/theme/MyThemeProvider";
 import { CompleteLoadingSpinner } from "./components/Loading";
 import AppWrapper from "./components/AppWrapper";
 import { HashRouter } from "react-router-dom";
-import SpellBuilderView from "./components/entities/spells/details/SpellBuilder";
 
 const ToEntity = lazy(() => import("./components/general_elements/details/ToEntity"));
 const EntityOverview = lazy(() => import("./components/general_elements/EntityOverview"));
@@ -25,7 +24,6 @@ const App = () => {
               <Route exact path="/home" component={Home}></Route>
               <Route path="/spell-detail/name/:name" component={ToEntity}></Route>
               <Route path="/spell-detail/id/:id" component={ToEntity}></Route>
-              <Route path="/spell-builder/" component={SpellBuilderView}></Route>
               <Route path="/spell-overview" component={EntityOverview}></Route>
               <Route path="/race-detail/name/:name" component={ToEntity}></Route>
               <Route path="/race-detail/id/:id" component={ToEntity}></Route>

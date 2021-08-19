@@ -71,10 +71,27 @@ export default class Spell implements IEntity {
   range: string;
   school: string;
   effect: string;
-  damage: string;
+  damageText: string;
   mastery: string;
   resist: string;
   drain: number;
+  drainParts: number[];
+
+  scalingEffect: string;
+  spellTarget: string;
+  aoeRadius: string;
+  damage: string[];
+  directEffects: string;
+  level: number;
+  projectileType: string;
+  projectileNumber: string;
+  damageType: string;
+  targetingType: string;
+  losRange: string;
+  drainType: string;
+  pureDamage: string;
+  size: string;
+  hp: string;
 
   constructor(
     id?: number,
@@ -87,10 +104,27 @@ export default class Spell implements IEntity {
     range?: string,
     school?: string,
     effect?: string,
-    damage?: string,
+    damageText?: string,
     mastery?: string,
     resist?: string,
-    drain?: number
+    drain?: number,
+    drainParts?: number[],
+
+    scalingEffect?: string,
+    spellTarget?: string,
+    aoeRadius?: string,
+    damage?: string[],
+    directEffects?: string,
+    level?: number,
+    projectileType?: string,
+    projectileNumber?: string,
+    damageType?: string,
+    targetingType?: string,
+    losRange?: string,
+    drainType?: string,
+    pureDamage?: string,
+    size?: string,
+    hp?: string
   ) {
     this.id = id;
     this.name = name || "";
@@ -102,10 +136,30 @@ export default class Spell implements IEntity {
     this.range = range || SpellRange.touch;
     this.school = school || SpellSchool.conjuration;
     this.effect = effect || "";
-    this.damage = damage || "";
+    this.damageText = damageText || "";
     this.mastery = mastery || "";
     this.resist = resist || "";
     this.drain = drain || 0;
+    //Source, Rite, Casting Time, Duration, Range, School, Scaling Effect, Single Target, aoeRadius, damage, damage, damage, direct Effects, level, projectile type, projectile number, damage type, targeting type, los Range, drain type, Pure Spell Damage, size, hp
+    this.drainParts = drainParts || [
+      0, 3, 2, 1, 1, 1, 0, 1, 0, 0, 0, 0, -4, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    ];
+
+    this.scalingEffect = scalingEffect || "";
+    this.spellTarget = spellTarget || "";
+    this.aoeRadius = aoeRadius || "";
+    this.damage = damage || [];
+    this.directEffects = directEffects || "";
+    this.level = level || 0;
+    this.projectileType = projectileType || "";
+    this.projectileNumber = projectileNumber || "";
+    this.damageType = damageType || "";
+    this.targetingType = targetingType || "";
+    this.losRange = losRange || "";
+    this.drainType = drainType || "";
+    this.pureDamage = pureDamage || "";
+    this.size = size || "";
+    this.hp = hp || "";
   }
 }
 

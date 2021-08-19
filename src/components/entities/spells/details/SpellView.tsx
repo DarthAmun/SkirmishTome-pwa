@@ -70,7 +70,7 @@ const SpellView = ({ spell }: $Props) => {
           <FormatedText text={spell.effect} />
         </Text>
         <Text>
-          <FormatedText text={spell.damage} />
+          <FormatedText text={spell.damageText} />
         </Text>
         <Text>
           <FormatedText text={spell.mastery} />
