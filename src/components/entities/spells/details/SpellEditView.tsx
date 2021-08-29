@@ -10,6 +10,7 @@ import Spell, {
   SpellSource,
   SpellTarget,
 } from "../../../../data/Spell";
+import CheckField from "../../../form_elements/CheckField";
 import NumberField from "../../../form_elements/NumberField";
 import SelectField from "../../../form_elements/SelectField";
 
@@ -38,98 +39,75 @@ const SpellEditView = ({ spell, onEdit }: $Props) => {
           label="Name"
           onChange={(name) => onEdit({ ...spell, name: name })}
         />
+        <SelectField
+          value={spell.school}
+          options={[
+            SpellSchool.conjuration,
+            SpellSchool.evocation,
+            SpellSchool.fortification,
+            SpellSchool.hex,
+            SpellSchool.illusion,
+            SpellSchool.necromancy,
+            SpellSchool.transmutation,
+            SpellSchool.enchantment,
+          ]}
+          label={"School"}
+          onChange={(value: string) => {
+            let newD = [...spell.drainParts];
+            switch (value) {
+              case SpellSchool.fortification:
+              case SpellSchool.hex:
+              case SpellSchool.illusion:
+              case SpellSchool.necromancy:
+              case SpellSchool.transmutation:
+              case SpellSchool.conjuration:
+                newD[4] = 1;
+                break;
+              case SpellSchool.evocation:
+                newD[4] = 0;
+                break;
+              case SpellSchool.enchantment:
+                newD[4] = 2;
+                break;
+              default:
+                newD[4] = 0;
+                break;
+            }
+
+            onEdit({ ...spell, drain: makeDrain(newD), drainParts: newD, school: value });
+          }}
+        />
+        <SelectField
+          value={spell.level + ""}
+          options={["1", "2", "3", "4", "5", "6", "7", "8", "9"]}
+          label={"Level"}
+          onChange={(value: string) => {
+            let newD = [...spell.drainParts];
+            newD[12] = +value - 5;
+
+            onEdit({ ...spell, drain: makeDrain(newD), drainParts: newD, level: +value });
+          }}
+        />
         <NumberField value={spell.drain} label="Drain" onChange={(drain) => undefined} />
-        <SelectField
-          value={spell.drainType}
-          options={["Stun", "Physical"]}
-          label={"Drain Type"}
-          onChange={(value: string) => {
+        <CheckField
+          value={spell.chargeable}
+          label="Chargeable"
+          onChange={(value: boolean) => {
             let newD = [...spell.drainParts];
-            switch (value) {
-              case "Stun":
-                newD[18] = 0;
-                break;
-              case "Physical":
-                newD[18] = -7;
-                break;
-              default:
-                newD[18] = 0;
-                break;
-            }
-            onEdit({ ...spell, drain: makeDrain(newD), drainParts: newD, drainType: value });
+            newD[21] = value ? -1 : 0;
+            onEdit({ ...spell, drain: makeDrain(newD), drainParts: newD, chargeable: value });
           }}
         />
-        <SelectField
-          value={spell.source}
-          options={[
-            SpellSource.air,
-            SpellSource.arcane,
-            SpellSource.demonic,
-            SpellSource.divine,
-            SpellSource.druidic,
-            SpellSource.earth,
-            SpellSource.fire,
-            SpellSource.frost,
-            SpellSource.psychic,
-          ]}
-          label={"Source"}
-          onChange={(category: string) => {
+        <CheckField
+          value={spell.needsMaterial}
+          label="Needs Material"
+          onChange={(value: boolean) => {
             let newD = [...spell.drainParts];
-            newD[0] = category === SpellSource.arcane ? 1 : 0;
-
-            onEdit({ ...spell, drain: makeDrain(newD), drainParts: newD, source: category });
+            newD[22] = value ? -1 : 0;
+            onEdit({ ...spell, drain: makeDrain(newD), drainParts: newD, needsMaterial: value });
           }}
         />
-        <SelectField
-          value={spell.castTime}
-          options={[
-            "4 - Mystb Rounds",
-            "9 + 3",
-            "9 + 3 (Channel)",
-            "7 + 3",
-            "5 + 3",
-            "5",
-            "Drain (Channel)",
-            "Drain + 3",
-            "24/MagiFaith Hours",
-          ]}
-          label={"Casting Time"}
-          onChange={(value: string) => {
-            let newD = [...spell.drainParts];
-            switch (value) {
-              case "4 - Mystb Rounds":
-                newD[2] = 2;
-                break;
-              case "9 + 3":
-                newD[2] = -4;
-                break;
-              case "9 + 3 (Channel)":
-              case "Drain (Channel)":
-                newD[2] = -3;
-                break;
-              case "7 + 3":
-                newD[2] = -1;
-                break;
-              case "5 + 3":
-                newD[2] = 1;
-                break;
-              case "5":
-                newD[2] = 4;
-                break;
-              case "Drain":
-                newD[2] = -2;
-                break;
-              case "24/MagiFaith Hours":
-                newD[2] = 0;
-                break;
-              default:
-                newD[2] = 0;
-                break;
-            }
-
-            onEdit({ ...spell, drain: makeDrain(newD), drainParts: newD, castTime: value });
-          }}
-        />
+        <Separator />
         <SelectField
           value={spell.rite}
           options={[SpellRite.mental, SpellRite.ritual, SpellRite.somatic, SpellRite.verbal]}
@@ -193,15 +171,127 @@ const SpellEditView = ({ spell, onEdit }: $Props) => {
             onEdit({ ...spell, drain: makeDrain(newD), drainParts: newD, duration: value });
           }}
         />
-        {(spell.duration === SpellDuration.fixedTicks ||
-          spell.duration === SpellDuration.fixedRounds ||
-          spell.duration === SpellDuration.fixedHours) && (
-          <StringField
-            value={spell.durationText}
-            label="Duration"
-            onChange={(value) => onEdit({ ...spell, durationText: value })}
-          />
-        )}
+        <SelectField
+          value={spell.drainType}
+          options={spell.school === SpellSchool.necromancy ? ["Stun", "Physical"] : ["Stun"]}
+          label={"Drain Type"}
+          onChange={(value: string) => {
+            let newD = [...spell.drainParts];
+            switch (value) {
+              case "Stun":
+                newD[18] = 0;
+                break;
+              case "Physical":
+                newD[18] = -7;
+                break;
+              default:
+                newD[18] = 0;
+                break;
+            }
+            onEdit({ ...spell, drain: makeDrain(newD), drainParts: newD, drainType: value });
+          }}
+        />
+        <SelectField
+          value={spell.castTime}
+          options={
+            spell.drainType === "Physical"
+              ? [
+                  "4 - Mystb Rounds",
+                  "9 + 3",
+                  "9 + 3 (Channel)",
+                  "7 + 3",
+                  "5 + 3",
+                  "5",
+                  "Drain (Channel)",
+                  "Drain + 3",
+                  "24/MagiFaith Hours",
+                ]
+              : [
+                  "4 - Mystb Rounds",
+                  "9 + 3",
+                  "9 + 3 (Channel)",
+                  "7 + 3",
+                  "5 + 3",
+                  "5",
+                  "24/MagiFaith Hours",
+                ]
+          }
+          label={"Casting Time"}
+          onChange={(value: string) => {
+            let newD = [...spell.drainParts];
+            switch (value) {
+              case "4 - Mystb Rounds":
+                newD[2] = 2;
+                break;
+              case "9 + 3":
+                newD[2] = -4;
+                break;
+              case "9 + 3 (Channel)":
+              case "Drain (Channel)":
+                newD[2] = -3;
+                break;
+              case "7 + 3":
+                newD[2] = -1;
+                break;
+              case "5 + 3":
+                newD[2] = 1;
+                break;
+              case "5":
+                newD[2] = 4;
+                break;
+              case "Drain":
+                newD[2] = -2;
+                break;
+              case "24/MagiFaith Hours":
+                newD[2] = 0;
+                break;
+              default:
+                newD[2] = 0;
+                break;
+            }
+
+            onEdit({ ...spell, drain: makeDrain(newD), drainParts: newD, castTime: value });
+          }}
+        />
+        <Separator />
+        <SelectField
+          value={spell.spellTarget}
+          options={[
+            SpellTarget.single,
+            SpellTarget.multi,
+            SpellTarget.aoe,
+            SpellTarget.daoe,
+            SpellTarget.target,
+            SpellTarget.caster,
+            SpellTarget.line,
+          ]}
+          label={"Spell Target"}
+          onChange={(value: string) => {
+            let newD = [...spell.drainParts];
+            switch (value) {
+              case SpellTarget.single:
+              case SpellTarget.daoe:
+                newD[6] = 1;
+                break;
+              case SpellTarget.aoe:
+              case SpellTarget.line:
+                newD[6] = 2;
+                break;
+              case SpellTarget.caster:
+              case SpellTarget.target:
+                newD[6] = 3;
+                break;
+              case SpellTarget.multi:
+                newD[6] = 4;
+                break;
+              default:
+                newD[6] = 0;
+                break;
+            }
+
+            onEdit({ ...spell, drain: makeDrain(newD), drainParts: newD, spellTarget: value });
+          }}
+        />
         <SelectField
           value={spell.range}
           options={[
@@ -241,127 +331,99 @@ const SpellEditView = ({ spell, onEdit }: $Props) => {
           }}
         />
         <SelectField
-          value={spell.school}
-          options={[
-            SpellSchool.conjuration,
-            SpellSchool.evocation,
-            SpellSchool.fortification,
-            SpellSchool.hex,
-            SpellSchool.illusion,
-            SpellSchool.necromancy,
-            SpellSchool.transmutation,
-            SpellSchool.enchantment,
-          ]}
-          label={"School"}
+          value={spell.targetingType}
+          options={["Direct Target", "Aura Targeting", "Indirect Targeting"]}
+          label={"Targeting Type"}
           onChange={(value: string) => {
             let newD = [...spell.drainParts];
             switch (value) {
-              case SpellSchool.fortification:
-              case SpellSchool.hex:
-              case SpellSchool.illusion:
-              case SpellSchool.necromancy:
-              case SpellSchool.transmutation:
-              case SpellSchool.conjuration:
-                newD[4] = 1;
+              case "Direct Target":
+                newD[16] = 0;
                 break;
-              case SpellSchool.evocation:
-                newD[4] = 0;
+              case "Aura Targeting":
+                newD[16] = 2;
                 break;
-              case SpellSchool.enchantment:
-                newD[4] = 2;
+              case "Indirect Targeting":
+                newD[16] = 1;
                 break;
               default:
-                newD[4] = 0;
+                newD[16] = 0;
                 break;
             }
 
-            onEdit({ ...spell, drain: makeDrain(newD), drainParts: newD, school: value });
+            onEdit({ ...spell, drain: makeDrain(newD), drainParts: newD, targetingType: value });
           }}
         />
         <SelectField
-          value={spell.scalingEffect}
-          options={[
-            "plus MystB Meters Radius",
-            "plus MystB Projectiles",
-            "1 Projectile/Effect per Variable Factor",
-            "1 Projectile/Effect per 3 Magic/Faith Rating",
-            "1 Projectile/Effect per 2 Magic/Faith Rating",
-            "1 Projectile/Effect and 1 Meter Radius per 2 Magic/Faith Rating",
-            "1 Projectile/Effect and 1 Meter Radius per 3 Magic/Faith Rating",
-            "plus  1 Projectile/Effect per 2 Magic/Faith Rating",
-            "plus  1 Projectile/Effect per 3 Magic/Faith Rating",
-            "plus  1 Projectile/Effect per 4 Magic/Faith Rating",
-            "plus MystB Meters Radius & Effect",
-          ]}
-          label={"Scaling Effects"}
+          value={spell.projectileType}
+          options={["Ball", "Missile", "Bolt", "Ray", "Spray", "Lasso"]}
+          label={"Projectile Type"}
           onChange={(value: string) => {
             let newD = [...spell.drainParts];
             switch (value) {
-              case "plus MystB Meters Radius":
-              case "plus MystB Projectiles":
-              case "1 Projectile/Effect per 3 Magic/Faith Rating":
-              case "plus  1 Projectile/Effect per 4 Magic/Faith Rating":
-                newD[5] = 2;
+              case "Ball":
+                newD[13] = -1;
                 break;
-              case "1 Projectile/Effect per Variable Factor":
-              case "plus MystB Meters Radius & Effect":
-              case "plus  1 Projectile/Effect per 3 Magic/Faith Rating":
-                newD[5] = 3;
+              case "Missile":
+              case "Bolt":
+              case "Spray":
+                newD[13] = 0;
                 break;
-              case "1 Projectile/Effect per 2 Magic/Faith Rating":
-              case "plus  1 Projectile/Effect per 2 Magic/Faith Rating":
-              case "1 Projectile/Effect and 1 Meter Radius per 3 Magic/Faith Rating":
-                newD[5] = 4;
-                break;
-              case "1 Projectile/Effect and 1 Meter Radius per 2 Magic/Faith Rating":
-                newD[5] = 5;
+              case "Ray":
+              case "Lasso":
+                newD[13] = 1;
                 break;
               default:
-                newD[5] = 0;
+                newD[13] = 0;
                 break;
             }
 
-            onEdit({ ...spell, drain: makeDrain(newD), drainParts: newD, scalingEffect: value });
+            onEdit({ ...spell, drain: makeDrain(newD), drainParts: newD, projectileType: value });
           }}
         />
-        <SelectField
-          value={spell.spellTarget}
-          options={[
-            SpellTarget.single,
-            SpellTarget.multi,
-            SpellTarget.aoe,
-            SpellTarget.daoe,
-            SpellTarget.target,
-            SpellTarget.caster,
-            SpellTarget.line,
-          ]}
-          label={"Spell Target"}
-          onChange={(value: string) => {
-            let newD = [...spell.drainParts];
-            switch (value) {
-              case SpellTarget.single:
-              case SpellTarget.daoe:
-                newD[6] = 1;
-                break;
-              case SpellTarget.aoe:
-              case SpellTarget.line:
-                newD[6] = 2;
-                break;
-              case SpellTarget.caster:
-              case SpellTarget.target:
-                newD[6] = 3;
-                break;
-              case SpellTarget.multi:
-                newD[6] = 4;
-                break;
-              default:
-                newD[6] = 0;
-                break;
-            }
+        {spell.range !== SpellRange.sonic &&
+          spell.range !== SpellRange.touch &&
+          spell.range !== SpellRange.radius &&
+          spell.range !== SpellRange.radiusPlus && (
+            <SelectField
+              value={spell.losRange}
+              options={[
+                "1/2 Magic/Faith meters",
+                "Magic/Faith meters",
+                "Magic/Faith *2 meters",
+                "Magic/Faith *3 meters",
+                "Magic/Faith *4 meters",
+                "Magic/Faith *5 meters",
+              ]}
+              label={"Line of Sight Range"}
+              onChange={(value: string) => {
+                let newD = [...spell.drainParts];
+                switch (value) {
+                  case "1/2 Magic/Faith meters":
+                  case "Magic/Faith meters":
+                    newD[17] = -1;
+                    break;
+                  case "Magic/Faith *2 meters":
+                    newD[17] = 0;
+                    break;
+                  case "Magic/Faith *3 meters":
+                    newD[17] = 1;
+                    break;
+                  case "Magic/Faith *4 meters":
+                    newD[17] = 2;
+                    break;
+                  case "Magic/Faith *5 meters":
+                    newD[17] = 3;
+                    break;
+                  default:
+                    newD[17] = 0;
+                    break;
+                }
 
-            onEdit({ ...spell, drain: makeDrain(newD), drainParts: newD, spellTarget: value });
-          }}
-        />
+                onEdit({ ...spell, drain: makeDrain(newD), drainParts: newD, losRange: value });
+              }}
+            />
+          )}
         {spell.range !== SpellRange.touch && spell.range !== SpellRange.losManipulate && (
           <SelectField
             value={spell.aoeRadius}
@@ -419,49 +481,7 @@ const SpellEditView = ({ spell, onEdit }: $Props) => {
             }}
           />
         )}
-        {spell.range !== SpellRange.sonic &&
-          spell.range !== SpellRange.touch &&
-          spell.range !== SpellRange.radius &&
-          spell.range !== SpellRange.radiusPlus && (
-            <SelectField
-              value={spell.losRange}
-              options={[
-                "1/2 Magic/Faith meters",
-                "Magic/Faith meters",
-                "Magic/Faith *2 meters",
-                "Magic/Faith *3 meters",
-                "Magic/Faith *4 meters",
-                "Magic/Faith *5 meters",
-              ]}
-              label={"Line of Sight Range"}
-              onChange={(value: string) => {
-                let newD = [...spell.drainParts];
-                switch (value) {
-                  case "1/2 Magic/Faith meters":
-                  case "Magic/Faith meters":
-                    newD[17] = -1;
-                    break;
-                  case "Magic/Faith *2 meters":
-                    newD[17] = 0;
-                    break;
-                  case "Magic/Faith *3 meters":
-                    newD[17] = 1;
-                    break;
-                  case "Magic/Faith *4 meters":
-                    newD[17] = 2;
-                    break;
-                  case "Magic/Faith *5 meters":
-                    newD[17] = 3;
-                    break;
-                  default:
-                    newD[17] = 0;
-                    break;
-                }
-
-                onEdit({ ...spell, drain: makeDrain(newD), drainParts: newD, losRange: value });
-              }}
-            />
-          )}
+        <Separator />
         <SelectField
           value={spell.damage[0]}
           options={[
@@ -835,6 +855,84 @@ const SpellEditView = ({ spell, onEdit }: $Props) => {
             onEdit({ ...spell, drain: makeDrain(newD), drainParts: newD, damage: newDa });
           }}
         />
+        {(spell.damage[0] !== "" || spell.damage[1] !== "" || spell.damage[2] !== "") && (
+          <SelectField
+            value={spell.damageType}
+            options={["Combined", "Physical", "Stun", "Pure", "Fatigue", "Agony"]}
+            label={"Damage Type"}
+            onChange={(value: string) => {
+              let newD = [...spell.drainParts];
+              switch (value) {
+                case "Combined":
+                case "Physical":
+                  newD[15] = 0;
+                  break;
+                case "Stun":
+                  newD[15] = 1;
+                  break;
+                case "Pure":
+                  newD[15] = 2;
+                  break;
+                case "Fatigue":
+                  newD[15] = 3;
+                  break;
+                case "Agony":
+                  newD[15] = 5;
+                  break;
+                default:
+                  newD[15] = 0;
+                  break;
+              }
+              onEdit({ ...spell, drain: makeDrain(newD), drainParts: newD, damageType: value });
+            }}
+          />
+        )}
+        <SelectField
+          value={spell.scalingEffect}
+          options={[
+            "plus MystB Meters Radius",
+            "plus MystB Projectiles",
+            "1 Projectile/Effect per Variable Factor",
+            "1 Projectile/Effect per 3 Magic/Faith Rating",
+            "1 Projectile/Effect per 2 Magic/Faith Rating",
+            "1 Projectile/Effect and 1 Meter Radius per 2 Magic/Faith Rating",
+            "1 Projectile/Effect and 1 Meter Radius per 3 Magic/Faith Rating",
+            "plus  1 Projectile/Effect per 2 Magic/Faith Rating",
+            "plus  1 Projectile/Effect per 3 Magic/Faith Rating",
+            "plus  1 Projectile/Effect per 4 Magic/Faith Rating",
+            "plus MystB Meters Radius & Effect",
+          ]}
+          label={"Scaling Effects"}
+          onChange={(value: string) => {
+            let newD = [...spell.drainParts];
+            switch (value) {
+              case "plus MystB Meters Radius":
+              case "plus MystB Projectiles":
+              case "1 Projectile/Effect per 3 Magic/Faith Rating":
+              case "plus  1 Projectile/Effect per 4 Magic/Faith Rating":
+                newD[5] = 2;
+                break;
+              case "1 Projectile/Effect per Variable Factor":
+              case "plus MystB Meters Radius & Effect":
+              case "plus  1 Projectile/Effect per 3 Magic/Faith Rating":
+                newD[5] = 3;
+                break;
+              case "1 Projectile/Effect per 2 Magic/Faith Rating":
+              case "plus  1 Projectile/Effect per 2 Magic/Faith Rating":
+              case "1 Projectile/Effect and 1 Meter Radius per 3 Magic/Faith Rating":
+                newD[5] = 4;
+                break;
+              case "1 Projectile/Effect and 1 Meter Radius per 2 Magic/Faith Rating":
+                newD[5] = 5;
+                break;
+              default:
+                newD[5] = 0;
+                break;
+            }
+
+            onEdit({ ...spell, drain: makeDrain(newD), drainParts: newD, scalingEffect: value });
+          }}
+        />
         <SelectField
           value={spell.directEffects}
           options={[
@@ -895,167 +993,6 @@ const SpellEditView = ({ spell, onEdit }: $Props) => {
             onEdit({ ...spell, drain: makeDrain(newD), drainParts: newD, directEffects: value });
           }}
         />
-        <SelectField
-          value={spell.level + ""}
-          options={["1", "2", "3", "4", "5", "6", "7", "8", "9"]}
-          label={"Level"}
-          onChange={(value: string) => {
-            let newD = [...spell.drainParts];
-            newD[12] = +value - 5;
-
-            onEdit({ ...spell, drain: makeDrain(newD), drainParts: newD, level: +value });
-          }}
-        />
-        <SelectField
-          value={spell.projectileType}
-          options={["Ball", "Missile", "Bolt", "Ray", "Spray", "Lasso"]}
-          label={"Projectile Type"}
-          onChange={(value: string) => {
-            let newD = [...spell.drainParts];
-            switch (value) {
-              case "Ball":
-                newD[13] = -1;
-                break;
-              case "Missile":
-              case "Bolt":
-              case "Spray":
-                newD[13] = 0;
-                break;
-              case "Ray":
-              case "Lasso":
-                newD[13] = 1;
-                break;
-              default:
-                newD[13] = 0;
-                break;
-            }
-
-            onEdit({ ...spell, drain: makeDrain(newD), drainParts: newD, projectileType: value });
-          }}
-        />
-        {spell.projectileType === "Spray" && (
-          <SelectField
-            value={spell.projectileNumber}
-            options={["1", "2", "3", "4", "5", "Scaling / Variable"]}
-            label={"Projectile Type"}
-            onChange={(value: string) => {
-              let newD = [...spell.drainParts];
-              switch (value) {
-                case "1":
-                case "Scaling / Variable":
-                  newD[14] = 1;
-                  break;
-                case "2":
-                  newD[14] = 2;
-                  break;
-                case "3":
-                  newD[14] = 4;
-                  break;
-                case "4":
-                  newD[14] = 6;
-                  break;
-                case "5":
-                  newD[14] = 8;
-                  break;
-                default:
-                  newD[14] = 0;
-                  break;
-              }
-              onEdit({
-                ...spell,
-                drain: makeDrain(newD),
-                drainParts: newD,
-                projectileNumber: value,
-              });
-            }}
-          />
-        )}
-        {(spell.damage[0] !== "" || spell.damage[1] !== "" || spell.damage[2] !== "") && (
-          <SelectField
-            value={spell.damageType}
-            options={["Combined", "Physical", "Stun", "Pure", "Fatigue", "Agony"]}
-            label={"Damage Type"}
-            onChange={(value: string) => {
-              let newD = [...spell.drainParts];
-              switch (value) {
-                case "Combined":
-                case "Physical":
-                  newD[15] = 0;
-                  break;
-                case "Stun":
-                  newD[15] = 1;
-                  break;
-                case "Pure":
-                  newD[15] = 2;
-                  break;
-                case "Fatigue":
-                  newD[15] = 3;
-                  break;
-                case "Agony":
-                  newD[15] = 5;
-                  break;
-                default:
-                  newD[15] = 0;
-                  break;
-              }
-              onEdit({ ...spell, drain: makeDrain(newD), drainParts: newD, damageType: value });
-            }}
-          />
-        )}
-        {spell.damageType === "Combined" ||
-          (spell.damageType === "Pure" && (
-            <SelectField
-              value={spell.pureDamage}
-              options={[
-                "Acid",
-                "Necrotic",
-                "Frost",
-                "Fire",
-                "Lightning",
-                "Radiant",
-                "Arcane",
-                "Poison",
-              ]}
-              label={"Pure Spell Damage"}
-              onChange={(value: string) => {
-                let newD = [...spell.drainParts];
-                switch (value) {
-                  case "Arcane":
-                    newD[18] = 1;
-                    break;
-                  default:
-                    newD[18] = 0;
-                    break;
-                }
-
-                onEdit({ ...spell, drain: makeDrain(newD), drainParts: newD, pureDamage: value });
-              }}
-            />
-          ))}
-        <SelectField
-          value={spell.targetingType}
-          options={["Direct Target", "Aura Targeting", "Indirect Targeting"]}
-          label={"Targeting Type"}
-          onChange={(value: string) => {
-            let newD = [...spell.drainParts];
-            switch (value) {
-              case "Direct Target":
-                newD[16] = 0;
-                break;
-              case "Aura Targeting":
-                newD[16] = 2;
-                break;
-              case "Indirect Targeting":
-                newD[16] = 1;
-                break;
-              default:
-                newD[16] = 0;
-                break;
-            }
-
-            onEdit({ ...spell, drain: makeDrain(newD), drainParts: newD, targetingType: value });
-          }}
-        />
         {spell.directEffects === "Wall / Barrier / Construct / Summon" && (
           <SelectField
             value={spell.size}
@@ -1069,7 +1006,7 @@ const SpellEditView = ({ spell, onEdit }: $Props) => {
               "Magic/Faith *2 M³",
               "Magic/Faith *3 M³",
             ]}
-            label={"Targeting Type"}
+            label={"Shield/Structure Size"}
             onChange={(value: string) => {
               let newD = [...spell.drainParts];
               switch (value) {
@@ -1144,6 +1081,103 @@ const SpellEditView = ({ spell, onEdit }: $Props) => {
             }}
           />
         )}
+        <SelectField
+          value={spell.source}
+          options={[
+            SpellSource.air,
+            SpellSource.arcane,
+            SpellSource.demonic,
+            SpellSource.divine,
+            SpellSource.druidic,
+            SpellSource.earth,
+            SpellSource.fire,
+            SpellSource.frost,
+            SpellSource.psychic,
+          ]}
+          label={"Source"}
+          onChange={(category: string) => {
+            let newD = [...spell.drainParts];
+            newD[0] = category === SpellSource.arcane ? 1 : 0;
+
+            onEdit({ ...spell, drain: makeDrain(newD), drainParts: newD, source: category });
+          }}
+        />
+        {(spell.duration === SpellDuration.fixedTicks ||
+          spell.duration === SpellDuration.fixedRounds ||
+          spell.duration === SpellDuration.fixedHours) && (
+          <StringField
+            value={spell.durationText}
+            label="Duration"
+            onChange={(value) => onEdit({ ...spell, durationText: value })}
+          />
+        )}
+        {spell.projectileType !== "Spray" && (
+          <SelectField
+            value={spell.projectileNumber}
+            options={["1", "2", "3", "4", "5", "Scaling / Variable"]}
+            label={"Projectile Type"}
+            onChange={(value: string) => {
+              let newD = [...spell.drainParts];
+              switch (value) {
+                case "1":
+                case "Scaling / Variable":
+                  newD[14] = 1;
+                  break;
+                case "2":
+                  newD[14] = 2;
+                  break;
+                case "3":
+                  newD[14] = 4;
+                  break;
+                case "4":
+                  newD[14] = 6;
+                  break;
+                case "5":
+                  newD[14] = 8;
+                  break;
+                default:
+                  newD[14] = 0;
+                  break;
+              }
+              onEdit({
+                ...spell,
+                drain: makeDrain(newD),
+                drainParts: newD,
+                projectileNumber: value,
+              });
+            }}
+          />
+        )}
+        {spell.damageType === "Combined" ||
+          (spell.damageType === "Pure" && (
+            <SelectField
+              value={spell.pureDamage}
+              options={[
+                "Acid",
+                "Necrotic",
+                "Frost",
+                "Fire",
+                "Lightning",
+                "Radiant",
+                "Arcane",
+                "Poison",
+              ]}
+              label={"Pure Spell Damage"}
+              onChange={(value: string) => {
+                let newD = [...spell.drainParts];
+                switch (value) {
+                  case "Arcane":
+                    newD[18] = 1;
+                    break;
+                  default:
+                    newD[18] = 0;
+                    break;
+                }
+
+                onEdit({ ...spell, drain: makeDrain(newD), drainParts: newD, pureDamage: value });
+              }}
+            />
+          ))}
         <TextField
           value={spell.effect}
           label="Effect"
@@ -1192,4 +1226,9 @@ const View = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+`;
+
+const Separator = styled.div`
+  flex: 1 1 100%;
+  height: 10px;
 `;

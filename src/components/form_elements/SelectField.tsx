@@ -19,9 +19,9 @@ interface $Props {
 
 const SelectField = ({ value, options, label, icon, transform, onChange }: $Props) => {
   const [opts, setOptions] = useState<{ value: string; label: string }[]>([]);
-  const handleChange = (option: string) => {
+  const handleChange = (option: { value: string; label: string } | null) => {
     if (option !== null && option !== undefined) {
-      onChange(option);
+      onChange(option.value);
     }
   };
 
@@ -39,10 +39,11 @@ const SelectField = ({ value, options, label, icon, transform, onChange }: $Prop
       {opts.length > 0 && (
         <StyledSelect
           isMulti={false}
+          isClearable={true}
           defaultValue={{ value: value, label: value }}
           classNamePrefix="react-select"
           options={opts}
-          onChange={(options: { value: string; label: string }) => handleChange(options.value)}
+          onChange={(options: { value: string; label: string }) => handleChange(options)}
         />
       )}
     </Field>

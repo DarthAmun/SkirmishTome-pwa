@@ -92,6 +92,8 @@ export default class Spell implements IEntity {
   pureDamage: string;
   size: string;
   hp: string;
+  chargeable: boolean;
+  needsMaterial: boolean;
 
   constructor(
     id?: number,
@@ -124,7 +126,9 @@ export default class Spell implements IEntity {
     drainType?: string,
     pureDamage?: string,
     size?: string,
-    hp?: string
+    hp?: string,
+    chargeable?: boolean,
+    needsMaterial?: boolean
   ) {
     this.id = id;
     this.name = name || "";
@@ -140,9 +144,9 @@ export default class Spell implements IEntity {
     this.mastery = mastery || "";
     this.resist = resist || "";
     this.drain = drain || 0;
-    //Source, Rite, Casting Time, Duration, Range, School, Scaling Effect, Single Target, aoeRadius, damage, damage, damage, direct Effects, level, projectile type, projectile number, damage type, targeting type, los Range, drain type, Pure Spell Damage, size, hp
+    //Source, Rite, Casting Time, Duration, Range, School, Scaling Effect, Single Target, aoeRadius, damage, damage, damage, direct Effects, level, projectile type, projectile number, damage type, targeting type, los Range, drain type, Pure Spell Damage, size, hp, chargeable, needs material
     this.drainParts = drainParts || [
-      0, 3, 2, 1, 1, 1, 0, 1, 0, 0, 0, 0, -4, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 3, 2, 1, 1, 1, 0, 1, 0, 0, 0, 0, -4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     ];
 
     this.scalingEffect = scalingEffect || "";
@@ -160,6 +164,8 @@ export default class Spell implements IEntity {
     this.pureDamage = pureDamage || "";
     this.size = size || "";
     this.hp = hp || "";
+    this.chargeable = chargeable || false;
+    this.needsMaterial = needsMaterial || false;
   }
 }
 
