@@ -76,6 +76,7 @@ export default class Spell implements IEntity {
   resist: string;
   drain: number;
   drainParts: number[];
+  masteryDrain: number;
 
   scalingEffect: string;
   spellTarget: string;
@@ -111,6 +112,7 @@ export default class Spell implements IEntity {
     resist?: string,
     drain?: number,
     drainParts?: number[],
+    masteryDrain?:number,
 
     scalingEffect?: string,
     spellTarget?: string,
@@ -148,6 +150,7 @@ export default class Spell implements IEntity {
     this.drainParts = drainParts || [
       0, 3, 2, 1, 1, 1, 0, 1, 0, 0, 0, 0, -4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     ];
+    this.masteryDrain = masteryDrain || 0;
 
     this.scalingEffect = scalingEffect || "";
     this.spellTarget = spellTarget || "";

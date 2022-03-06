@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { exportAll } from "../../services/OptionService";
-import { deleteAll, reciveCount } from "../../services/DatabaseService";
+import { deleteAll, reciveAll, reciveCount } from "../../services/DatabaseService";
 import IEntity from "../../data/IEntity";
 import P2PReciver from "../p2p/P2PReciver";
 
 import { isTalent } from "../../data/Talent";
 
-import { faFileExport } from "@fortawesome/free-solid-svg-icons";
+import { faFileExport, faFileImport } from "@fortawesome/free-solid-svg-icons";
 import TabBar from "../general_elements/TabBar";
 import IconButton from "../form_elements/IconButton";
 import TalentTile from "../entities/talents/TalentTile";
@@ -15,6 +15,9 @@ import GeneralOptions from "./GeneralOptions";
 import TalentsOptions from "./TalentsOptions";
 import ImportField, { ImportModus } from "../form_elements/ImportField";
 import DiscordOptions from "./DiscordOptions";
+import { useCSVDownloader, usePapaParse } from "react-papaparse";
+import FileField from "../form_elements/FileField";
+// import { scanImportedJson } from "../../services/CsvService";
 
 const Options = () => {
   const [activeTab, setTab] = useState<string>("General");
@@ -24,12 +27,40 @@ const Options = () => {
   const [reload, isReload] = useState<boolean>(true);
   const [data, setData] = useState<IEntity[] | IEntity>();
 
+  const { readString } = usePapaParse();
+  const { CSVDownloader, Type } = useCSVDownloader();
+  const [csvBackup, setBackup] = useState<any>();
+
+  const handleCsvUpload = (files: any) => {
+    const file = files[0];
+    let fileReader = new FileReader();
+    fileReader.onloadend = function () {
+      const content = fileReader.result;
+      if (content !== null) {
+        readString(content.toString(), {
+          worker: true,
+          complete: (results) => {
+            console.log("Csv loaded from " + file.name);
+            const csv: Array<any> = results.data;
+            console.log(csv);
+            // scanImportedJson(csv);
+            console.log("---------");
+          },
+        });
+      }
+    };
+    fileReader.readAsText(file);
+  };
+
   useEffect(() => {
     if (reload) {
       reciveCount("talents", (result: number) => {
         setTalentAmount(result);
       });
       isReload(false);
+      reciveAll("talents", (result: any[]) => {
+        setBackup(result);
+      });
     }
   }, [reload]);
 
@@ -53,11 +84,42 @@ const Options = () => {
         <ImportField modus={ImportModus.NORMAL} />
       </OptionSection>
       <OptionSection>
+        <SelectionTitle>Import Spell CSV</SelectionTitle>
+        <FileField
+          label=""
+          isMulti={true}
+          accept={".csv"}
+          icon={faFileImport}
+          onChange={(file) => handleCsvUpload(file)}
+        />
+      </OptionSection>
+      <OptionSection>
         <SelectionTitle>Export</SelectionTitle>
         <SectionRow>
           <SectionText>Export as one file?</SectionText>
-          <IconButton icon={faFileExport} onClick={() => exportAll("SkirmishTome_all.json")} />
+          <IconButton
+            icon={faFileExport}
+            onClick={() => exportAll("SkirmishTome_all.json")}
+          />
         </SectionRow>
+      </OptionSection>
+      <OptionSection>
+        <CSVDownloader
+          type={Type.Button}
+          filename={
+            "CsvBackup_" +
+            new Date().getFullYear() +
+            "." +
+            (new Date().getMonth() + 1)
+          }
+          bom={true}
+          config={{
+            delimiter: ";",
+          }}
+          data={csvBackup}
+        >
+          Download
+        </CSVDownloader>
       </OptionSection>
       <TabBar
         children={["General", "Talents", "Discord", "Receive"]}
@@ -66,7 +128,10 @@ const Options = () => {
       />
       {activeTab === "General" && <GeneralOptions />}
       {activeTab === "Talents" && (
-        <TalentsOptions amount={talentAmount} triggerDeleteAll={triggerDeleteAll} />
+        <TalentsOptions
+          amount={talentAmount}
+          triggerDeleteAll={triggerDeleteAll}
+        />
       )}
       {activeTab === "Discord" && <DiscordOptions />}
       {activeTab === "Receive" && (

@@ -7,7 +7,10 @@ import FormatedText from "../../../general_elements/FormatedText";
 import P2PSender from "../../../p2p/P2PSender";
 import TextButton from "../../../form_elements/TextButton";
 import { useWebhook } from "../../../../hooks/webhookHook";
-import { formatDiscordText, sendEmbedMessage } from "../../../../services/DiscordService";
+import {
+  formatDiscordText,
+  sendEmbedMessage,
+} from "../../../../services/DiscordService";
 import { faDiscord } from "@fortawesome/free-brands-svg-icons";
 
 interface $Props {
@@ -32,6 +35,11 @@ const TalentView = ({ talent }: $Props) => {
               {
                 name: "Cost",
                 value: talent.cost ? talent.cost : "-",
+                inline: true,
+              },
+              {
+                name: "Ticks",
+                value: talent.ticks ? talent.ticks : "-",
                 inline: true,
               },
               {
@@ -67,28 +75,41 @@ const TalentView = ({ talent }: $Props) => {
         </Name>
 
         <PropWrapper>
-          <Prop>{talent.category}</Prop>
-          <Prop>{talent.type ? (talent.isFlaw ? "trigger" : "active") : "Passive"}</Prop>
+          <Prop>
+            <PropTitle>Category: </PropTitle>
+            {talent.category}
+          </Prop>
+          <Prop>
+            <PropTitle>Type: </PropTitle>
+            {talent.type ? (talent.isFlaw ? "trigger" : "active") : "Passive"}
+          </Prop>
         </PropWrapper>
         <Text>
+          <PropTitle>Prerequisite: </PropTitle>
           <FormatedText text={talent.prerequisite} />
         </Text>
         <Text>
+          <PropTitle>Effect: </PropTitle>
           <FormatedText text={talent.effect} />
         </Text>
         {talent.isFlaw && talent.type && (
           <>
             <Text>
+              <PropTitle>Trigger: </PropTitle>
               <FormatedText text={talent.trigger} />
             </Text>
             <PropWrapper>
+              <PropTitle>Trigger Frequency: </PropTitle>
               <Prop>{talent.triggerFrequency}</Prop>
             </PropWrapper>
           </>
         )}
         {!talent.isFlaw && talent.type && (
           <PropWrapper>
-            <Prop>{talent.stress}</Prop>
+            <Prop>
+              <PropTitle>Swtress: </PropTitle>
+              {talent.stress}
+            </Prop>
           </PropWrapper>
         )}
         <PropWrapper>
@@ -194,6 +215,13 @@ const Prop = styled.div`
     0 100%
   );
   background-color: ${({ theme }) => theme.tile.backgroundColor};
+`;
+
+const PropTitle = styled.span`
+  display: inline-block;
+  color: ${({ theme }) => theme.tile.backgroundColorLink};
+  text-decoration: none;
+  margin: 0px 5px 0px 5px;
 `;
 
 const Text = styled.div`

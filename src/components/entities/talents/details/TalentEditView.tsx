@@ -52,13 +52,17 @@ const TalentEditView = ({ talent, onEdit }: $Props) => {
             TalentCategory.social,
           ]}
           label={"Category"}
-          onChange={(category: string) => onEdit({ ...talent, category: category })}
+          onChange={(category: string) =>
+            onEdit({ ...talent, category: category })
+          }
         />
         <TextField
           value={talent.prerequisite}
           label="Prerequisite"
           icon={faBookOpen}
-          onChange={(prerequisite) => onEdit({ ...talent, prerequisite: prerequisite })}
+          onChange={(prerequisite) =>
+            onEdit({ ...talent, prerequisite: prerequisite })
+          }
         />
         <TextField
           value={talent.effect}
@@ -84,11 +88,18 @@ const TalentEditView = ({ talent, onEdit }: $Props) => {
           </>
         )}
         {!talent.isFlaw && talent.type && (
-          <StringField
-            value={talent.stress}
-            label="Stress"
-            onChange={(stress) => onEdit({ ...talent, stress: stress })}
-          />
+          <>
+            <StringField
+              value={talent.stress}
+              label="Stress"
+              onChange={(stress) => onEdit({ ...talent, stress: stress })}
+            />
+            <NumberField
+              value={talent.ticks}
+              label="Ticks"
+              onChange={(ticks) => onEdit({ ...talent, ticks: ticks })}
+            />
+          </>
         )}
       </View>
     </CenterWrapper>

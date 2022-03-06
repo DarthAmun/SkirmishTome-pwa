@@ -1,10 +1,28 @@
-import { MyAppDatabase } from "../database/MyDatabase";
+import { SkirmishDB } from "../database/SkirmishDB";
 import { IndexableType } from "dexie";
 import IEntity from "../data/IEntity";
 import Filter from "../data/Filter";
 
+// export const saveNewFromList = (tableName: string, entities: BookeeEntry[]) => {
+//   const db = new BookeeDB();
+//   db.open()
+//     .then(async function () {
+//       const refinedEntities = (entities as BookeeEntry[]).map(
+//         (entity: BookeeEntry) => {
+//           delete entity["id"];
+//           return entity;
+//         }
+//       );
+//       const prom = await db.table(tableName).bulkPut(refinedEntities);
+//       return prom;
+//     })
+//     .finally(function () {
+//       db.close();
+//     });
+// };
+
 export const update = (tableName: string, data: IEntity) => {
-  const db = new MyAppDatabase();
+  const db = new SkirmishDB();
   db.open()
     .then(function () {
       db.table(tableName).update(data.id, data);
@@ -19,7 +37,7 @@ export const updateWithCallback = (
   data: IEntity,
   callback: (data: number) => void
 ) => {
-  const db = new MyAppDatabase();
+  const db = new SkirmishDB();
   db.open()
     .then(function () {
       db.table(tableName)
@@ -34,7 +52,7 @@ export const updateWithCallback = (
 };
 
 export const save = (tableName: string, data: IEntity) => {
-  const db = new MyAppDatabase();
+  const db = new SkirmishDB();
   db.open()
     .then(function () {
       db.table(tableName).add(data);
@@ -45,7 +63,7 @@ export const save = (tableName: string, data: IEntity) => {
 };
 
 export const saveNew = (tableName: string, entity: IEntity, filename: string) => {
-  const db = new MyAppDatabase();
+  const db = new SkirmishDB();
   return db
     .open()
     .then(async function () {
@@ -59,7 +77,7 @@ export const saveNew = (tableName: string, entity: IEntity, filename: string) =>
 };
 
 export const saveNewFromList = (tableName: string, entities: IEntity[], filename: string) => {
-  const db = new MyAppDatabase();
+  const db = new SkirmishDB();
   db.open()
     .then(async function () {
       const refinedEntities = (entities as IEntity[]).map((entity: IEntity) => {
@@ -79,7 +97,7 @@ export const saveWithCallback = (
   data: IEntity,
   callback: (data: number) => void
 ) => {
-  const db = new MyAppDatabase();
+  const db = new SkirmishDB();
   db.open()
     .then(function () {
       db.table(tableName)
@@ -94,7 +112,7 @@ export const saveWithCallback = (
 };
 
 export const remove = (tableName: string, id: number | undefined) => {
-  const db = new MyAppDatabase();
+  const db = new SkirmishDB();
   if (id !== undefined) {
     db.open()
       .then(function () {
@@ -107,7 +125,7 @@ export const remove = (tableName: string, id: number | undefined) => {
 };
 
 export const reciveAll = (tableName: string, callback: (data: IndexableType[]) => void) => {
-  const db = new MyAppDatabase();
+  const db = new SkirmishDB();
   db.open()
     .then(function () {
       db.table(tableName)
@@ -122,7 +140,7 @@ export const reciveAll = (tableName: string, callback: (data: IndexableType[]) =
 };
 
 export const reciveCount = (tableName: string, callback: (value: number) => void) => {
-  const db = new MyAppDatabase();
+  const db = new SkirmishDB();
   db.open()
     .then(function () {
       db.table(tableName).count((count) => {
@@ -135,7 +153,7 @@ export const reciveCount = (tableName: string, callback: (value: number) => void
 };
 
 export const reciveCountPromise = (tableName: string) => {
-  const db = new MyAppDatabase();
+  const db = new SkirmishDB();
   return db
     .open()
     .then(function () {
@@ -152,7 +170,7 @@ export const reciveByAttribute = (
   value: string,
   callback: (data: IEntity) => void
 ) => {
-  const db = new MyAppDatabase();
+  const db = new SkirmishDB();
   db.open()
     .then(function () {
       db.table(tableName)
@@ -169,7 +187,7 @@ export const reciveByAttribute = (
 };
 
 export const recivePromiseByAttribute = (tableName: string, name: string, value: string) => {
-  const db = new MyAppDatabase();
+  const db = new SkirmishDB();
   return db
     .open()
     .then(async function () {
@@ -182,7 +200,7 @@ export const recivePromiseByAttribute = (tableName: string, name: string, value:
 };
 
 export const recivePromise = (tableName: string, value: number) => {
-  const db = new MyAppDatabase();
+  const db = new SkirmishDB();
   return db
     .open()
     .then(async function () {
@@ -198,7 +216,7 @@ export const recivePromiseByAttributeCount = (
   name: string,
   value: string | number
 ) => {
-  const db = new MyAppDatabase();
+  const db = new SkirmishDB();
   if (typeof value === "string") {
     return db
       .open()
@@ -234,7 +252,7 @@ export const recivePromiseByAttributeCount = (
 };
 
 export const reciveAllPromise = (tableName: string) => {
-  const db = new MyAppDatabase();
+  const db = new SkirmishDB();
   return db
     .open()
     .then(async function () {
@@ -307,7 +325,7 @@ export const reciveAllFiltered = (
   filters: Filter[],
   callback: (data: IndexableType[]) => void
 ) => {
-  const db = new MyAppDatabase();
+  const db = new SkirmishDB();
   db.open()
     .then(function () {
       let sortedFiled: string = "name";
@@ -343,7 +361,7 @@ export const reciveAllFiltered = (
 };
 
 export const reciveAllFilteredPromise = (tableName: string, filters: Filter[]) => {
-  const db = new MyAppDatabase();
+  const db = new SkirmishDB();
   return db
     .open()
     .then(function () {
@@ -380,7 +398,7 @@ export const reciveAttributeSelection = (
   attribute: string,
   callback: (data: IndexableType[]) => void
 ) => {
-  const db = new MyAppDatabase();
+  const db = new SkirmishDB();
   db.open()
     .then(function () {
       db.table(tableName)
@@ -395,7 +413,7 @@ export const reciveAttributeSelection = (
 };
 
 export const reciveAttributeSelectionPromise = (tableName: string, attribute: string) => {
-  const db = new MyAppDatabase();
+  const db = new SkirmishDB();
   return db
     .open()
     .then(function () {
@@ -411,7 +429,7 @@ export const createNewWithId = (
   entity: IEntity,
   callback: (id: number) => void
 ) => {
-  const db = new MyAppDatabase();
+  const db = new SkirmishDB();
   db.open()
     .then(function () {
       db.table(tableName)
@@ -426,7 +444,7 @@ export const createNewWithId = (
 };
 
 export const deleteAll = (tableName: string) => {
-  const db = new MyAppDatabase();
+  const db = new SkirmishDB();
   db.open()
     .then(function () {
       db.table(tableName).clear();

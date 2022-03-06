@@ -4,7 +4,7 @@ import RandomTable from "../data/RandomTable";
 import Spell from "../data/Spell";
 import Talent from "../data/Talent";
 
-export class MyAppDatabase extends Dexie {
+export class SkirmishDB extends Dexie {
   randomTables: Dexie.Table<RandomTable, number>; // number = type of the primkey
   talents: Dexie.Table<Talent, number>;
   races: Dexie.Table<Race, number>;
@@ -29,11 +29,12 @@ export class MyAppDatabase extends Dexie {
         "++id, name, source, castTime, rite, duration, durationText, range, school, effect, damage, mastery,resist, drain",
     });
     this.version(4).stores({
-      talents: "++id, name, isFlaw, cost, prerequisite, effect, type, stress",
+      talents:
+        "++id, name, isFlaw, cost, prerequisite, effect, type, stress, ticks",
       races: "++id, name, hp, abilityModifier, size, stamina, talents, flaws",
       randomTables: "++id, name, rows, header",
       spells:
-        "++id, name, source, castTime, rite, duration, durationText, range, school, effect, damage, mastery,resist, drain",
+        "++id, name, source, castTime, rite, duration, durationText, range, school, effect, damage, mastery, resist, drain, masteryDrain",
     });
 
     this.talents = this.table("talents");

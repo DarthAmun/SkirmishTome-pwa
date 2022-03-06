@@ -61,21 +61,37 @@ const SpellView = ({ spell }: $Props) => {
         </Name>
 
         <PropWrapper>
-          <Prop>Source{spell.source}</Prop>
-          <Prop>Casting Time: {spell.castTime}</Prop>
-          <Prop>Rite: {spell.rite}</Prop>
-          <Prop>Range: {spell.range}</Prop>
+          <Prop>
+            <PropTitle>Source: </PropTitle>
+            {spell.source}
+          </Prop>
+          <Prop>
+            <PropTitle>Casting Time: </PropTitle>
+            {spell.castTime}
+          </Prop>
+          <Prop>
+            <PropTitle>Rite: </PropTitle>
+            {spell.rite}
+          </Prop>
+          <Prop>
+            <PropTitle>Range: </PropTitle>
+            {spell.range}
+          </Prop>
         </PropWrapper>
         <Text>
+          <PropTitle>Effect: </PropTitle>
           <FormatedText text={spell.effect} />
         </Text>
         <Text>
+          <PropTitle>Damage: </PropTitle>
           <FormatedText text={spell.damageText} />
         </Text>
         <Text>
+          <PropTitle>Mastery: </PropTitle>
           <FormatedText text={spell.mastery} />
         </Text>
         <Text>
+          <PropTitle>Resist: </PropTitle>
           <FormatedText text={spell.resist} />
         </Text>
         <PropWrapper>
@@ -167,6 +183,13 @@ const Prop = styled.div`
     0 100%
   );
   background-color: ${({ theme }) => theme.tile.backgroundColor};
+`;
+
+const PropTitle = styled.span`
+  display: inline-block;
+  color: ${({ theme }) => theme.tile.backgroundColorLink};
+  text-decoration: none;
+  margin: 0px 5px 0px 5px;
 `;
 
 type SchoolType = {

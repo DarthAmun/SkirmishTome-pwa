@@ -74,7 +74,38 @@ const SpellEditView = ({ spell, onEdit }: $Props) => {
                 break;
             }
 
-            onEdit({ ...spell, drain: makeDrain(newD), drainParts: newD, school: value });
+            onEdit({
+              ...spell,
+              drain: makeDrain(newD),
+              drainParts: newD,
+              school: value,
+            });
+          }}
+        />
+        <SelectField
+          value={spell.source}
+          options={[
+            SpellSource.air,
+            SpellSource.arcane,
+            SpellSource.demonic,
+            SpellSource.divine,
+            SpellSource.druidic,
+            SpellSource.earth,
+            SpellSource.fire,
+            SpellSource.frost,
+            SpellSource.psychic,
+          ]}
+          label={"Source"}
+          onChange={(category: string) => {
+            let newD = [...spell.drainParts];
+            newD[0] = category === SpellSource.arcane ? 1 : 0;
+
+            onEdit({
+              ...spell,
+              drain: makeDrain(newD),
+              drainParts: newD,
+              source: category,
+            });
           }}
         />
         <SelectField
@@ -85,17 +116,31 @@ const SpellEditView = ({ spell, onEdit }: $Props) => {
             let newD = [...spell.drainParts];
             newD[12] = +value - 5;
 
-            onEdit({ ...spell, drain: makeDrain(newD), drainParts: newD, level: +value });
+            onEdit({
+              ...spell,
+              drain: makeDrain(newD),
+              drainParts: newD,
+              level: +value,
+            });
           }}
         />
-        <NumberField value={spell.drain} label="Drain" onChange={(drain) => undefined} />
+        <NumberField
+          value={spell.drain}
+          label="Drain"
+          onChange={(drain) => undefined}
+        />
         <CheckField
           value={spell.chargeable}
           label="Chargeable"
           onChange={(value: boolean) => {
             let newD = [...spell.drainParts];
             newD[21] = value ? -1 : 0;
-            onEdit({ ...spell, drain: makeDrain(newD), drainParts: newD, chargeable: value });
+            onEdit({
+              ...spell,
+              drain: makeDrain(newD),
+              drainParts: newD,
+              chargeable: value,
+            });
           }}
         />
         <CheckField
@@ -104,13 +149,23 @@ const SpellEditView = ({ spell, onEdit }: $Props) => {
           onChange={(value: boolean) => {
             let newD = [...spell.drainParts];
             newD[22] = value ? -1 : 0;
-            onEdit({ ...spell, drain: makeDrain(newD), drainParts: newD, needsMaterial: value });
+            onEdit({
+              ...spell,
+              drain: makeDrain(newD),
+              drainParts: newD,
+              needsMaterial: value,
+            });
           }}
         />
         <Separator />
         <SelectField
           value={spell.rite}
-          options={[SpellRite.mental, SpellRite.ritual, SpellRite.somatic, SpellRite.verbal]}
+          options={[
+            SpellRite.mental,
+            SpellRite.ritual,
+            SpellRite.somatic,
+            SpellRite.verbal,
+          ]}
           label={"Rite"}
           onChange={(category: string) => {
             let newD = [...spell.drainParts];
@@ -130,7 +185,12 @@ const SpellEditView = ({ spell, onEdit }: $Props) => {
                 break;
             }
 
-            onEdit({ ...spell, drain: makeDrain(newD), drainParts: newD, rite: category });
+            onEdit({
+              ...spell,
+              drain: makeDrain(newD),
+              drainParts: newD,
+              rite: category,
+            });
           }}
         />
         <SelectField
@@ -168,12 +228,21 @@ const SpellEditView = ({ spell, onEdit }: $Props) => {
                 break;
             }
 
-            onEdit({ ...spell, drain: makeDrain(newD), drainParts: newD, duration: value });
+            onEdit({
+              ...spell,
+              drain: makeDrain(newD),
+              drainParts: newD,
+              duration: value,
+            });
           }}
         />
         <SelectField
           value={spell.drainType}
-          options={spell.school === SpellSchool.necromancy ? ["Stun", "Physical"] : ["Stun"]}
+          options={
+            spell.school === SpellSchool.necromancy
+              ? ["Stun", "Physical"]
+              : ["Stun"]
+          }
           label={"Drain Type"}
           onChange={(value: string) => {
             let newD = [...spell.drainParts];
@@ -188,7 +257,12 @@ const SpellEditView = ({ spell, onEdit }: $Props) => {
                 newD[18] = 0;
                 break;
             }
-            onEdit({ ...spell, drain: makeDrain(newD), drainParts: newD, drainType: value });
+            onEdit({
+              ...spell,
+              drain: makeDrain(newD),
+              drainParts: newD,
+              drainType: value,
+            });
           }}
         />
         <SelectField
@@ -250,7 +324,12 @@ const SpellEditView = ({ spell, onEdit }: $Props) => {
                 break;
             }
 
-            onEdit({ ...spell, drain: makeDrain(newD), drainParts: newD, castTime: value });
+            onEdit({
+              ...spell,
+              drain: makeDrain(newD),
+              drainParts: newD,
+              castTime: value,
+            });
           }}
         />
         <Separator />
@@ -289,7 +368,12 @@ const SpellEditView = ({ spell, onEdit }: $Props) => {
                 break;
             }
 
-            onEdit({ ...spell, drain: makeDrain(newD), drainParts: newD, spellTarget: value });
+            onEdit({
+              ...spell,
+              drain: makeDrain(newD),
+              drainParts: newD,
+              spellTarget: value,
+            });
           }}
         />
         <SelectField
@@ -327,7 +411,12 @@ const SpellEditView = ({ spell, onEdit }: $Props) => {
                 break;
             }
 
-            onEdit({ ...spell, drain: makeDrain(newD), drainParts: newD, range: value });
+            onEdit({
+              ...spell,
+              drain: makeDrain(newD),
+              drainParts: newD,
+              range: value,
+            });
           }}
         />
         <SelectField
@@ -351,7 +440,12 @@ const SpellEditView = ({ spell, onEdit }: $Props) => {
                 break;
             }
 
-            onEdit({ ...spell, drain: makeDrain(newD), drainParts: newD, targetingType: value });
+            onEdit({
+              ...spell,
+              drain: makeDrain(newD),
+              drainParts: newD,
+              targetingType: value,
+            });
           }}
         />
         <SelectField
@@ -378,9 +472,51 @@ const SpellEditView = ({ spell, onEdit }: $Props) => {
                 break;
             }
 
-            onEdit({ ...spell, drain: makeDrain(newD), drainParts: newD, projectileType: value });
+            onEdit({
+              ...spell,
+              drain: makeDrain(newD),
+              drainParts: newD,
+              projectileType: value,
+            });
           }}
         />
+        {spell.projectileType !== "Spray" && (
+          <SelectField
+            value={spell.projectileNumber}
+            options={["1", "2", "3", "4", "5", "Scaling / Variable"]}
+            label={"Projectile Number"}
+            onChange={(value: string) => {
+              let newD = [...spell.drainParts];
+              switch (value) {
+                case "1":
+                case "Scaling / Variable":
+                  newD[14] = 1;
+                  break;
+                case "2":
+                  newD[14] = 2;
+                  break;
+                case "3":
+                  newD[14] = 4;
+                  break;
+                case "4":
+                  newD[14] = 6;
+                  break;
+                case "5":
+                  newD[14] = 8;
+                  break;
+                default:
+                  newD[14] = 0;
+                  break;
+              }
+              onEdit({
+                ...spell,
+                drain: makeDrain(newD),
+                drainParts: newD,
+                projectileNumber: value,
+              });
+            }}
+          />
+        )}
         {spell.range !== SpellRange.sonic &&
           spell.range !== SpellRange.touch &&
           spell.range !== SpellRange.radius &&
@@ -420,67 +556,78 @@ const SpellEditView = ({ spell, onEdit }: $Props) => {
                     break;
                 }
 
-                onEdit({ ...spell, drain: makeDrain(newD), drainParts: newD, losRange: value });
+                onEdit({
+                  ...spell,
+                  drain: makeDrain(newD),
+                  drainParts: newD,
+                  losRange: value,
+                });
               }}
             />
           )}
-        {spell.range !== SpellRange.touch && spell.range !== SpellRange.losManipulate && (
-          <SelectField
-            value={spell.aoeRadius}
-            options={[
-              "1 Meter",
-              "2 Meter",
-              "3 Meter",
-              "4 Meter",
-              "5 Meter",
-              "6 Meter",
-              "7 Meter",
-              "8 Meter",
-              "9 Meter",
-              "10 Meter",
-              "1/2 Magic/Faith Meter",
-              "Magic/Faith Meters",
-              "Magic/Faith *2 Meters",
-            ]}
-            label={"Area of Effect Radius"}
-            onChange={(value: string) => {
-              let newD = [...spell.drainParts];
-              switch (value) {
-                case "1 Meter":
-                  newD[7] = -1;
-                  break;
-                case "2 Meter":
-                  newD[7] = 0;
-                  break;
-                case "3 Meter":
-                  newD[7] = 1;
-                  break;
-                case "4 Meter":
-                case "5 Meter":
-                case "1/2 Magic/Faith Meter":
-                  newD[7] = 2;
-                  break;
-                case "6 Meter":
-                case "7 Meter":
-                case "Magic/Faith Meters":
-                  newD[7] = 3;
-                  break;
-                case "8 Meter":
-                case "9 Meter":
-                case "Magic/Faith *2 Meters":
-                  newD[7] = 4;
-                  break;
-                case "10 Meter":
-                  newD[7] = 5;
-                  break;
-                default:
-                  newD[7] = 0;
-                  break;
-              }
-              onEdit({ ...spell, drain: makeDrain(newD), drainParts: newD, aoeRadius: value });
-            }}
-          />
-        )}
+        {spell.range !== SpellRange.touch &&
+          spell.range !== SpellRange.losManipulate && (
+            <SelectField
+              value={spell.aoeRadius}
+              options={[
+                "1 Meter",
+                "2 Meter",
+                "3 Meter",
+                "4 Meter",
+                "5 Meter",
+                "6 Meter",
+                "7 Meter",
+                "8 Meter",
+                "9 Meter",
+                "10 Meter",
+                "1/2 Magic/Faith Meter",
+                "Magic/Faith Meters",
+                "Magic/Faith *2 Meters",
+              ]}
+              label={"Area of Effect Radius"}
+              onChange={(value: string) => {
+                let newD = [...spell.drainParts];
+                switch (value) {
+                  case "1 Meter":
+                    newD[7] = -1;
+                    break;
+                  case "2 Meter":
+                    newD[7] = 0;
+                    break;
+                  case "3 Meter":
+                    newD[7] = 1;
+                    break;
+                  case "4 Meter":
+                  case "5 Meter":
+                  case "1/2 Magic/Faith Meter":
+                    newD[7] = 2;
+                    break;
+                  case "6 Meter":
+                  case "7 Meter":
+                  case "Magic/Faith Meters":
+                    newD[7] = 3;
+                    break;
+                  case "8 Meter":
+                  case "9 Meter":
+                  case "Magic/Faith *2 Meters":
+                    newD[7] = 4;
+                    break;
+                  case "10 Meter":
+                    newD[7] = 5;
+                    break;
+                  default:
+                    newD[7] = 0;
+                    break;
+                }
+                onEdit({
+                  ...spell,
+                  drain: makeDrain(newD),
+                  drainParts: newD,
+                  aoeRadius: value,
+                });
+              }}
+            />
+          )}
         <Separator />
         <SelectField
           value={spell.damage[0]}
@@ -602,7 +749,12 @@ const SpellEditView = ({ spell, onEdit }: $Props) => {
 
             let newDa = [...spell.damage];
             newDa[0] = value;
-            onEdit({ ...spell, drain: makeDrain(newD), drainParts: newD, damage: newDa });
+            onEdit({
+              ...spell,
+              drain: makeDrain(newD),
+              drainParts: newD,
+              damage: newDa,
+            });
           }}
         />
         <SelectField
@@ -727,7 +879,12 @@ const SpellEditView = ({ spell, onEdit }: $Props) => {
 
             let newDa = [...spell.damage];
             newDa[1] = value;
-            onEdit({ ...spell, drain: makeDrain(newD), drainParts: newD, damage: newDa });
+            onEdit({
+              ...spell,
+              drain: makeDrain(newD),
+              drainParts: newD,
+              damage: newDa,
+            });
           }}
         />
         <SelectField
@@ -852,13 +1009,27 @@ const SpellEditView = ({ spell, onEdit }: $Props) => {
 
             let newDa = [...spell.damage];
             newDa[2] = value;
-            onEdit({ ...spell, drain: makeDrain(newD), drainParts: newD, damage: newDa });
+            onEdit({
+              ...spell,
+              drain: makeDrain(newD),
+              drainParts: newD,
+              damage: newDa,
+            });
           }}
         />
-        {(spell.damage[0] !== "" || spell.damage[1] !== "" || spell.damage[2] !== "") && (
+        {(spell.damage[0] !== "" ||
+          spell.damage[1] !== "" ||
+          spell.damage[2] !== "") && (
           <SelectField
             value={spell.damageType}
-            options={["Combined", "Physical", "Stun", "Pure", "Fatigue", "Agony"]}
+            options={[
+              "Combined",
+              "Physical",
+              "Stun",
+              "Pure",
+              "Fatigue",
+              "Agony",
+            ]}
             label={"Damage Type"}
             onChange={(value: string) => {
               let newD = [...spell.drainParts];
@@ -883,7 +1054,12 @@ const SpellEditView = ({ spell, onEdit }: $Props) => {
                   newD[15] = 0;
                   break;
               }
-              onEdit({ ...spell, drain: makeDrain(newD), drainParts: newD, damageType: value });
+              onEdit({
+                ...spell,
+                drain: makeDrain(newD),
+                drainParts: newD,
+                damageType: value,
+              });
             }}
           />
         )}
@@ -930,9 +1106,16 @@ const SpellEditView = ({ spell, onEdit }: $Props) => {
                 break;
             }
 
-            onEdit({ ...spell, drain: makeDrain(newD), drainParts: newD, scalingEffect: value });
+            onEdit({
+              ...spell,
+              drain: makeDrain(newD),
+              drainParts: newD,
+              scalingEffect: value,
+            });
           }}
         />
+
+        <Separator />
         <SelectField
           value={spell.directEffects}
           options={[
@@ -990,7 +1173,12 @@ const SpellEditView = ({ spell, onEdit }: $Props) => {
                 break;
             }
 
-            onEdit({ ...spell, drain: makeDrain(newD), drainParts: newD, directEffects: value });
+            onEdit({
+              ...spell,
+              drain: makeDrain(newD),
+              drainParts: newD,
+              directEffects: value,
+            });
           }}
         />
         {spell.directEffects === "Wall / Barrier / Construct / Summon" && (
@@ -1030,7 +1218,12 @@ const SpellEditView = ({ spell, onEdit }: $Props) => {
                   newD[19] = 0;
                   break;
               }
-              onEdit({ ...spell, drain: makeDrain(newD), drainParts: newD, size: value });
+              onEdit({
+                ...spell,
+                drain: makeDrain(newD),
+                drainParts: newD,
+                size: value,
+              });
             }}
           />
         )}
@@ -1049,7 +1242,7 @@ const SpellEditView = ({ spell, onEdit }: $Props) => {
               "Magic/Faith *3 hit points",
               "Magic/Faith *4 hit points",
             ]}
-            label={"Targeting Type"}
+            label={"Armor/Hit Points"}
             onChange={(value: string) => {
               let newD = [...spell.drainParts];
               switch (value) {
@@ -1077,31 +1270,16 @@ const SpellEditView = ({ spell, onEdit }: $Props) => {
                   newD[20] = 0;
                   break;
               }
-              onEdit({ ...spell, drain: makeDrain(newD), drainParts: newD, hp: value });
+              onEdit({
+                ...spell,
+                drain: makeDrain(newD),
+                drainParts: newD,
+                hp: value,
+              });
             }}
           />
         )}
-        <SelectField
-          value={spell.source}
-          options={[
-            SpellSource.air,
-            SpellSource.arcane,
-            SpellSource.demonic,
-            SpellSource.divine,
-            SpellSource.druidic,
-            SpellSource.earth,
-            SpellSource.fire,
-            SpellSource.frost,
-            SpellSource.psychic,
-          ]}
-          label={"Source"}
-          onChange={(category: string) => {
-            let newD = [...spell.drainParts];
-            newD[0] = category === SpellSource.arcane ? 1 : 0;
-
-            onEdit({ ...spell, drain: makeDrain(newD), drainParts: newD, source: category });
-          }}
-        />
+        <Separator />
         {(spell.duration === SpellDuration.fixedTicks ||
           spell.duration === SpellDuration.fixedRounds ||
           spell.duration === SpellDuration.fixedHours) && (
@@ -1109,43 +1287,6 @@ const SpellEditView = ({ spell, onEdit }: $Props) => {
             value={spell.durationText}
             label="Duration"
             onChange={(value) => onEdit({ ...spell, durationText: value })}
-          />
-        )}
-        {spell.projectileType !== "Spray" && (
-          <SelectField
-            value={spell.projectileNumber}
-            options={["1", "2", "3", "4", "5", "Scaling / Variable"]}
-            label={"Projectile Type"}
-            onChange={(value: string) => {
-              let newD = [...spell.drainParts];
-              switch (value) {
-                case "1":
-                case "Scaling / Variable":
-                  newD[14] = 1;
-                  break;
-                case "2":
-                  newD[14] = 2;
-                  break;
-                case "3":
-                  newD[14] = 4;
-                  break;
-                case "4":
-                  newD[14] = 6;
-                  break;
-                case "5":
-                  newD[14] = 8;
-                  break;
-                default:
-                  newD[14] = 0;
-                  break;
-              }
-              onEdit({
-                ...spell,
-                drain: makeDrain(newD),
-                drainParts: newD,
-                projectileNumber: value,
-              });
-            }}
           />
         )}
         {spell.damageType === "Combined" ||
@@ -1174,7 +1315,12 @@ const SpellEditView = ({ spell, onEdit }: $Props) => {
                     break;
                 }
 
-                onEdit({ ...spell, drain: makeDrain(newD), drainParts: newD, pureDamage: value });
+                onEdit({
+                  ...spell,
+                  drain: makeDrain(newD),
+                  drainParts: newD,
+                  pureDamage: value,
+                });
               }}
             />
           ))}

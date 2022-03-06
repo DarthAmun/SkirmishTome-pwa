@@ -1,13 +1,13 @@
 html {
   padding: 0px;
   margin: 0px;
+
+  font-family: "Ringbearer", serif;
 }
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-family:  "Ringbearer", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -17,7 +17,6 @@ code {
     monospace;
 }
 
-
 #root:before,
 #root:after {
   content: "";
@@ -26,4 +25,19 @@ code {
 
 #root:after {
   clear: both;
+}
+
+@font-face {
+  font-family: "Ringbearer";
+  src: url("//db.onlinewebfonts.com/t/8f383153e7ec8e171aeacc314f7c3c5b.eot");
+  src: url("//db.onlinewebfonts.com/t/8f383153e7ec8e171aeacc314f7c3c5b.eot?#iefix")
+      format("embedded-opentype"),
+    url("//db.onlinewebfonts.com/t/8f383153e7ec8e171aeacc314f7c3c5b.woff2")
+      format("woff2"),
+    url("//db.onlinewebfonts.com/t/8f383153e7ec8e171aeacc314f7c3c5b.woff")
+      format("woff"),
+    url("//db.onlinewebfonts.com/t/8f383153e7ec8e171aeacc314f7c3c5b.ttf")
+      format("truetype"),
+    url("//db.onlinewebfonts.com/t/8f383153e7ec8e171aeacc314f7c3c5b.svg#Ringbearer")
+      format("svg");
 }

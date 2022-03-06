@@ -65,17 +65,30 @@ const RaceView = ({ race }: $Props) => {
         </Name>
 
         <PropWrapper>
-          <Prop>Hp: {race.hp}</Prop>
-          <Prop>Stamina: {race.stamina}</Prop>
-          <Prop>Size: {race.size}</Prop>
-          <Prop>Ability Modifier:{race.abilityModifier}</Prop>
+          <Prop>
+            <PropTitle>Hp: </PropTitle>
+            {race.hp}
+          </Prop>
+          <Prop>
+            <PropTitle>Stamina: </PropTitle>
+            {race.stamina}
+          </Prop>
+          <Prop>
+            <PropTitle>Size: </PropTitle>
+            {race.size}
+          </Prop>
+          <Prop>
+            <PropTitle>Ability Modifier: </PropTitle>
+            {race.abilityModifier}
+          </Prop>
         </PropWrapper>
 
         <PropWrapper>
           {race.talents.length > 0 &&
             race.talents.map((talent, index: number) => {
               const link: string =
-                "/talent-detail/id/" + talents.filter((tal) => tal.name === talent)[0]?.id;
+                "/talent-detail/id/" +
+                talents.filter((tal) => tal.name === talent)[0]?.id;
               return (
                 <TalentLink key={index} onClick={() => history.push(link)}>
                   {talent}
@@ -85,7 +98,9 @@ const RaceView = ({ race }: $Props) => {
         </PropWrapper>
         <PropWrapper>
           {race.flaws.length > 0 &&
-            race.flaws.map((flaw, index: number) => <Prop key={index}>{flaw}</Prop>)}
+            race.flaws.map((flaw, index: number) => (
+              <Prop key={index}>{flaw}</Prop>
+            ))}
         </PropWrapper>
         <PropWrapper>
           {webhook !== undefined && (
@@ -180,6 +195,13 @@ const Prop = styled.div`
   );
 
   background-color: ${({ theme }) => theme.tile.backgroundColor};
+`;
+
+const PropTitle = styled.span`
+  display: inline-block;
+  color: ${({ theme }) => theme.tile.backgroundColorLink};
+  text-decoration: none;
+  margin: 0px 5px 0px 5px;
 `;
 
 const TalentLink = styled.span`
