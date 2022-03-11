@@ -1,188 +1,178 @@
 import IEntity from "./IEntity";
-
-export enum SpellSource {
-  earth = "earth",
-  frost = "frost",
-  air = "air",
-  fire = "fire",
-  arcane = "arcane",
-  divine = "divine",
-  demonic = "demonic",
-  druidic = "druidic",
-  psychic = "psychic",
-}
-
-export enum SpellRange {
-  touch = "touch",
-  sonic = "sonic",
-  radius = "Radius 90° around Caster",
-  radiusPlus = "Radius 90°+ around Caster",
-  losAura = "Line of Sight Aura or Projectile",
-  losManipulate = "Line of Sight Manipulate",
-  losPoint = "Line of Sight Spawn At Point",
-}
-
-export enum SpellRite {
-  verbal = "verbal",
-  somatic = "somatic",
-  mental = "mental",
-  ritual = "ritual",
-}
-
-export enum SpellTarget {
-  single = "Single Target",
-  daoe = "Diminishing Area Of Effect ",
-  multi = "Multiple Targets",
-  aoe = "Area Of Effect",
-  caster = "Caster",
-  target = "Caster Or Target",
-  line = "Straight Line",
-}
-
-export enum SpellDuration {
-  concentration = "concentration",
-  instantaneous = "instantaneous",
-  permanent = "permanent",
-  fixedTicks = "fixed # of ticks",
-  fixedRounds = "fixed # of rounds",
-  fixedHours = "fixed # of hours",
-  channel = "channel",
-}
-
-export enum SpellSchool {
-  transmutation = "Transmutation",
-  evocation = "Evocation",
-  fortification = "Fortification",
-  hex = "Hex",
-  illusion = "Illusion",
-  conjuration = "Conjuration",
-  necromancy = "Necromancy",
-  enchantment = "Enchantment",
-}
+import {
+  StringPair,
+  NumberPair,
+  SpellSource,
+  SpellRite,
+  SpellDuration,
+  SpellRange,
+  SpellSchool,
+  SpellTarget,
+  SpellDrainType,
+  SpellLevel,
+  SpellCastTime,
+  SpellScalingEffect,
+  SpellAoeRadius,
+  SpellDirectEffects,
+  SpellProjectileType,
+  SpellProjectileNumber,
+  SpellDamageType,
+  SpellTargetingType,
+  SpellLosRange,
+  SpellSize,
+  SpellPureDamage,
+  SpellHp,
+} from "./SpellValues";
 
 export default class Spell implements IEntity {
   id?: number;
   name: string;
-  source: string;
-  castTime: string;
-  rite: string;
-  duration: string;
+  source: StringPair;
+  castTime: StringPair;
+  rite: StringPair;
+  duration: StringPair;
   durationText: string;
-  range: string;
-  school: string;
+  range: StringPair;
+  school: StringPair;
   effect: string;
   damageText: string;
   mastery: string;
   resist: string;
   drain: number;
-  drainParts: number[];
   masteryDrain: number;
 
-  scalingEffect: string;
-  spellTarget: string;
-  aoeRadius: string;
-  damage: string[];
-  directEffects: string;
-  level: number;
-  projectileType: string;
-  projectileNumber: string;
-  damageType: string;
-  targetingType: string;
-  losRange: string;
-  drainType: string;
-  pureDamage: string;
-  size: string;
-  hp: string;
+  drainType: StringPair;
+  scalingEffect: StringPair;
+  spellTarget: StringPair;
+  aoeRadius: StringPair;
+  damage: StringPair[];
+  directEffects: StringPair;
+  level: NumberPair;
+  projectileType: StringPair;
+  projectileNumber: StringPair;
+  damageType: StringPair;
+  targetingType: StringPair;
+  losRange: StringPair;
+  pureDamage: StringPair;
+  size: StringPair;
+  hp: StringPair;
   chargeable: boolean;
   needsMaterial: boolean;
 
   constructor(
     id?: number,
     name?: string,
-    source?: string,
-    castTime?: string,
-    rite?: string,
-    duration?: string,
+    source?: StringPair,
+    castTime?: StringPair,
+    rite?: StringPair,
+    duration?: StringPair,
     durationText?: string,
-    range?: string,
-    school?: string,
+    range?: StringPair,
+    school?: StringPair,
     effect?: string,
     damageText?: string,
     mastery?: string,
     resist?: string,
     drain?: number,
-    drainParts?: number[],
-    masteryDrain?:number,
+    masteryDrain?: number,
 
-    scalingEffect?: string,
-    spellTarget?: string,
-    aoeRadius?: string,
-    damage?: string[],
-    directEffects?: string,
-    level?: number,
-    projectileType?: string,
-    projectileNumber?: string,
-    damageType?: string,
-    targetingType?: string,
-    losRange?: string,
-    drainType?: string,
-    pureDamage?: string,
-    size?: string,
-    hp?: string,
+    scalingEffect?: StringPair,
+    spellTarget?: StringPair,
+    aoeRadius?: StringPair,
+    damage?: StringPair[],
+    directEffects?: StringPair,
+    level?: NumberPair,
+    projectileType?: StringPair,
+    projectileNumber?: StringPair,
+    damageType?: StringPair,
+    targetingType?: StringPair,
+    losRange?: StringPair,
+    drainType?: StringPair,
+    pureDamage?: StringPair,
+    size?: StringPair,
+    hp?: StringPair,
     chargeable?: boolean,
     needsMaterial?: boolean
   ) {
     this.id = id;
     this.name = name || "";
-    this.source = source || SpellSource.air;
-    this.castTime = castTime || "4 - Mystb Rounds";
-    this.rite = rite || SpellRite.mental;
-    this.duration = duration || SpellDuration.instantaneous;
+    this.source = source || SpellSource.NONE;
+    this.castTime = castTime || SpellCastTime.NONE;
+    this.rite = rite || SpellRite.NONE;
+    this.duration = duration || SpellDuration.NONE;
     this.durationText = durationText || "";
-    this.range = range || SpellRange.touch;
-    this.school = school || SpellSchool.conjuration;
+    this.range = range || SpellRange.NONE;
+    this.school = school || SpellSchool.NONE;
     this.effect = effect || "";
     this.damageText = damageText || "";
     this.mastery = mastery || "";
     this.resist = resist || "";
     this.drain = drain || 0;
-    //Source, Rite, Casting Time, Duration, Range, School, Scaling Effect, Single Target, aoeRadius, damage, damage, damage, direct Effects, level, projectile type, projectile number, damage type, targeting type, los Range, drain type, Pure Spell Damage, size, hp, chargeable, needs material
-    this.drainParts = drainParts || [
-      0, 3, 2, 1, 1, 1, 0, 1, 0, 0, 0, 0, -4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    ];
     this.masteryDrain = masteryDrain || 0;
 
-    this.scalingEffect = scalingEffect || "";
-    this.spellTarget = spellTarget || "";
-    this.aoeRadius = aoeRadius || "";
+    this.scalingEffect = scalingEffect || SpellScalingEffect.NONE;
+    this.spellTarget = spellTarget || SpellTarget.NONE;
+    this.aoeRadius = aoeRadius || SpellAoeRadius.NONE;
     this.damage = damage || [];
-    this.directEffects = directEffects || "";
-    this.level = level || 0;
-    this.projectileType = projectileType || "";
-    this.projectileNumber = projectileNumber || "";
-    this.damageType = damageType || "";
-    this.targetingType = targetingType || "";
-    this.losRange = losRange || "";
-    this.drainType = drainType || "";
-    this.pureDamage = pureDamage || "";
-    this.size = size || "";
-    this.hp = hp || "";
+    this.directEffects = directEffects || SpellDirectEffects.NONE;
+    this.level = level || SpellLevel.NONE;
+    this.projectileType = projectileType || SpellProjectileType.NONE;
+    this.projectileNumber = projectileNumber || SpellProjectileNumber.NONE;
+    this.damageType = damageType || SpellDamageType.NONE;
+    this.targetingType = targetingType || SpellTargetingType.NONE;
+    this.losRange = losRange || SpellLosRange.NONE;
+    this.drainType = drainType || SpellDrainType.NONE;
+    this.pureDamage = pureDamage || SpellPureDamage.NONE;
+    this.size = size || SpellSize.NONE;
+    this.hp = hp || SpellHp.NONE;
     this.chargeable = chargeable || false;
     this.needsMaterial = needsMaterial || false;
   }
+
+  static calcDrain = (spell: Spell): number => {
+    let drain = 0;
+    drain += spell.drainType ? spell.drainType.drain : 0;
+    drain += spell.school ? spell.school.drain : 0;
+    drain += spell.duration ? spell.duration.drain : 0;
+    drain += spell.spellTarget ? spell.spellTarget.drain : 0;
+    drain += spell.rite ? spell.rite.drain : 0;
+    drain += spell.range ? spell.range.drain : 0;
+    drain += spell.source ? spell.source.drain : 0;
+    drain += spell.level ? spell.level.drain : 0;
+    drain += spell.chargeable ? -1 : 0;
+    drain += spell.needsMaterial ? -1 : 0;
+    drain += spell.targetingType ? spell.targetingType.drain : 0;
+    drain += spell.projectileType ? spell.projectileType.drain : 0;
+    drain += spell.projectileNumber ? spell.projectileNumber.drain : 0;
+    drain += spell.losRange ? spell.losRange.drain : 0;
+    drain += spell.aoeRadius ? spell.aoeRadius.drain : 0;
+    drain += spell.damage[0] ? spell.damage[0].drain : 0;
+    drain += spell.damage[1] ? spell.damage[1].drain : 0;
+    drain += spell.damage[2] ? spell.damage[2].drain : 0;
+    drain += spell.damageType ? spell.damageType.drain : 0;
+    drain += spell.scalingEffect ? spell.scalingEffect.drain : 0;
+    drain += spell.directEffects ? spell.directEffects.drain : 0;
+    drain += spell.size ? spell.size.drain : 0;
+    drain += spell.hp ? spell.hp.drain : 0;
+    drain += spell.pureDamage ? spell.pureDamage.drain : 0;
+    return drain;
+  };
 }
 
 export function isSpell(arg: any): arg is Spell {
   const nameCheck = arg.name !== undefined && typeof arg.name == "string";
   const sourceCheck = arg.source !== undefined && typeof arg.source == "string";
-  const castTimeCheck = arg.castTime !== undefined && typeof arg.castTime == "string";
+  const castTimeCheck =
+    arg.castTime !== undefined && typeof arg.castTime == "string";
   const riteCheck = arg.rite !== undefined && typeof arg.rite == "string";
-  const durationCheck = arg.duration !== undefined && typeof arg.duration == "string";
+  const durationCheck =
+    arg.duration !== undefined && typeof arg.duration == "string";
   const rangeCheck = arg.range !== undefined && typeof arg.range == "number";
   const schoolCheck = arg.school !== undefined && typeof arg.school == "string";
   const effectCheck = arg.effect !== undefined && typeof arg.effect == "string";
   const damageCheck = arg.damage !== undefined && typeof arg.damage == "string";
-  const masteryCheck = arg.mastery !== undefined && typeof arg.mastery == "string";
+  const masteryCheck =
+    arg.mastery !== undefined && typeof arg.mastery == "string";
   const resistCheck = arg.resist !== undefined && typeof arg.resist == "string";
   const drainCheck = arg.drain !== undefined && typeof arg.drain == "number";
 

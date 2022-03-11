@@ -10,7 +10,7 @@ interface $Props {
 const SpellTile = ({ spell }: $Props) => {
   return (
     <Tile to={"/spell-detail/id/" + spell.id}>
-      <School school={spell.school}>{spell.school}</School>
+      <School school={spell.school.label}>{spell.school.label}</School>
 
       <Drain>
         <b>{spell.drain}</b>
@@ -21,10 +21,10 @@ const SpellTile = ({ spell }: $Props) => {
       </Name>
 
       <PropWrapper>
-        <Prop>Source{spell.source}</Prop>
-        <Prop>Casting Time: {spell.castTime}</Prop>
-        <Prop>Rite: {spell.rite}</Prop>
-        <Prop>Range: {spell.range}</Prop>
+        <Prop>Source{spell.source.label}</Prop>
+        <Prop>Casting Time: {spell.castTime.label}</Prop>
+        <Prop>Rite: {spell.rite.label}</Prop>
+        <Prop>Range: {spell.range.label}</Prop>
       </PropWrapper>
     </Tile>
   );
@@ -88,9 +88,8 @@ const Prop = styled.div`
   overflow: hidden;
 
   &:nth-child(odd) {
-  margin: 0 0 5px 0px;
+    margin: 0 0 5px 0px;
   }
-}
 `;
 
 type SchoolType = {

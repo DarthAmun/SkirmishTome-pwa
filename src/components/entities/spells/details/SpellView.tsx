@@ -50,7 +50,7 @@ const SpellView = ({ spell }: $Props) => {
   return (
     <CenterWrapper>
       <View>
-        <School school={spell.school}>{spell.school}</School>
+        <School school={spell.school.label}>{spell.school.label}</School>
 
         <Drain>
           <b>{spell.drain}</b>
@@ -63,19 +63,19 @@ const SpellView = ({ spell }: $Props) => {
         <PropWrapper>
           <Prop>
             <PropTitle>Source: </PropTitle>
-            {spell.source}
+            {spell.source.label}
           </Prop>
           <Prop>
             <PropTitle>Casting Time: </PropTitle>
-            {spell.castTime}
+            {spell.castTime.label}
           </Prop>
           <Prop>
             <PropTitle>Rite: </PropTitle>
-            {spell.rite}
+            {spell.rite.label}
           </Prop>
           <Prop>
             <PropTitle>Range: </PropTitle>
-            {spell.range}
+            {spell.range.label}
           </Prop>
         </PropWrapper>
         <Text>

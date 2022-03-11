@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { exportAll } from "../../services/OptionService";
-import { deleteAll, reciveAll, reciveCount } from "../../services/DatabaseService";
+import {
+  deleteAll,
+  reciveCount,
+} from "../../services/DatabaseService";
 import IEntity from "../../data/IEntity";
 import P2PReciver from "../p2p/P2PReciver";
 
-import { isTalent } from "../../data/Talent";
+import Talent, { isTalent } from "../../data/Talent";
 
 import { faFileExport, faFileImport } from "@fortawesome/free-solid-svg-icons";
 import TabBar from "../general_elements/TabBar";
@@ -17,7 +20,9 @@ import ImportField, { ImportModus } from "../form_elements/ImportField";
 import DiscordOptions from "./DiscordOptions";
 import { useCSVDownloader, usePapaParse } from "react-papaparse";
 import FileField from "../form_elements/FileField";
-// import { scanImportedJson } from "../../services/CsvService";
+import { scanImportedSpellCsv } from "../../services/CsvService";
+import Spell from "../../data/Spell";
+import Race from "../../data/Race";
 
 const Options = () => {
   const [activeTab, setTab] = useState<string>("General");
@@ -31,8 +36,8 @@ const Options = () => {
   const { CSVDownloader, Type } = useCSVDownloader();
   const [csvBackup, setBackup] = useState<any>();
 
-  const handleCsvUpload = (files: any) => {
-    const file = files[0];
+  const handleSpellCsvUpload = (files: any) => {
+    const file: File = files[0];
     let fileReader = new FileReader();
     fileReader.onloadend = function () {
       const content = fileReader.result;
@@ -43,7 +48,7 @@ const Options = () => {
             console.log("Csv loaded from " + file.name);
             const csv: Array<any> = results.data;
             console.log(csv);
-            // scanImportedJson(csv);
+            scanImportedSpellCsv(csv, file.name);
             console.log("---------");
           },
         });
@@ -57,10 +62,12 @@ const Options = () => {
       reciveCount("talents", (result: number) => {
         setTalentAmount(result);
       });
+      let backup: any[] = [];
+      backup.push(["Spell"].concat(Object.keys(new Spell())));
+      backup.push(["Talent"].concat(Object.keys(new Talent())));
+      backup.push(["Race"].concat(Object.keys(new Race())));
+      setBackup(backup);
       isReload(false);
-      reciveAll("talents", (result: any[]) => {
-        setBackup(result);
-      });
     }
   }, [reload]);
 
@@ -82,16 +89,6 @@ const Options = () => {
       <OptionSection>
         <SelectionTitle>Import</SelectionTitle>
         <ImportField modus={ImportModus.NORMAL} />
-      </OptionSection>
-      <OptionSection>
-        <SelectionTitle>Import Spell CSV</SelectionTitle>
-        <FileField
-          label=""
-          isMulti={true}
-          accept={".csv"}
-          icon={faFileImport}
-          onChange={(file) => handleCsvUpload(file)}
-        />
       </OptionSection>
       <OptionSection>
         <SelectionTitle>Export</SelectionTitle>
@@ -122,7 +119,7 @@ const Options = () => {
         </CSVDownloader>
       </OptionSection>
       <TabBar
-        children={["General", "Talents", "Discord", "Receive"]}
+        children={["General", "Talents", "Discord", "Receive", "CSV Imports"]}
         onChange={(tab: string) => setTab(tab)}
         activeTab={activeTab}
       />
@@ -145,6 +142,20 @@ const Options = () => {
               return returnTile(entity, index);
             })}
           {data !== undefined && !Array.isArray(data) && returnTile(data, 0)}
+        </OptionTab>
+      )}
+      {activeTab === "CSV Imports" && (
+        <OptionTab>
+          <OptionSection>
+            <SelectionTitle>Import Spell CSV</SelectionTitle>
+            <FileField
+              label=""
+              isMulti={true}
+              accept={".csv"}
+              icon={faFileImport}
+              onChange={(file) => handleSpellCsvUpload(file)}
+            />
+          </OptionSection>
         </OptionTab>
       )}
       {/* {failedObjs &&
@@ -203,7 +214,7 @@ const SelectionTitle = styled.div`
   margin: 5px;
   min-width: calc(100% - 20px);
   font-weight: bold;
-  text-algin: center;
+  text-align: center;
   border-radius: 5px;
   color: ${({ theme }) => theme.input.color};
   background-color: ${({ theme }) => theme.input.backgroundColor};
