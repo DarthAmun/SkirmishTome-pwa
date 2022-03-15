@@ -123,26 +123,16 @@ const Options = () => {
           />
         </SectionRow>
       </OptionSection>
-      <OptionSection>
-        <CSVDownloader
-          type={Type.Button}
-          filename={
-            "CsvBackup_" +
-            new Date().getFullYear() +
-            "." +
-            (new Date().getMonth() + 1)
-          }
-          bom={true}
-          config={{
-            delimiter: ";",
-          }}
-          data={csvBackup}
-        >
-          Download
-        </CSVDownloader>
-      </OptionSection>
       <TabBar
-        children={["General", "Spells", "Races", "Talents", "Discord", "Receive", "CSV Imports"]}
+        children={[
+          "General",
+          "Spells",
+          "Races",
+          "Talents",
+          "Discord",
+          "Receive",
+          "CSV Imports",
+        ]}
         onChange={(tab: string) => setTab(tab)}
         activeTab={activeTab}
       />
@@ -153,11 +143,8 @@ const Options = () => {
           triggerDeleteAll={triggerDeleteAll}
         />
       )}
-       {activeTab === "Races" && (
-        <RacesOptions
-          amount={raceAmount}
-          triggerDeleteAll={triggerDeleteAll}
-        />
+      {activeTab === "Races" && (
+        <RacesOptions amount={raceAmount} triggerDeleteAll={triggerDeleteAll} />
       )}
       {activeTab === "Talents" && (
         <TalentsOptions
@@ -181,6 +168,24 @@ const Options = () => {
       )}
       {activeTab === "CSV Imports" && (
         <OptionTab>
+          <OptionSection>
+            <CSVDownloader
+              type={Type.Button}
+              filename={
+                "CsvBackup_" +
+                new Date().getFullYear() +
+                "." +
+                (new Date().getMonth() + 1)
+              }
+              bom={true}
+              config={{
+                delimiter: ";",
+              }}
+              data={csvBackup}
+            >
+              Download
+            </CSVDownloader>
+          </OptionSection>
           <OptionSection>
             <SelectionTitle>Import Spell CSV</SelectionTitle>
             <FileField

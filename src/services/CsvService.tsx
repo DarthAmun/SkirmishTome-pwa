@@ -40,7 +40,6 @@ export const scanImportedSpellCsv = (csv: Array<any>, filename: string) => {
       SpellRange.find(row[7]),
       SpellSchool.find(row[25]),
       row[27],
-      "",
       row[28],
       row[31],
       0,

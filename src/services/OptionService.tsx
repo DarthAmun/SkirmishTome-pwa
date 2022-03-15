@@ -2,7 +2,11 @@ import { reciveAll, reciveAllPromise, saveNew } from "./DatabaseService";
 import { IndexableType } from "dexie";
 import Talent, { isTalent } from "../data/Talent";
 
-export const scanImportFileTest = async (json: any, fileName: string, callback: () => void) => {
+export const scanImportFileTest = async (
+  json: any,
+  fileName: string,
+  callback: () => void
+) => {
   let promList: Promise<any>[] = [];
 
   if (!Array.isArray(json)) {
@@ -181,20 +185,14 @@ export const exportAllFromTable = (tableName: string, filename: string) => {
   reciveAll(tableName, (all: IndexableType[]) => {
     let entity = { [tableName]: all };
     let contentType = "application/json;charset=utf-8;";
-    if (window.navigator && window.navigator.msSaveOrOpenBlob) {
-      var blob = new Blob([decodeURIComponent(encodeURI(JSON.stringify(entity)))], {
-        type: contentType,
-      });
-      navigator.msSaveOrOpenBlob(blob, filename);
-    } else {
-      var a = document.createElement("a");
-      a.download = filename;
-      a.href = "data:" + contentType + "," + encodeURIComponent(JSON.stringify(entity));
-      a.target = "_blank";
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-    }
+    var a = document.createElement("a");
+    a.download = filename;
+    a.href =
+      "data:" + contentType + "," + encodeURIComponent(JSON.stringify(entity));
+    a.target = "_blank";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
   });
 };
 
@@ -206,18 +204,13 @@ export const exportAll = async (filename: string) => {
   };
 
   let contentType = "application/json;charset=utf-8;";
-  if (window.navigator && window.navigator.msSaveOrOpenBlob) {
-    var blob = new Blob([decodeURIComponent(encodeURI(JSON.stringify(all)))], {
-      type: contentType,
-    });
-    navigator.msSaveOrOpenBlob(blob, filename);
-  } else {
-    var a = document.createElement("a");
-    a.download = filename;
-    a.href = "data:" + contentType + "," + encodeURIComponent(JSON.stringify(all));
-    a.target = "_blank";
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-  }
+
+  var a = document.createElement("a");
+  a.download = filename;
+  a.href =
+    "data:" + contentType + "," + encodeURIComponent(JSON.stringify(all));
+  a.target = "_blank";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
 };

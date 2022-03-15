@@ -407,12 +407,6 @@ const SpellEditView = ({ spell, onEdit }: $Props) => {
           onChange={(value) => onEdit({ ...spell, effect: value })}
         />
         <TextField
-          value={spell.damageText}
-          label="Damage"
-          icon={faBookOpen}
-          onChange={(value) => onEdit({ ...spell, damageText: value })}
-        />
-        <TextField
           value={spell.mastery}
           label="Mastery"
           icon={faBookOpen}

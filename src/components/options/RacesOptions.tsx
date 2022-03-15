@@ -23,7 +23,7 @@ const RacesOptions = ({ amount, triggerDeleteAll }: $Props) => {
           <SectionText>Export all Races?</SectionText>
           <IconButton
             icon={faFileExport}
-            onClick={() => exportAllFromTable("Races", "SkirmishTome_Races.json")}
+            onClick={() => exportAllFromTable("races", "SkirmishTome_Races.json")}
           />
         </SectionRow>
       </OptionSection>
@@ -33,7 +33,7 @@ const RacesOptions = ({ amount, triggerDeleteAll }: $Props) => {
           <SectionText>Delete all {amount} Races?</SectionText>
           <IconButton
             icon={faTrashAlt}
-            onClick={() => triggerDeleteAll("Races")}
+            onClick={() => triggerDeleteAll("races")}
           />
         </SectionRow>
       </OptionSection>

@@ -23,7 +23,7 @@ const SpellsOptions = ({ amount, triggerDeleteAll }: $Props) => {
           <SectionText>Export all Spells?</SectionText>
           <IconButton
             icon={faFileExport}
-            onClick={() => exportAllFromTable("Spells", "SkirmishTome_Spells.json")}
+            onClick={() => exportAllFromTable("spells", "SkirmishTome_Spells.json")}
           />
         </SectionRow>
       </OptionSection>
@@ -33,7 +33,7 @@ const SpellsOptions = ({ amount, triggerDeleteAll }: $Props) => {
           <SectionText>Delete all {amount} Spells?</SectionText>
           <IconButton
             icon={faTrashAlt}
-            onClick={() => triggerDeleteAll("Spells")}
+            onClick={() => triggerDeleteAll("spells")}
           />
         </SectionRow>
       </OptionSection>

@@ -35,7 +35,6 @@ export default class Spell implements IEntity {
   range: StringPair;
   school: StringPair;
   effect: string;
-  damageText: string;
   mastery: string;
   resist: string;
   drain: number;
@@ -70,7 +69,6 @@ export default class Spell implements IEntity {
     range?: StringPair,
     school?: StringPair,
     effect?: string,
-    damageText?: string,
     mastery?: string,
     resist?: string,
     drain?: number,
@@ -104,7 +102,6 @@ export default class Spell implements IEntity {
     this.range = range || SpellRange.NONE;
     this.school = school || SpellSchool.NONE;
     this.effect = effect || "";
-    this.damageText = damageText || "";
     this.mastery = mastery || "";
     this.resist = resist || "";
     this.drain = drain || 0;
@@ -170,7 +167,6 @@ export default class Spell implements IEntity {
       spell.range.label,
       spell.school.label,
       spell.effect,
-      spell.damageText,
       spell.mastery,
       spell.resist,
       spell.drain,
