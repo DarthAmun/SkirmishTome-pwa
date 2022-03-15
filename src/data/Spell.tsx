@@ -157,6 +157,43 @@ export default class Spell implements IEntity {
     drain += spell.pureDamage ? spell.pureDamage.drain : 0;
     return drain;
   };
+
+  static makeCsv = (spell: Spell): any[] => {
+    return [
+      spell.id,
+      spell.name,
+      spell.source.label,
+      spell.castTime.label,
+      spell.rite.label,
+      spell.duration.label,
+      spell.durationText,
+      spell.range.label,
+      spell.school.label,
+      spell.effect,
+      spell.damageText,
+      spell.mastery,
+      spell.resist,
+      spell.drain,
+      spell.masteryDrain,
+      spell.scalingEffect.label,
+      spell.spellTarget.label,
+      spell.aoeRadius.label,
+      spell.damage[0].label + ", " +spell.damage[1].label + ", " +spell.damage[2].label,
+      spell.directEffects.label,
+      spell.level.label,
+      spell.projectileType.label,
+      spell.projectileNumber.label,
+      spell.damageType.label,
+      spell.targetingType.label,
+      spell.losRange.label,
+      spell.drainType.label,
+      spell.pureDamage.label,
+      spell.size.label,
+      spell.hp.label,
+      spell.chargeable,
+      spell.needsMaterial,
+    ];
+  };
 }
 
 export function isSpell(arg: any): arg is Spell {

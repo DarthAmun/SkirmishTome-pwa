@@ -48,6 +48,23 @@ export default class Talent implements IEntity {
     this.triggerFrequency = triggerFrequency || "";
     this.ticks = ticks || 0;
   }
+
+  static makeCsv = (talent: Talent): any[] => {
+    return [
+      talent.id,
+      talent.name,
+      talent.category,
+      talent.isFlaw,
+      talent.cost,
+      talent.prerequisite,
+      talent.effect,
+      talent.type,
+      talent.stress,
+      talent.trigger,
+      talent.triggerFrequency,
+      talent.ticks,
+    ];
+  };
 }
 
 export function isTalent(arg: any): arg is Talent {

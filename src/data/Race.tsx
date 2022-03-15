@@ -29,6 +29,19 @@ export default class Race implements IEntity {
     this.talents = talents || [];
     this.flaws = flaws || [];
   }
+
+  static makeCsv = (race: Race): any[] => {
+    return [
+      race.id,
+      race.name,
+      race.hp,
+      race.abilityModifier,
+      race.size,
+      race.stamina,
+      race.talents,
+      race.flaws,
+    ];
+  };
 }
 
 export function isRace(arg: any): arg is Race {
@@ -39,5 +52,12 @@ export function isRace(arg: any): arg is Race {
   const talentsCheck = arg.talents !== undefined && Array.isArray(arg.talents);
   const flawsCheck = arg.flaws !== undefined && Array.isArray(arg.flaws);
 
-  return arg && nameCheck && hpCheck && abilityModifierCheck && talentsCheck && flawsCheck;
+  return (
+    arg &&
+    nameCheck &&
+    hpCheck &&
+    abilityModifierCheck &&
+    talentsCheck &&
+    flawsCheck
+  );
 }

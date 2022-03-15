@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { exportAll } from "../../services/OptionService";
 import {
   deleteAll,
+  reciveAll,
   reciveCount,
 } from "../../services/DatabaseService";
 import IEntity from "../../data/IEntity";
@@ -23,11 +24,15 @@ import FileField from "../form_elements/FileField";
 import { scanImportedSpellCsv } from "../../services/CsvService";
 import Spell from "../../data/Spell";
 import Race from "../../data/Race";
+import SpellsOptions from "./SpellsOptions";
+import RacesOptions from "./RacesOptions";
 
 const Options = () => {
   const [activeTab, setTab] = useState<string>("General");
 
   const [talentAmount, setTalentAmount] = useState<number>(0);
+  const [spellAmount, setSpellAmount] = useState<number>(0);
+  const [raceAmount, setRaceAmount] = useState<number>(0);
 
   const [reload, isReload] = useState<boolean>(true);
   const [data, setData] = useState<IEntity[] | IEntity>();
@@ -63,9 +68,27 @@ const Options = () => {
         setTalentAmount(result);
       });
       let backup: any[] = [];
-      backup.push(["Spell"].concat(Object.keys(new Spell())));
-      backup.push(["Talent"].concat(Object.keys(new Talent())));
-      backup.push(["Race"].concat(Object.keys(new Race())));
+      reciveAll("spells", (result: any[]) => {
+        setSpellAmount(result.length);
+        backup.push(["Spell"].concat(Object.keys(new Spell())));
+        result.forEach((spell: Spell) => {
+          backup.push([""].concat(Spell.makeCsv(spell)));
+        });
+      });
+      reciveAll("talents", (result: any[]) => {
+        setTalentAmount(result.length);
+        backup.push(["Talent"].concat(Object.keys(new Talent())));
+        result.forEach((talent: Talent) => {
+          backup.push([""].concat(Talent.makeCsv(talent)));
+        });
+      });
+      reciveAll("races", (result: any[]) => {
+        setRaceAmount(result.length);
+        backup.push(["Race"].concat(Object.keys(new Race())));
+        result.forEach((race: Race) => {
+          backup.push([""].concat(Race.makeCsv(race)));
+        });
+      });
       setBackup(backup);
       isReload(false);
     }
@@ -119,11 +142,23 @@ const Options = () => {
         </CSVDownloader>
       </OptionSection>
       <TabBar
-        children={["General", "Talents", "Discord", "Receive", "CSV Imports"]}
+        children={["General", "Spells", "Races", "Talents", "Discord", "Receive", "CSV Imports"]}
         onChange={(tab: string) => setTab(tab)}
         activeTab={activeTab}
       />
       {activeTab === "General" && <GeneralOptions />}
+      {activeTab === "Spells" && (
+        <SpellsOptions
+          amount={spellAmount}
+          triggerDeleteAll={triggerDeleteAll}
+        />
+      )}
+       {activeTab === "Races" && (
+        <RacesOptions
+          amount={raceAmount}
+          triggerDeleteAll={triggerDeleteAll}
+        />
+      )}
       {activeTab === "Talents" && (
         <TalentsOptions
           amount={talentAmount}
