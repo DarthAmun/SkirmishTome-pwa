@@ -91,27 +91,27 @@ export class SpellHp {
     drain: 0,
   };
   static readonly HALFMAGICSTRUCTUREHP: StringPair = {
-    label: "1/2 Magic/Faith structure rating and Magic/Faith *1 hit points",
+    label: "1/2 Magic/Faith armor/structure rating and Magic/Faith *1 hit points",
     drain: 0,
   };
   static readonly HALFMAGICSTRUCTUREDOUBLEHP: StringPair = {
-    label: "1/2 Magic/Faith structure rating and Magic/Faith *2 hit points",
+    label: "1/2 Magic/Faith armor/structure rating and Magic/Faith *2 hit points",
     drain: 1,
   };
   static readonly HALFMAGICSTRUCTURETRIPPLEHP: StringPair = {
-    label: "1/2 Magic/Faith structure rating and Magic/Faith *3 hit points",
+    label: "1/2 Magic/Faith armor/structure rating and Magic/Faith *3 hit points",
     drain: 2,
   };
   static readonly MAGICSTRUCTUREHP: StringPair = {
-    label: "Magic/Faith structure rating and Magic/Faith *1 hit points",
+    label: "Magic/Faith *1 armor/structure rating and Magic/Faith *1 hit points",
     drain: 1,
   };
   static readonly MAGICSTRUCTUREDOUBLEHP: StringPair = {
-    label: "Magic/Faith structure rating and Magic/Faith *2 hit points",
+    label: "Magic/Faith *1 armor/structure rating and Magic/Faith *2 hit points",
     drain: 3,
   };
   static readonly DOUBLEMAGICESTRUCTUREHP: StringPair = {
-    label: "Magic/Faith *2 structure rating and Magic/Faith hit points",
+    label: "Magic/Faith *2 armor/structure rating and Magic/Faith hit points",
     drain: 4,
   };
   static readonly MAGICHP: StringPair = {
@@ -286,23 +286,23 @@ export class SpellDirectEffects {
   static readonly DOT: StringPair = { label: "Damage Over Time", drain: 3 };
   static readonly INCAPACITATE: StringPair = {
     label: "Incapacitate",
-    drain: 4,
+    drain: 5,
   };
-  static readonly SPHERE: StringPair = { label: "Sphere", drain: 5 };
+  static readonly SPHERE: StringPair = { label: "Shield", drain: 5 };
   static readonly KNOCKDOWN: StringPair = { label: "Knockdown", drain: 2 };
   static readonly WALLBARRIERCONSTRUCTSUMMON: StringPair = {
-    label: "Wall / Barrier / Construct / Summon",
-    drain: 0,
+    label: "Wall / Barrier / Sphere / Summon",
+    drain: 5,
   };
   static readonly TELEPORT: StringPair = { label: "Teleport", drain: 6 };
   static readonly HEAL: StringPair = { label: "Heal", drain: 5 };
   static readonly BUFFILLUSIONSHIELD: StringPair = {
-    label: "Buff / Illusion / Shield",
+    label: "Buff / Illusion",
     drain: 5,
   };
   static readonly CHARMCONTROLINFLUENCE: StringPair = {
     label: "Charm / Control / Influence",
-    drain: 3,
+    drain: 5,
   };
   static readonly TRANSFORM: StringPair = { label: "Transform", drain: 4 };
 
@@ -381,48 +381,68 @@ export class SpellScalingEffect {
     drain: 0,
   };
   static readonly MYSTBRADIUS: StringPair = {
-    label: "plus MystB Meters Radius",
-    drain: 2,
+    label: "MystB Meters Radius",
+    drain: 3,
   };
   static readonly MYSTBPROJECTILES: StringPair = {
-    label: "plus MystB Projectiles",
-    drain: 2,
+    label: "MystB Projectiles / Effects",
+    drain: 4,
   };
-  static readonly ONEVARIABLEPROJECTILE: StringPair = {
+  static readonly PROJECTILERADIUSPERVARIABLE: StringPair = {
+    label: "1 Projectile/Effect and 1 Meter Radius per Variable Factor",
+    drain: 4,
+  };
+  static readonly PROJECTILEPERVARIABLE: StringPair = {
     label: "1 Projectile/Effect per Variable Factor",
     drain: 3,
   };
-  static readonly ONEPROJECTILETHREEMAGIC: StringPair = {
+  static readonly PROJECTILEPERTHREEMAGIC: StringPair = {
     label: "1 Projectile/Effect per 3 Magic/Faith Rating",
     drain: 2,
   };
-  static readonly ONEPROJECTILETWOMAGIC: StringPair = {
+  static readonly PROJECTILEPERTWOMAGIC: StringPair = {
     label: "1 Projectile/Effect per 2 Magic/Faith Rating",
     drain: 4,
   };
-  static readonly ONEPROJECTILERADIUSTWOMAGIC: StringPair = {
+  static readonly PROJECTILERADIUSPERTWOMAGIC: StringPair = {
     label: "1 Projectile/Effect and 1 Meter Radius per 2 Magic/Faith Rating",
     drain: 5,
   };
-  static readonly ONEPROJECTILERADIUSTHREEMAGIC: StringPair = {
+  static readonly PROJECTILERADIUSPERTHREEMAGIC: StringPair = {
     label: "1 Projectile/Effect and 1 Meter Radius per 3 Magic/Faith Rating",
     drain: 4,
   };
-  static readonly PROJECTILETWOMAGIC: StringPair = {
+  static readonly PLUSPROJECTILEPERTWOMAGIC: StringPair = {
     label: "plus 1 Projectile/Effect per 2 Magic/Faith Rating",
     drain: 4,
   };
-  static readonly PROJECTILETHREEMAGIC: StringPair = {
-    label: "plus 1 Projectile/Effect per 3 Magic/Faith Rating",
-    drain: 3,
-  };
-  static readonly ONEPROJECTILEFOURMAGIC: StringPair = {
+  static readonly PLUSPROJECTILEPERFOURMAGIC: StringPair = {
     label: "plus 1 Projectile/Effect per 4 Magic/Faith Rating",
     drain: 2,
   };
-  static readonly MYSTBRADIUSEFFECT: StringPair = {
-    label: "plus MystB Meters Radius & Effect",
+  static readonly PLUSPROJECTILEPERTHREEMAGIC: StringPair = {
+    label: "plus 1 Projectile/Effect per 3 Magic/Faith Rating",
     drain: 3,
+  };
+  static readonly MYSTBRADIUSEFFECT: StringPair = {
+    label: "MystB Meters Radius & Effect",
+    drain: 5,
+  };
+  static readonly PLUSHALFMYSTBRADIUSEFFECT: StringPair = {
+    label: "plus 1/2 MystB Meters Radius & Effect",
+    drain: 4,
+  };
+  static readonly PLUSHALFMYSTBRADIUS: StringPair = {
+    label: "plus 1/2 MystB Meters Radius",
+    drain: 2,
+  };
+  static readonly PLUSMYSTBRADIUS: StringPair = {
+    label: "plus MystB Meters Radius",
+    drain: 3,
+  };
+  static readonly PLUSMYSTBRADIUSEFFECT: StringPair = {
+    label: "plus MystB Meters Radius & Effect",
+    drain: 6,
   };
 
   private constructor(
@@ -436,24 +456,34 @@ export class SpellScalingEffect {
         return SpellScalingEffect.MYSTBRADIUS;
       case SpellScalingEffect.MYSTBPROJECTILES.label.toLowerCase():
         return SpellScalingEffect.MYSTBPROJECTILES;
-      case SpellScalingEffect.ONEVARIABLEPROJECTILE.label.toLowerCase():
-        return SpellScalingEffect.ONEVARIABLEPROJECTILE;
-      case SpellScalingEffect.ONEPROJECTILETHREEMAGIC.label.toLowerCase():
-        return SpellScalingEffect.ONEPROJECTILETHREEMAGIC;
-      case SpellScalingEffect.ONEPROJECTILETWOMAGIC.label.toLowerCase():
-        return SpellScalingEffect.ONEPROJECTILETWOMAGIC;
-      case SpellScalingEffect.ONEPROJECTILERADIUSTWOMAGIC.label.toLowerCase():
-        return SpellScalingEffect.ONEPROJECTILERADIUSTWOMAGIC;
-      case SpellScalingEffect.ONEPROJECTILERADIUSTHREEMAGIC.label.toLowerCase():
-        return SpellScalingEffect.ONEPROJECTILERADIUSTHREEMAGIC;
-      case SpellScalingEffect.PROJECTILETWOMAGIC.label.toLowerCase():
-        return SpellScalingEffect.PROJECTILETWOMAGIC;
-      case SpellScalingEffect.PROJECTILETHREEMAGIC.label.toLowerCase():
-        return SpellScalingEffect.PROJECTILETHREEMAGIC;
-      case SpellScalingEffect.ONEPROJECTILEFOURMAGIC.label.toLowerCase():
-        return SpellScalingEffect.ONEPROJECTILEFOURMAGIC;
+      case SpellScalingEffect.PROJECTILERADIUSPERVARIABLE.label.toLowerCase():
+        return SpellScalingEffect.PROJECTILERADIUSPERVARIABLE;
+      case SpellScalingEffect.PROJECTILEPERVARIABLE.label.toLowerCase():
+        return SpellScalingEffect.PROJECTILEPERVARIABLE;
+      case SpellScalingEffect.PROJECTILEPERTHREEMAGIC.label.toLowerCase():
+        return SpellScalingEffect.PROJECTILEPERTHREEMAGIC;
+      case SpellScalingEffect.PROJECTILEPERTWOMAGIC.label.toLowerCase():
+        return SpellScalingEffect.PROJECTILEPERTWOMAGIC;
+      case SpellScalingEffect.PROJECTILERADIUSPERTWOMAGIC.label.toLowerCase():
+        return SpellScalingEffect.PROJECTILERADIUSPERTWOMAGIC;
+      case SpellScalingEffect.PROJECTILERADIUSPERTHREEMAGIC.label.toLowerCase():
+        return SpellScalingEffect.PROJECTILERADIUSPERTHREEMAGIC;
+      case SpellScalingEffect.PLUSPROJECTILEPERTWOMAGIC.label.toLowerCase():
+        return SpellScalingEffect.PLUSPROJECTILEPERTWOMAGIC;
+      case SpellScalingEffect.PLUSPROJECTILEPERFOURMAGIC.label.toLowerCase():
+        return SpellScalingEffect.PLUSPROJECTILEPERFOURMAGIC;
+      case SpellScalingEffect.PLUSPROJECTILEPERTHREEMAGIC.label.toLowerCase():
+        return SpellScalingEffect.PLUSPROJECTILEPERTHREEMAGIC;
       case SpellScalingEffect.MYSTBRADIUSEFFECT.label.toLowerCase():
         return SpellScalingEffect.MYSTBRADIUSEFFECT;
+      case SpellScalingEffect.PLUSHALFMYSTBRADIUSEFFECT.label.toLowerCase():
+        return SpellScalingEffect.PLUSHALFMYSTBRADIUSEFFECT;
+      case SpellScalingEffect.PLUSHALFMYSTBRADIUS.label.toLowerCase():
+        return SpellScalingEffect.PLUSHALFMYSTBRADIUS;
+      case SpellScalingEffect.PLUSMYSTBRADIUS.label.toLowerCase():
+        return SpellScalingEffect.PLUSMYSTBRADIUS;
+      case SpellScalingEffect.PLUSMYSTBRADIUSEFFECT.label.toLowerCase():
+        return SpellScalingEffect.PLUSMYSTBRADIUSEFFECT;
       default:
         return SpellScalingEffect.NONE;
     }
@@ -463,15 +493,20 @@ export class SpellScalingEffect {
       SpellScalingEffect.NONE.label,
       SpellScalingEffect.MYSTBRADIUS.label,
       SpellScalingEffect.MYSTBPROJECTILES.label,
-      SpellScalingEffect.ONEVARIABLEPROJECTILE.label,
-      SpellScalingEffect.ONEPROJECTILETHREEMAGIC.label,
-      SpellScalingEffect.ONEPROJECTILETWOMAGIC.label,
-      SpellScalingEffect.ONEPROJECTILERADIUSTWOMAGIC.label,
-      SpellScalingEffect.ONEPROJECTILERADIUSTHREEMAGIC.label,
-      SpellScalingEffect.PROJECTILETWOMAGIC.label,
-      SpellScalingEffect.PROJECTILETHREEMAGIC.label,
-      SpellScalingEffect.ONEPROJECTILEFOURMAGIC.label,
+      SpellScalingEffect.PROJECTILERADIUSPERVARIABLE.label,
+      SpellScalingEffect.PROJECTILEPERVARIABLE.label,
+      SpellScalingEffect.PROJECTILEPERTHREEMAGIC.label,
+      SpellScalingEffect.PROJECTILEPERTWOMAGIC.label,
+      SpellScalingEffect.PROJECTILERADIUSPERTWOMAGIC.label,
+      SpellScalingEffect.PROJECTILERADIUSPERTHREEMAGIC.label,
+      SpellScalingEffect.PLUSPROJECTILEPERTWOMAGIC.label,
+      SpellScalingEffect.PLUSPROJECTILEPERFOURMAGIC.label,
+      SpellScalingEffect.PLUSPROJECTILEPERTHREEMAGIC.label,
       SpellScalingEffect.MYSTBRADIUSEFFECT.label,
+      SpellScalingEffect.PLUSHALFMYSTBRADIUSEFFECT.label,
+      SpellScalingEffect.PLUSHALFMYSTBRADIUS.label,
+      SpellScalingEffect.PLUSMYSTBRADIUS.label,
+      SpellScalingEffect.PLUSMYSTBRADIUSEFFECT.label,
     ];
   };
 }
@@ -484,7 +519,7 @@ export class SpellDamageType {
   static readonly COMBINED: StringPair = { label: "Combined", drain: 0 };
   static readonly PHYSICAL: StringPair = { label: "Physical", drain: 0 };
   static readonly STUN: StringPair = { label: "Stun", drain: 1 };
-  static readonly PURE: StringPair = { label: "Pure", drain: 2 };
+  static readonly PURE SPELL: StringPair = { label: "Pure", drain: 2 };
   static readonly FATIGUE: StringPair = { label: "Fatigue", drain: 3 };
   static readonly AGONY: StringPair = { label: "Agony", drain: 5 };
 
@@ -525,30 +560,12 @@ export class SpellDamageType {
 }
 
 export class SpellDamage {
-  static readonly NONE: StringPair = {
-    label: "",
-    drain: 0,
-  };
-  static readonly ONEPRMAGIC: StringPair = {
-    label: "1 PR Magic/Faith",
-    drain: 3,
-  };
-  static readonly TWOPRMAGIC: StringPair = {
-    label: "2 PR Magic/Faith",
-    drain: 4,
-  };
-  static readonly THREEPRMAGIC: StringPair = {
-    label: "3 PR Magic/Faith",
-    drain: 6,
-  };
-  static readonly FOURPRMAGIC: StringPair = {
-    label: "4 PR Magic/Faith",
-    drain: 8,
-  };
-  static readonly FIVEPRMAGIC: StringPair = {
-    label: "5 PR Magic/Faith",
-    drain: 12,
-  };
+  static readonly NONE: StringPair = { label: "", drain: 0, };
+  static readonly ONEPRMAGIC: StringPair = { label: "1 PR Magic/Faith", drain: 3, };
+  static readonly TWOPRMAGIC: StringPair = { label: "2 PR Magic/Faith", drain: 4, };
+  static readonly THREEPRMAGIC: StringPair = { label: "3 PR Magic/Faith", drain: 6, };
+  static readonly FOURPRMAGIC: StringPair = { label: "4 PR Magic/Faith", drain: 9, };
+  static readonly FIVEPRMAGIC: StringPair = { label: "5 PR Magic/Faith", drain: 12, };
   static readonly ONE: StringPair = { label: "1", drain: 1 };
   static readonly TWO: StringPair = { label: "2", drain: 2 };
   static readonly THREE: StringPair = { label: "3", drain: 3 };
@@ -581,19 +598,10 @@ export class SpellDamage {
   static readonly SIXDFOUR: StringPair = { label: "6d4", drain: 7 };
   static readonly MYSTB: StringPair = { label: "MystB", drain: 1 };
   static readonly MYSTBDOUBLE: StringPair = { label: "MystB *2", drain: 2 };
-  static readonly QUARTERMAGIC: StringPair = {
-    label: "1/4 Magic/Faith",
-    drain: 2,
-  };
-  static readonly HALFMAGIC: StringPair = {
-    label: "1/2 Magic/Faith",
-    drain: 3,
-  };
+  static readonly QUARTERMAGIC: StringPair = { label: "1/4 Magic/Faith", drain: 2, };
+  static readonly HALFMAGIC: StringPair = { label: "1/2 Magic/Faith", drain: 3, };
   static readonly MAGIC: StringPair = { label: "Magic/Faith", drain: 4 };
-  static readonly COLLETERAL: StringPair = {
-    label: "Collateral Damage based on environment",
-    drain: 1,
-  };
+  static readonly COLLETERAL: StringPair = { label: "Collateral damage based on environment", drain: 1, };
 
   private constructor(
     private readonly label: string,
@@ -751,18 +759,10 @@ export class SpellAoeRadius {
   static readonly EIGHTMETER: StringPair = { label: "8 Meter", drain: 4 };
   static readonly NINEMETER: StringPair = { label: "9 Meter", drain: 4 };
   static readonly TENMETER: StringPair = { label: "10 Meter", drain: 5 };
-  static readonly HALFMAGICMETER: StringPair = {
-    label: "1/2 Magic/Faith Meter",
-    drain: 2,
-  };
-  static readonly MAGICMETER: StringPair = {
-    label: "Magic/Faith Meters",
-    drain: 3,
-  };
-  static readonly DOUBLEMAGICMETER: StringPair = {
-    label: "Magic/Faith *2 Meters",
-    drain: 4,
-  };
+  static readonly HALFMAGICMETER: StringPair = { label: "1/2 Magic/Faith Meter", drain: 2, };
+  static readonly MAGICMETER: StringPair = { label: "Magic/Faith Meters", drain: 3, };
+  static readonly DOUBLEMAGICMETER: StringPair = { label: "Magic/Faith *2 Meters", drain: 4, };
+  static readonly VARIABLE: StringPair = { label: "Variable", drain: 1, };
 
   private constructor(
     private readonly label: string,
@@ -797,6 +797,8 @@ export class SpellAoeRadius {
         return SpellAoeRadius.MAGICMETER;
       case SpellAoeRadius.DOUBLEMAGICMETER.label.toLowerCase():
         return SpellAoeRadius.DOUBLEMAGICMETER;
+      case SpellAoeRadius.VARIABLE.label.toLowerCase():
+        return SpellAoeRadius.VARIABLE;
       default:
         return SpellAoeRadius.NONE;
     }
@@ -817,6 +819,7 @@ export class SpellAoeRadius {
       SpellAoeRadius.HALFMAGICMETER.label,
       SpellAoeRadius.MAGICMETER.label,
       SpellAoeRadius.DOUBLEMAGICMETER.label,
+      SpellAoeRadius.VARIABLE.label,
     ];
   };
 }
@@ -1036,27 +1039,15 @@ export class SpellCastTime {
     label: "",
     drain: 0,
   };
-  static readonly FOURMYSTBROUNDS: StringPair = {
-    label: "4 - Mystb Rounds",
-    drain: 2,
-  };
+  static readonly SIXMINUSMYSTBROUNDS: StringPair = { label: "6 - Mystb Rounds", drain: 2, };
   static readonly NINETHREE: StringPair = { label: "9 + 3", drain: -4 };
-  static readonly NINETHREECHANNEL: StringPair = {
-    label: "9 + 3 (Channel)",
-    drain: -3,
-  };
+  static readonly NINETHREECHANNEL: StringPair = { label: "9 + 3 (Channel)", drain: -3, };
   static readonly SEVENTHREE: StringPair = { label: "7 + 3", drain: -1 };
   static readonly FIVETHREE: StringPair = { label: "5 + 3", drain: 1 };
   static readonly FIVE: StringPair = { label: "5", drain: 4 };
-  static readonly DRAINCHENNEL: StringPair = {
-    label: "Drain (Channel)",
-    drain: -3,
-  };
+  static readonly DRAINCHENNEL: StringPair = { label: "Drain (Channel)", drain: -3, };
   static readonly DRAINTHREE: StringPair = { label: "Drain + 3", drain: -2 };
-  static readonly MAGIFAITHHOURS: StringPair = {
-    label: "24/MagiFaith Hours",
-    drain: 0,
-  };
+  static readonly MAGIFAITHHOURS: StringPair = { label: "24 / Magic/Faith Hours", drain: 0, };
 
   private constructor(
     private readonly label: string,
@@ -1065,8 +1056,8 @@ export class SpellCastTime {
 
   static find = (label: string): StringPair => {
     switch (label?.toLowerCase().trim()) {
-      case SpellCastTime.FOURMYSTBROUNDS.label.toLowerCase():
-        return SpellCastTime.FOURMYSTBROUNDS;
+      case SpellCastTime.SIXMINUSMYSTBROUNDS.label.toLowerCase():
+        return SpellCastTime.SIXMINUSMYSTBROUNDS;
       case SpellCastTime.NINETHREE.label.toLowerCase():
         return SpellCastTime.NINETHREE;
       case SpellCastTime.NINETHREECHANNEL.label.toLowerCase():
@@ -1090,7 +1081,7 @@ export class SpellCastTime {
   static getAllPhysical = (): string[] => {
     return [
       SpellCastTime.NONE.label,
-      SpellCastTime.FOURMYSTBROUNDS.label,
+      SpellCastTime.SIXMINUSMYSTBROUNDS.label,
       SpellCastTime.NINETHREE.label,
       SpellCastTime.NINETHREECHANNEL.label,
       SpellCastTime.SEVENTHREE.label,
@@ -1104,7 +1095,7 @@ export class SpellCastTime {
   static getAllStun = (): string[] => {
     return [
       SpellCastTime.NONE.label,
-      SpellCastTime.FOURMYSTBROUNDS.label,
+      SpellCastTime.SIXMINUSMYSTBROUNDS.label,
       SpellCastTime.NINETHREE.label,
       SpellCastTime.NINETHREECHANNEL.label,
       SpellCastTime.SEVENTHREE.label,
@@ -1242,11 +1233,11 @@ export class SpellRange {
   };
   static readonly TOUCH: StringPair = { label: "touch", drain: 1 };
   static readonly SONIC: StringPair = { label: "sonic", drain: 1 };
-  static readonly RADIUS: StringPair = {
+  static readonly RADIUS90: StringPair = {
     label: "Radius 90° around Caster",
     drain: 1,
   };
-  static readonly RADIUSPLUS: StringPair = {
+  static readonly RADIUS360: StringPair = {
     label: "Radius 90°+ around Caster",
     drain: 2,
   };
@@ -1274,9 +1265,9 @@ export class SpellRange {
         return SpellRange.TOUCH;
       case SpellRange.SONIC.label.toLowerCase():
         return SpellRange.SONIC;
-      case SpellRange.RADIUS.label.toLowerCase():
+      case SpellRange.RADIUS90.label.toLowerCase():
         return SpellRange.RADIUS;
-      case SpellRange.RADIUSPLUS.label.toLowerCase():
+      case SpellRange.RADIUS360.label.toLowerCase():
         return SpellRange.RADIUSPLUS;
       case SpellRange.LOSAURA.label.toLowerCase():
         return SpellRange.LOSAURA;
@@ -1293,8 +1284,8 @@ export class SpellRange {
       SpellRange.NONE.label,
       SpellRange.TOUCH.label,
       SpellRange.SONIC.label,
-      SpellRange.RADIUS.label,
-      SpellRange.RADIUSPLUS.label,
+      SpellRange.RADIUS90.label,
+      SpellRange.RADIUS360.label,
       SpellRange.LOSAURA.label,
       SpellRange.LOSMANIPULATE.label,
       SpellRange.LOSPOINT.label,
@@ -1348,30 +1339,12 @@ export class SpellTarget {
     drain: 0,
   };
   static readonly SINGLE: StringPair = { label: "Single Target", drain: 1 };
-  static readonly DAOE: StringPair = {
-    label: "Diminishing Area Of Effect ",
-    drain: 1,
-  };
-  static readonly MULTI: StringPair = {
-    label: "Multiple Targets",
-    drain: 4,
-  };
-  static readonly AOE: StringPair = {
-    label: "Area Of Effect",
-    drain: 2,
-  };
-  static readonly CASTER: StringPair = {
-    label: "Caster",
-    drain: 3,
-  };
-  static readonly TARGET: StringPair = {
-    label: "Caster Or Target",
-    drain: 3,
-  };
-  static readonly LINE: StringPair = {
-    label: "Straight Line",
-    drain: 2,
-  };
+  static readonly DAOE: StringPair = { label: "Diminishing Area Of Effect ", drain: 1, };
+  static readonly MULTI: StringPair = { label: "Multiple Targets", drain: 4, };
+  static readonly AOE: StringPair = { label: "Area Of Effect", drain: 2, };
+  static readonly CASTER: StringPair = { label: "Caster", drain: 3, };
+  static readonly TARGET: StringPair = { label: "Caster Or Target", drain: 3, };
+  static readonly LINE: StringPair = { label: "Straight Line", drain: 2, };
 
   private constructor(
     private readonly label: string,
@@ -1417,27 +1390,12 @@ export class SpellDuration {
     label: "",
     drain: 0,
   };
-  static readonly CONCENTRATION: StringPair = {
-    label: "concentration",
-    drain: 0,
-  };
-  static readonly INSTANTANEOUS: StringPair = {
-    label: "instantaneous",
-    drain: 1,
-  };
+  static readonly CONCENTRATION: StringPair = { label: "concentration", drain: 0, };
+  static readonly INSTANTANEOUS: StringPair = { label: "instantaneous", drain: 1, };
   static readonly PERMANENT: StringPair = { label: "permanent", drain: 1 };
-  static readonly FIXEDTICKS: StringPair = {
-    label: "fixed # of ticks",
-    drain: 1,
-  };
-  static readonly FIXEDROUNDS: StringPair = {
-    label: "fixed # of rounds",
-    drain: 2,
-  };
-  static readonly FIXEDHOURS: StringPair = {
-    label: "fixed # of hours",
-    drain: 2,
-  };
+  static readonly FIXEDTICKS: StringPair = { label: "fixed # of ticks", drain: 1, };
+  static readonly FIXEDROUNDS: StringPair = { label: "fixed # of rounds", drain: 2, };
+  static readonly FIXEDHOURS: StringPair = { label: "fixed # of hours", drain: 2, };
   static readonly CHANNEL: StringPair = { label: "channel", drain: -1 };
 
   private constructor(
@@ -1484,18 +1442,12 @@ export class SpellSchool {
     label: "",
     drain: 0,
   };
-  static readonly TRANSMUTATION: StringPair = {
-    label: "Transmutation",
-    drain: 1,
-  };
+  static readonly TRANSMUTATION: StringPair = { label: "Transmutation", drain: 1, };
   static readonly EVOCATION: StringPair = { label: "Evocation", drain: 0 };
-  static readonly FORTIFICATION: StringPair = {
-    label: "Fortification",
-    drain: 1,
-  };
+  static readonly FORTIFICATION: StringPair = { label: "Fortification", drain: 1, };
   static readonly HEX: StringPair = { label: "Hex", drain: 1 };
   static readonly ILLUSION: StringPair = { label: "Illusion", drain: 1 };
-  static readonly CONJURATION: StringPair = { label: "Conjuration", drain: 1 };
+  static readonly CONJURATION: StringPair = { label: "Conjuration", drain: 2 };
   static readonly NECROMANCY: StringPair = { label: "Necromancy", drain: 1 };
   static readonly ENCHANTMENT: StringPair = { label: "Enchantment", drain: 2 };
 
