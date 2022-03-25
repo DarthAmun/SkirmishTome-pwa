@@ -519,7 +519,7 @@ export class SpellDamageType {
   static readonly COMBINED: StringPair = { label: "Combined", drain: 0 };
   static readonly PHYSICAL: StringPair = { label: "Physical", drain: 0 };
   static readonly STUN: StringPair = { label: "Stun", drain: 1 };
-  static readonly PURE SPELL: StringPair = { label: "Pure", drain: 2 };
+  static readonly PURE: StringPair = { label: "Pure", drain: 2 };
   static readonly FATIGUE: StringPair = { label: "Fatigue", drain: 3 };
   static readonly AGONY: StringPair = { label: "Agony", drain: 5 };
 
@@ -1266,9 +1266,9 @@ export class SpellRange {
       case SpellRange.SONIC.label.toLowerCase():
         return SpellRange.SONIC;
       case SpellRange.RADIUS90.label.toLowerCase():
-        return SpellRange.RADIUS;
+        return SpellRange.RADIUS90;
       case SpellRange.RADIUS360.label.toLowerCase():
-        return SpellRange.RADIUSPLUS;
+        return SpellRange.RADIUS360;
       case SpellRange.LOSAURA.label.toLowerCase():
         return SpellRange.LOSAURA;
       case SpellRange.LOSMANIPULATE.label.toLowerCase():
