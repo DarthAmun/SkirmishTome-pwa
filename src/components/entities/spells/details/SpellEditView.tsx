@@ -231,8 +231,8 @@ const SpellEditView = ({ spell, onEdit }: $Props) => {
         )}
         {spell.range.label !== SpellRange.SONIC.label &&
           spell.range.label !== SpellRange.TOUCH.label &&
-          spell.range.label !== SpellRange.RADIUS.label &&
-          spell.range.label !== SpellRange.RADIUSPLUS.label && (
+          spell.range.label !== SpellRange.RADIUS90.label &&
+          spell.range.label !== SpellRange.RADIUS360.label && (
             <SelectField
               value={spell.losRange.label}
               options={SpellLosRange.getAll()}
