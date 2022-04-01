@@ -291,7 +291,7 @@ export class SpellDirectEffects {
   static readonly SPHERE: StringPair = { label: "Shield", drain: 5 };
   static readonly KNOCKDOWN: StringPair = { label: "Knockdown", drain: 2 };
   static readonly WALLBARRIERCONSTRUCTSUMMON: StringPair = {
-    label: "Wall / Barrier / Sphere / Summon",
+    label: "Wall / Barrier / Sphere / Construct",
     drain: 5,
   };
   static readonly TELEPORT: StringPair = { label: "Teleport", drain: 6 };
@@ -750,20 +750,13 @@ export class SpellAoeRadius {
     drain: 0,
   };
   static readonly ONEMETER: StringPair = { label: "1 Meter", drain: -1 };
-  static readonly TWOMETER: StringPair = { label: "2 Meter", drain: 0 };
-  static readonly THREEMETER: StringPair = { label: "3 Meter", drain: 1 };
-  static readonly FOURMETER: StringPair = { label: "4 Meter", drain: 2 };
-  static readonly FIVEMETER: StringPair = { label: "5 Meter", drain: 2 };
-  static readonly SIXMETER: StringPair = { label: "6 Meter", drain: 3 };
-  static readonly SEVENMETER: StringPair = { label: "7 Meter", drain: 3 };
-  static readonly EIGHTMETER: StringPair = { label: "8 Meter", drain: 4 };
-  static readonly NINEMETER: StringPair = { label: "9 Meter", drain: 4 };
-  static readonly TENMETER: StringPair = { label: "10 Meter", drain: 5 };
-  static readonly HALFMAGICMETER: StringPair = { label: "1/2 Magic/Faith Meter", drain: 2, };
-  static readonly MAGICMETER: StringPair = { label: "Magic/Faith Meters", drain: 3, };
-  static readonly DOUBLEMAGICMETER: StringPair = { label: "Magic/Faith *2 Meters", drain: 4, };
-  static readonly VARIABLE: StringPair = { label: "Variable", drain: 1, };
-
+  static readonly TWOMETERS: StringPair = { label: "2 Meters", drain: 0 };
+  static readonly THREEMETERS: StringPair = { label: "3 Meters", drain: 1 };
+  static readonly HALFMAGMETERS: StringPair = { label: "1/2 Magic/Faith Meters", drain: 2 };
+  static readonly MAGMETERS: StringPair = { label: "Magic/Faith *1 Meters", drain: 4 };
+  static readonly MAGTIMESTWOMETERS: StringPair = { label: "Magic/Faith *2 Meters", drain: 6 };
+  static readonly VARIABLE: StringPair = { label: "Variable", drain: 1 };
+  
   private constructor(
     private readonly label: string,
     public readonly drain: number
@@ -773,30 +766,16 @@ export class SpellAoeRadius {
     switch (label?.toLowerCase().trim()) {
       case SpellAoeRadius.ONEMETER.label.toLowerCase():
         return SpellAoeRadius.ONEMETER;
-      case SpellAoeRadius.TWOMETER.label.toLowerCase():
-        return SpellAoeRadius.TWOMETER;
-      case SpellAoeRadius.THREEMETER.label.toLowerCase():
-        return SpellAoeRadius.THREEMETER;
-      case SpellAoeRadius.FOURMETER.label.toLowerCase():
-        return SpellAoeRadius.FOURMETER;
-      case SpellAoeRadius.FIVEMETER.label.toLowerCase():
-        return SpellAoeRadius.FIVEMETER;
-      case SpellAoeRadius.SIXMETER.label.toLowerCase():
-        return SpellAoeRadius.SIXMETER;
-      case SpellAoeRadius.SEVENMETER.label.toLowerCase():
-        return SpellAoeRadius.SEVENMETER;
-      case SpellAoeRadius.EIGHTMETER.label.toLowerCase():
-        return SpellAoeRadius.EIGHTMETER;
-      case SpellAoeRadius.NINEMETER.label.toLowerCase():
-        return SpellAoeRadius.NINEMETER;
-      case SpellAoeRadius.TENMETER.label.toLowerCase():
-        return SpellAoeRadius.TENMETER;
-      case SpellAoeRadius.HALFMAGICMETER.label.toLowerCase():
-        return SpellAoeRadius.HALFMAGICMETER;
-      case SpellAoeRadius.MAGICMETER.label.toLowerCase():
-        return SpellAoeRadius.MAGICMETER;
-      case SpellAoeRadius.DOUBLEMAGICMETER.label.toLowerCase():
-        return SpellAoeRadius.DOUBLEMAGICMETER;
+      case SpellAoeRadius.TWOMETERS.label.toLowerCase():
+        return SpellAoeRadius.TWOMETERS;
+      case SpellAoeRadius.THREEMETERS.label.toLowerCase():
+        return SpellAoeRadius.THREEMETERS;
+      case SpellAoeRadius.HALFMAGMETERS.label.toLowerCase():
+        return SpellAoeRadius.HALFMAGMETERS;
+      case SpellAoeRadius.MAGMETERS.label.toLowerCase():
+        return SpellAoeRadius.MAGMETERS;
+      case SpellAoeRadius.MAGTIMESTWOMETERS.label.toLowerCase():
+        return SpellAoeRadius.MAGTIMESTWOMETERS;
       case SpellAoeRadius.VARIABLE.label.toLowerCase():
         return SpellAoeRadius.VARIABLE;
       default:
@@ -807,18 +786,11 @@ export class SpellAoeRadius {
     return [
       SpellAoeRadius.NONE.label,
       SpellAoeRadius.ONEMETER.label,
-      SpellAoeRadius.TWOMETER.label,
-      SpellAoeRadius.THREEMETER.label,
-      SpellAoeRadius.FOURMETER.label,
-      SpellAoeRadius.FIVEMETER.label,
-      SpellAoeRadius.SIXMETER.label,
-      SpellAoeRadius.SEVENMETER.label,
-      SpellAoeRadius.EIGHTMETER.label,
-      SpellAoeRadius.NINEMETER.label,
-      SpellAoeRadius.TENMETER.label,
-      SpellAoeRadius.HALFMAGICMETER.label,
-      SpellAoeRadius.MAGICMETER.label,
-      SpellAoeRadius.DOUBLEMAGICMETER.label,
+      SpellAoeRadius.TWOMETERS.label,
+      SpellAoeRadius.THREEMETERS.label,
+      SpellAoeRadius.HALFMAGMETERS.label,
+      SpellAoeRadius.MAGMETERS.label,
+      SpellAoeRadius.MAGTIMESTWOMETERS.label,
       SpellAoeRadius.VARIABLE.label,
     ];
   };
@@ -995,15 +967,15 @@ export class SpellTargetingType {
     drain: 0,
   };
   static readonly DIRECTTARGET: StringPair = {
-    label: "Direct Target",
+    label: "Direct",
     drain: 0,
   };
   static readonly AURATARGETING: StringPair = {
-    label: "Aura Targeting",
+    label: "Aura",
     drain: 2,
   };
   static readonly INDIRECTTARGETING: StringPair = {
-    label: "Indirect Targeting",
+    label: "Indirect",
     drain: 1,
   };
 
