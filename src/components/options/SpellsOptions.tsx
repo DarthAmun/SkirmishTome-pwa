@@ -87,7 +87,7 @@ const SelectionTitle = styled.div`
   margin: 5px;
   min-width: calc(100% - 20px);
   font-weight: bold;
-  text-algin: center;
+  text-align: center;
   border-radius: 5px;
   color: ${({ theme }) => theme.input.color};
   background-color: ${({ theme }) => theme.input.backgroundColor};
