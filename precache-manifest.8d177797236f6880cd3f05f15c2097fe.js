@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "cdc387fbc27d91adcadbbe3133b80741",
+    "revision": "7d8bd154685511b950dfb6a4162de4da",
     "url": "/SkirmishTome-pwa/index.html"
   },
   {
-    "revision": "1af16e4bc952ce590e63",
+    "revision": "3bdbc010672e53fba619",
     "url": "/SkirmishTome-pwa/static/css/main.b53c0ce6.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/SkirmishTome-pwa/static/js/1.c41c829a.chunk.js"
   },
   {
-    "revision": "3597014ddd825a3b47e1",
-    "url": "/SkirmishTome-pwa/static/js/10.f2085b48.chunk.js"
+    "revision": "77558845bb9cf85e562b",
+    "url": "/SkirmishTome-pwa/static/js/10.644a3657.chunk.js"
   },
   {
     "revision": "0eb72cf45a66e68f35e7",
@@ -64,20 +64,20 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/SkirmishTome-pwa/static/js/7.466bba60.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "201fac6b533bf71c980c",
-    "url": "/SkirmishTome-pwa/static/js/8.29cd6201.chunk.js"
+    "revision": "aff0a6aea5590f1136c4",
+    "url": "/SkirmishTome-pwa/static/js/8.45f569c2.chunk.js"
   },
   {
-    "revision": "801881cf181026e7eb25",
-    "url": "/SkirmishTome-pwa/static/js/9.d14b8035.chunk.js"
+    "revision": "ecaf8ec5d1d826a417e7",
+    "url": "/SkirmishTome-pwa/static/js/9.f59ac41a.chunk.js"
   },
   {
-    "revision": "1af16e4bc952ce590e63",
-    "url": "/SkirmishTome-pwa/static/js/main.78727e22.chunk.js"
+    "revision": "3bdbc010672e53fba619",
+    "url": "/SkirmishTome-pwa/static/js/main.2155cf0a.chunk.js"
   },
   {
-    "revision": "fd31786ac9d027bda2bf",
-    "url": "/SkirmishTome-pwa/static/js/runtime-main.f3085df6.js"
+    "revision": "d98f2efd644c263a6235",
+    "url": "/SkirmishTome-pwa/static/js/runtime-main.d7ca1d1b.js"
   },
   {
     "revision": "a0b12edf02c3f325bdf7975e77ac2194",
