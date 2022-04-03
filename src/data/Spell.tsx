@@ -57,6 +57,7 @@ export default class Spell implements IEntity {
   hp: StringPair;
   chargeable: boolean;
   needsMaterial: boolean;
+  glyph: boolean;
 
   constructor(
     id?: number,
@@ -90,7 +91,8 @@ export default class Spell implements IEntity {
     size?: StringPair,
     hp?: StringPair,
     chargeable?: boolean,
-    needsMaterial?: boolean
+    needsMaterial?: boolean,
+    glyph?: boolean
   ) {
     this.id = id;
     this.name = name || "";
@@ -124,6 +126,7 @@ export default class Spell implements IEntity {
     this.hp = hp || SpellHp.NONE;
     this.chargeable = chargeable || false;
     this.needsMaterial = needsMaterial || false;
+    this.glyph = glyph || false;
   }
 
   static calcDrain = (spell: Spell): number => {
@@ -188,6 +191,7 @@ export default class Spell implements IEntity {
       spell.hp.label,
       spell.chargeable,
       spell.needsMaterial,
+      spell.glyph,
     ];
   };
 }

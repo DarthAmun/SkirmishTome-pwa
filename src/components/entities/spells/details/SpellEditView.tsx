@@ -109,6 +109,17 @@ const SpellEditView = ({ spell, onEdit }: $Props) => {
             });
           }}
         />
+        <CheckField
+          value={spell.glyph}
+          label="Glyph"
+          onChange={(value: boolean) => {
+            onEdit({
+              ...spell,
+              drain: Spell.calcDrain(spell),
+              glyph: value,
+            });
+          }}
+        />
         <Separator />
         <SelectField
           value={spell.rite.label}

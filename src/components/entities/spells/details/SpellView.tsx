@@ -52,9 +52,19 @@ const SpellView = ({ spell }: $Props) => {
       <View>
         <School school={spell.school.label}>{spell.school.label}</School>
 
-        <Drain>
+        <Flag>
           <b>{spell.drain}</b>
-        </Drain>
+        </Flag>
+        {spell.needsMaterial && (
+          <Flag>
+            <b>M</b>
+          </Flag>
+        )}
+        {spell.glyph && (
+          <Flag>
+            <b>G</b>
+          </Flag>
+        )}
 
         <Name>
           <b>{spell.name}</b>
@@ -230,7 +240,7 @@ const School = styled.div<SchoolType>`
   }};
 `;
 
-const Drain = styled.div`
+const Flag = styled.div`
   height: auto;
   padding: 10px;
   width: 20px;

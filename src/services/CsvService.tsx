@@ -44,7 +44,7 @@ export const scanImportedSpellCsv = (csv: Array<any>, filename: string) => {
       row[31],
       0,
       +row[29],
-      SpellScalingEffect.find(row[14]),
+      SpellScalingEffect.find(row[12]),
       SpellTarget.find(row[3]),
       SpellAoeRadius.find(row[9]),
       [
@@ -52,7 +52,7 @@ export const scanImportedSpellCsv = (csv: Array<any>, filename: string) => {
         SpellDamage.find(row[14]),
         SpellDamage.find(row[15]),
       ],
-      SpellDirectEffects.NONE,
+      SpellDirectEffects.find(row[19]),
       SpellLevel.find(row[2]),
       SpellProjectileType.find(row[10]),
       SpellProjectileNumber.find(row[11]),
@@ -64,7 +64,8 @@ export const scanImportedSpellCsv = (csv: Array<any>, filename: string) => {
       SpellSize.find(row[21]),
       SpellHp.find(row[20]),
       row[30]?.toLowerCase() === "yes" ? true : false,
-      row[6]?.toLowerCase() === "yes" ? true : false
+      row[6]?.toLowerCase() === "yes" ? true : false,
+      row[5]?.toLowerCase() === "yes" ? true : false
     );
     newSpell.drain = Spell.calcDrain(newSpell);
     listOfSpells.push(newSpell);
