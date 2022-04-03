@@ -51,11 +51,9 @@ const SpellEditView = ({ spell, onEdit }: $Props) => {
           options={SpellSchool.getAll()}
           label={"School"}
           onChange={(value: string) => {
-            onEdit({
-              ...spell,
-              drain: Spell.calcDrain(spell),
-              school: SpellSchool.find(value),
-            });
+            onEdit(
+              Spell.calcDrain({ ...spell, school: SpellSchool.find(value) })
+            );
           }}
         />
         <SelectField
@@ -63,11 +61,9 @@ const SpellEditView = ({ spell, onEdit }: $Props) => {
           options={SpellSource.getAll()}
           label={"Source"}
           onChange={(category: string) => {
-            onEdit({
-              ...spell,
-              drain: Spell.calcDrain(spell),
-              source: SpellSource.find(category),
-            });
+            onEdit(
+              Spell.calcDrain({ ...spell, source: SpellSource.find(category) })
+            );
           }}
         />
         <SelectField
@@ -75,11 +71,9 @@ const SpellEditView = ({ spell, onEdit }: $Props) => {
           options={SpellLevel.getAll()}
           label={"Level"}
           onChange={(value: string) => {
-            onEdit({
-              ...spell,
-              drain: Spell.calcDrain(spell),
-              level: SpellLevel.find(value),
-            });
+            onEdit(
+              Spell.calcDrain({ ...spell, level: SpellLevel.find(value) })
+            );
           }}
         />
         <NumberField
@@ -91,33 +85,21 @@ const SpellEditView = ({ spell, onEdit }: $Props) => {
           value={spell.chargeable}
           label="Chargeable"
           onChange={(value: boolean) => {
-            onEdit({
-              ...spell,
-              drain: Spell.calcDrain(spell),
-              chargeable: value,
-            });
+            onEdit(Spell.calcDrain({ ...spell, chargeable: value }));
           }}
         />
         <CheckField
           value={spell.needsMaterial}
           label="Needs Material"
           onChange={(value: boolean) => {
-            onEdit({
-              ...spell,
-              drain: Spell.calcDrain(spell),
-              needsMaterial: value,
-            });
+            onEdit(Spell.calcDrain({ ...spell, needsMaterial: value }));
           }}
         />
         <CheckField
           value={spell.glyph}
           label="Glyph"
           onChange={(value: boolean) => {
-            onEdit({
-              ...spell,
-              drain: Spell.calcDrain(spell),
-              glyph: value,
-            });
+            onEdit(Spell.calcDrain({ ...spell, glyph: value }));
           }}
         />
         <Separator />
@@ -126,11 +108,9 @@ const SpellEditView = ({ spell, onEdit }: $Props) => {
           options={SpellRite.getAll()}
           label={"Rite"}
           onChange={(category: string) => {
-            onEdit({
-              ...spell,
-              drain: Spell.calcDrain(spell),
-              rite: SpellRite.find(category),
-            });
+            onEdit(
+              Spell.calcDrain({ ...spell, rite: SpellRite.find(category) })
+            );
           }}
         />
         <SelectField
@@ -138,11 +118,9 @@ const SpellEditView = ({ spell, onEdit }: $Props) => {
           options={SpellDuration.getAll()}
           label={"Duration"}
           onChange={(value: string) => {
-            onEdit({
-              ...spell,
-              drain: Spell.calcDrain(spell),
-              duration: SpellDuration.find(value),
-            });
+            onEdit(
+              Spell.calcDrain({ ...spell, duration: SpellDuration.find(value) })
+            );
           }}
         />
         <SelectField
@@ -154,11 +132,12 @@ const SpellEditView = ({ spell, onEdit }: $Props) => {
           }
           label={"Drain Type"}
           onChange={(value: string) => {
-            onEdit({
-              ...spell,
-              drain: Spell.calcDrain(spell),
-              drainType: SpellDrainType.find(value),
-            });
+            onEdit(
+              Spell.calcDrain({
+                ...spell,
+                drainType: SpellDrainType.find(value),
+              })
+            );
           }}
         />
         <SelectField
@@ -170,11 +149,9 @@ const SpellEditView = ({ spell, onEdit }: $Props) => {
           }
           label={"Casting Time"}
           onChange={(value: string) => {
-            onEdit({
-              ...spell,
-              drain: Spell.calcDrain(spell),
-              castTime: SpellCastTime.find(value),
-            });
+            onEdit(
+              Spell.calcDrain({ ...spell, castTime: SpellCastTime.find(value) })
+            );
           }}
         />
         <Separator />
@@ -183,11 +160,12 @@ const SpellEditView = ({ spell, onEdit }: $Props) => {
           options={SpellTarget.getAll()}
           label={"Spell Target"}
           onChange={(value: string) => {
-            onEdit({
-              ...spell,
-              drain: Spell.calcDrain(spell),
-              spellTarget: SpellTarget.find(value),
-            });
+            onEdit(
+              Spell.calcDrain({
+                ...spell,
+                spellTarget: SpellTarget.find(value),
+              })
+            );
           }}
         />
         <SelectField
@@ -195,11 +173,9 @@ const SpellEditView = ({ spell, onEdit }: $Props) => {
           options={SpellRange.getAll()}
           label={"Range"}
           onChange={(value: string) => {
-            onEdit({
-              ...spell,
-              drain: Spell.calcDrain(spell),
-              range: SpellRange.find(value),
-            });
+            onEdit(
+              Spell.calcDrain({ ...spell, range: SpellRange.find(value) })
+            );
           }}
         />
         <SelectField
@@ -207,11 +183,12 @@ const SpellEditView = ({ spell, onEdit }: $Props) => {
           options={SpellTargetingType.getAll()}
           label={"Targeting Type"}
           onChange={(value: string) => {
-            onEdit({
-              ...spell,
-              drain: Spell.calcDrain(spell),
-              targetingType: SpellTargetingType.find(value),
-            });
+            onEdit(
+              Spell.calcDrain({
+                ...spell,
+                targetingType: SpellTargetingType.find(value),
+              })
+            );
           }}
         />
         <SelectField
@@ -219,11 +196,12 @@ const SpellEditView = ({ spell, onEdit }: $Props) => {
           options={SpellProjectileType.getAll()}
           label={"Projectile Type"}
           onChange={(value: string) => {
-            onEdit({
-              ...spell,
-              drain: Spell.calcDrain(spell),
-              projectileType: SpellProjectileType.find(value),
-            });
+            onEdit(
+              Spell.calcDrain({
+                ...spell,
+                projectileType: SpellProjectileType.find(value),
+              })
+            );
           }}
         />
         {spell.projectileType.label !== SpellProjectileType.SPRAY.label && (
@@ -232,46 +210,49 @@ const SpellEditView = ({ spell, onEdit }: $Props) => {
             options={SpellProjectileNumber.getAll()}
             label={"Projectile Number"}
             onChange={(value: string) => {
-              onEdit({
-                ...spell,
-                drain: Spell.calcDrain(spell),
-                projectileNumber: SpellProjectileNumber.find(value),
-              });
+              onEdit(
+                Spell.calcDrain({
+                  ...spell,
+                  projectileNumber: SpellProjectileNumber.find(value),
+                })
+              );
             }}
           />
         )}
-        {spell.range.label !== SpellRange.SONIC.label &&
-          spell.range.label !== SpellRange.TOUCH.label &&
-          spell.range.label !== SpellRange.RADIUS90.label &&
-          spell.range.label !== SpellRange.RADIUS360.label && (
-            <SelectField
-              value={spell.losRange.label}
-              options={SpellLosRange.getAll()}
-              label={"Line of Sight Range"}
-              onChange={(value: string) => {
-                onEdit({
+        {(spell.range.label !== SpellRange.SONIC.label ||
+          spell.range.label !== SpellRange.TOUCH.label ||
+          spell.range.label !== SpellRange.RADIUS90.label ||
+          spell.range.label !== SpellRange.RADIUS360.label) && (
+          <SelectField
+            value={spell.losRange.label}
+            options={SpellLosRange.getAll()}
+            label={"Line of Sight Range"}
+            onChange={(value: string) => {
+              onEdit(
+                Spell.calcDrain({
                   ...spell,
-                  drain: Spell.calcDrain(spell),
                   losRange: SpellLosRange.find(value),
-                });
-              }}
-            />
-          )}
-        {spell.range.label !== SpellRange.TOUCH.label &&
-          spell.range.label !== SpellRange.LOSMANIPULATE.label && (
-            <SelectField
-              value={spell.aoeRadius.label}
-              options={SpellAoeRadius.getAll()}
-              label={"Area of Effect Radius"}
-              onChange={(value: string) => {
-                onEdit({
+                })
+              );
+            }}
+          />
+        )}
+        {(spell.range.label !== SpellRange.TOUCH.label ||
+          spell.range.label !== SpellRange.LOSMANIPULATE.label) && (
+          <SelectField
+            value={spell.aoeRadius.label}
+            options={SpellAoeRadius.getAll()}
+            label={"Area of Effect Radius"}
+            onChange={(value: string) => {
+              onEdit(
+                Spell.calcDrain({
                   ...spell,
-                  drain: Spell.calcDrain(spell),
                   aoeRadius: SpellAoeRadius.find(value),
-                });
-              }}
-            />
-          )}
+                })
+              );
+            }}
+          />
+        )}
         <Separator />
         <SelectField
           value={spell.damage[0]?.label}
@@ -280,11 +261,7 @@ const SpellEditView = ({ spell, onEdit }: $Props) => {
           onChange={(value: string) => {
             let newDa = [...spell.damage];
             newDa[0] = SpellDamage.find(value);
-            onEdit({
-              ...spell,
-              drain: Spell.calcDrain(spell),
-              damage: newDa,
-            });
+            onEdit(Spell.calcDrain({ ...spell, damage: newDa }));
           }}
         />
         <SelectField
@@ -294,11 +271,7 @@ const SpellEditView = ({ spell, onEdit }: $Props) => {
           onChange={(value: string) => {
             let newDa = [...spell.damage];
             newDa[1] = SpellDamage.find(value);
-            onEdit({
-              ...spell,
-              drain: Spell.calcDrain(spell),
-              damage: newDa,
-            });
+            onEdit(Spell.calcDrain({ ...spell, damage: newDa }));
           }}
         />
         <SelectField
@@ -308,11 +281,7 @@ const SpellEditView = ({ spell, onEdit }: $Props) => {
           onChange={(value: string) => {
             let newDa = [...spell.damage];
             newDa[2] = SpellDamage.find(value);
-            onEdit({
-              ...spell,
-              drain: Spell.calcDrain(spell),
-              damage: newDa,
-            });
+            onEdit(Spell.calcDrain({ ...spell, damage: newDa }));
           }}
         />
         {(spell.damage[0]?.label !== "" ||
@@ -323,11 +292,12 @@ const SpellEditView = ({ spell, onEdit }: $Props) => {
             options={SpellDamageType.getAll()}
             label={"Damage Type"}
             onChange={(value: string) => {
-              onEdit({
-                ...spell,
-                drain: Spell.calcDrain(spell),
-                damageType: SpellDamageType.find(value),
-              });
+              onEdit(
+                Spell.calcDrain({
+                  ...spell,
+                  damageType: SpellDamageType.find(value),
+                })
+              );
             }}
           />
         )}
@@ -336,11 +306,12 @@ const SpellEditView = ({ spell, onEdit }: $Props) => {
           options={SpellScalingEffect.getAll()}
           label={"Scaling Effects"}
           onChange={(value: string) => {
-            onEdit({
-              ...spell,
-              drain: Spell.calcDrain(spell),
-              scalingEffect: SpellScalingEffect.find(value),
-            });
+            onEdit(
+              Spell.calcDrain({
+                ...spell,
+                scalingEffect: SpellScalingEffect.find(value),
+              })
+            );
           }}
         />
 
@@ -350,11 +321,12 @@ const SpellEditView = ({ spell, onEdit }: $Props) => {
           options={SpellDirectEffects.getAll()}
           label={"Direct Effects"}
           onChange={(value: string) => {
-            onEdit({
-              ...spell,
-              drain: Spell.calcDrain(spell),
-              directEffects: SpellDirectEffects.find(value),
-            });
+            onEdit(
+              Spell.calcDrain({
+                ...spell,
+                directEffects: SpellDirectEffects.find(value),
+              })
+            );
           }}
         />
         {spell.directEffects.label ===
@@ -365,11 +337,9 @@ const SpellEditView = ({ spell, onEdit }: $Props) => {
               options={SpellSize.getAll()}
               label={"Shield/Structure Size"}
               onChange={(value: string) => {
-                onEdit({
-                  ...spell,
-                  drain: Spell.calcDrain(spell),
-                  size: SpellSize.find(value),
-                });
+                onEdit(
+                  Spell.calcDrain({ ...spell, size: SpellSize.find(value) })
+                );
               }}
             />
             <SelectField
@@ -377,11 +347,7 @@ const SpellEditView = ({ spell, onEdit }: $Props) => {
               options={SpellHp.getAll()}
               label={"Armor/Hit Points"}
               onChange={(value: string) => {
-                onEdit({
-                  ...spell,
-                  drain: Spell.calcDrain(spell),
-                  hp: SpellHp.find(value),
-                });
+                onEdit(Spell.calcDrain({ ...spell, hp: SpellHp.find(value) }));
               }}
             />
           </>
@@ -396,21 +362,22 @@ const SpellEditView = ({ spell, onEdit }: $Props) => {
             onChange={(value) => onEdit({ ...spell, durationText: value })}
           />
         )}
-        {spell.damageType.label === SpellDamageType.COMBINED.label ||
-          (spell.damageType.label === SpellDamageType.PURE.label && (
-            <SelectField
-              value={spell.pureDamage.label}
-              options={SpellPureDamage.getAll()}
-              label={"Pure Spell Damage"}
-              onChange={(value: string) => {
-                onEdit({
+        {(spell.damageType.label === SpellDamageType.COMBINED.label ||
+          spell.damageType.label === SpellDamageType.PURE.label) && (
+          <SelectField
+            value={spell.pureDamage.label}
+            options={SpellPureDamage.getAll()}
+            label={"Pure Spell Damage"}
+            onChange={(value: string) => {
+              onEdit(
+                Spell.calcDrain({
                   ...spell,
-                  drain: Spell.calcDrain(spell),
                   pureDamage: SpellPureDamage.find(value),
-                });
-              }}
-            />
-          ))}
+                })
+              );
+            }}
+          />
+        )}
         <TextField
           value={spell.effect}
           label="Effect"

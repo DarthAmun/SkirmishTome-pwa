@@ -806,7 +806,7 @@ export class SpellLosRange {
     drain: -1,
   };
   static readonly ONEMAGIC: StringPair = {
-    label: "Magic/Faith meters",
+    label: "Magic/Faith *1 meters",
     drain: -1,
   };
   static readonly TWOMAGIC: StringPair = {

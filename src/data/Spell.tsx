@@ -129,7 +129,7 @@ export default class Spell implements IEntity {
     this.glyph = glyph || false;
   }
 
-  static calcDrain = (spell: Spell): number => {
+  static calcDrain = (spell: Spell): Spell => {
     let drain = 0;
     drain += spell.drainType ? spell.drainType.drain : 0;
     drain += spell.school ? spell.school.drain : 0;
@@ -155,7 +155,7 @@ export default class Spell implements IEntity {
     drain += spell.size ? spell.size.drain : 0;
     drain += spell.hp ? spell.hp.drain : 0;
     drain += spell.pureDamage ? spell.pureDamage.drain : 0;
-    return drain;
+    return {...spell, drain: drain};
   };
 
   static makeCsv = (spell: Spell): any[] => {

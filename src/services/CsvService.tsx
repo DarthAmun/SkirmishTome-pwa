@@ -67,8 +67,7 @@ export const scanImportedSpellCsv = (csv: Array<any>, filename: string) => {
       row[6]?.toLowerCase() === "yes" ? true : false,
       row[5]?.toLowerCase() === "yes" ? true : false
     );
-    newSpell.drain = Spell.calcDrain(newSpell);
-    listOfSpells.push(newSpell);
+    listOfSpells.push(Spell.calcDrain(newSpell));
   });
   console.log("Processed Spells", listOfSpells);
   saveInDB("spells", listOfSpells, filename);
