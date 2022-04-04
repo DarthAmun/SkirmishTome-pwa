@@ -156,7 +156,6 @@ export default class Spell implements IEntity {
     drain += spell.size ? spell.size.drain : 0;
     drain += spell.hp ? spell.hp.drain : 0;
     drain += spell.pureDamage ? spell.pureDamage.drain : 0;
-    console.log(drain, spell.spellTarget);
     return { ...spell, drain: drain };
   };
 
