@@ -110,12 +110,13 @@ export const CreateButton = styled.button`
     bottom: 10px;
     right: 10px;
     top: auto;
+    z-index: 100;
   
     background-color: ${({ theme }) => theme.buttons.backgroundColor};
     color: ${({ theme }) => theme.buttons.color};
     box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.75);
     border: none;
-    padding 10px;
+    padding: 10px;
     box-sizing:content-box;
     line-height: 20px;
     cursor: pointer;

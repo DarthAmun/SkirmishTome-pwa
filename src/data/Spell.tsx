@@ -156,7 +156,8 @@ export default class Spell implements IEntity {
     drain += spell.size ? spell.size.drain : 0;
     drain += spell.hp ? spell.hp.drain : 0;
     drain += spell.pureDamage ? spell.pureDamage.drain : 0;
-    return {...spell, drain: drain};
+    console.log(drain, spell.spellTarget);
+    return { ...spell, drain: drain };
   };
 
   static makeCsv = (spell: Spell): any[] => {
@@ -178,7 +179,11 @@ export default class Spell implements IEntity {
       spell.scalingEffect.label,
       spell.spellTarget.label,
       spell.aoeRadius.label,
-      spell.damage[0].label + ", " +spell.damage[1].label + ", " +spell.damage[2].label,
+      spell.damage[0].label +
+        ", " +
+        spell.damage[1].label +
+        ", " +
+        spell.damage[2].label,
       spell.directEffects.label,
       spell.level.label,
       spell.projectileType.label,

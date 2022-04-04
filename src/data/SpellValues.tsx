@@ -91,23 +91,28 @@ export class SpellHp {
     drain: 0,
   };
   static readonly HALFMAGICSTRUCTUREHP: StringPair = {
-    label: "1/2 Magic/Faith armor/structure rating and Magic/Faith *1 hit points",
+    label:
+      "1/2 Magic/Faith armor/structure rating and Magic/Faith *1 hit points",
     drain: 0,
   };
   static readonly HALFMAGICSTRUCTUREDOUBLEHP: StringPair = {
-    label: "1/2 Magic/Faith armor/structure rating and Magic/Faith *2 hit points",
+    label:
+      "1/2 Magic/Faith armor/structure rating and Magic/Faith *2 hit points",
     drain: 1,
   };
   static readonly HALFMAGICSTRUCTURETRIPPLEHP: StringPair = {
-    label: "1/2 Magic/Faith armor/structure rating and Magic/Faith *3 hit points",
+    label:
+      "1/2 Magic/Faith armor/structure rating and Magic/Faith *3 hit points",
     drain: 2,
   };
   static readonly MAGICSTRUCTUREHP: StringPair = {
-    label: "Magic/Faith *1 armor/structure rating and Magic/Faith *1 hit points",
+    label:
+      "Magic/Faith *1 armor/structure rating and Magic/Faith *1 hit points",
     drain: 1,
   };
   static readonly MAGICSTRUCTUREDOUBLEHP: StringPair = {
-    label: "Magic/Faith *1 armor/structure rating and Magic/Faith *2 hit points",
+    label:
+      "Magic/Faith *1 armor/structure rating and Magic/Faith *2 hit points",
     drain: 3,
   };
   static readonly DOUBLEMAGICESTRUCTUREHP: StringPair = {
@@ -560,12 +565,27 @@ export class SpellDamageType {
 }
 
 export class SpellDamage {
-  static readonly NONE: StringPair = { label: "", drain: 0, };
-  static readonly ONEPRMAGIC: StringPair = { label: "1 PR Magic/Faith", drain: 3, };
-  static readonly TWOPRMAGIC: StringPair = { label: "2 PR Magic/Faith", drain: 4, };
-  static readonly THREEPRMAGIC: StringPair = { label: "3 PR Magic/Faith", drain: 6, };
-  static readonly FOURPRMAGIC: StringPair = { label: "4 PR Magic/Faith", drain: 9, };
-  static readonly FIVEPRMAGIC: StringPair = { label: "5 PR Magic/Faith", drain: 12, };
+  static readonly NONE: StringPair = { label: "", drain: 0 };
+  static readonly ONEPRMAGIC: StringPair = {
+    label: "1 PR Magic/Faith",
+    drain: 3,
+  };
+  static readonly TWOPRMAGIC: StringPair = {
+    label: "2 PR Magic/Faith",
+    drain: 4,
+  };
+  static readonly THREEPRMAGIC: StringPair = {
+    label: "3 PR Magic/Faith",
+    drain: 6,
+  };
+  static readonly FOURPRMAGIC: StringPair = {
+    label: "4 PR Magic/Faith",
+    drain: 9,
+  };
+  static readonly FIVEPRMAGIC: StringPair = {
+    label: "5 PR Magic/Faith",
+    drain: 12,
+  };
   static readonly ONE: StringPair = { label: "1", drain: 1 };
   static readonly TWO: StringPair = { label: "2", drain: 2 };
   static readonly THREE: StringPair = { label: "3", drain: 3 };
@@ -598,10 +618,19 @@ export class SpellDamage {
   static readonly SIXDFOUR: StringPair = { label: "6d4", drain: 7 };
   static readonly MYSTB: StringPair = { label: "MystB", drain: 1 };
   static readonly MYSTBDOUBLE: StringPair = { label: "MystB *2", drain: 2 };
-  static readonly QUARTERMAGIC: StringPair = { label: "1/4 Magic/Faith", drain: 2, };
-  static readonly HALFMAGIC: StringPair = { label: "1/2 Magic/Faith", drain: 3, };
+  static readonly QUARTERMAGIC: StringPair = {
+    label: "1/4 Magic/Faith",
+    drain: 2,
+  };
+  static readonly HALFMAGIC: StringPair = {
+    label: "1/2 Magic/Faith",
+    drain: 3,
+  };
   static readonly MAGIC: StringPair = { label: "Magic/Faith", drain: 4 };
-  static readonly COLLETERAL: StringPair = { label: "Collateral damage based on environment", drain: 1, };
+  static readonly COLLETERAL: StringPair = {
+    label: "Collateral damage based on environment",
+    drain: 1,
+  };
 
   private constructor(
     private readonly label: string,
@@ -752,11 +781,20 @@ export class SpellAoeRadius {
   static readonly ONEMETER: StringPair = { label: "1 Meter", drain: -1 };
   static readonly TWOMETERS: StringPair = { label: "2 Meters", drain: 0 };
   static readonly THREEMETERS: StringPair = { label: "3 Meters", drain: 1 };
-  static readonly HALFMAGMETERS: StringPair = { label: "1/2 Magic/Faith Meters", drain: 2 };
-  static readonly MAGMETERS: StringPair = { label: "Magic/Faith *1 Meters", drain: 4 };
-  static readonly MAGTIMESTWOMETERS: StringPair = { label: "Magic/Faith *2 Meters", drain: 6 };
+  static readonly HALFMAGMETERS: StringPair = {
+    label: "1/2 Magic/Faith Meters",
+    drain: 2,
+  };
+  static readonly MAGMETERS: StringPair = {
+    label: "Magic/Faith *1 Meters",
+    drain: 4,
+  };
+  static readonly MAGTIMESTWOMETERS: StringPair = {
+    label: "Magic/Faith *2 Meters",
+    drain: 6,
+  };
   static readonly VARIABLE: StringPair = { label: "Variable", drain: 1 };
-  
+
   private constructor(
     private readonly label: string,
     public readonly drain: number
@@ -1021,15 +1059,27 @@ export class SpellCastTime {
     label: "",
     drain: 0,
   };
-  static readonly SIXMINUSMYSTBROUNDS: StringPair = { label: "6 - Mystb Rounds", drain: 2, };
+  static readonly SIXMINUSMYSTBROUNDS: StringPair = {
+    label: "6 - Mystb Rounds",
+    drain: 2,
+  };
   static readonly NINETHREE: StringPair = { label: "9 + 3", drain: -5 };
-  static readonly NINETHREECHANNEL: StringPair = { label: "9 + 3 (Channel)", drain: -3, };
+  static readonly NINETHREECHANNEL: StringPair = {
+    label: "9 + 3 (Channel)",
+    drain: -3,
+  };
   static readonly SEVENTHREE: StringPair = { label: "7 + 3", drain: -1 };
   static readonly FIVETHREE: StringPair = { label: "5 + 3", drain: 1 };
   static readonly FIVE: StringPair = { label: "5", drain: 4 };
-  static readonly DRAINCHENNEL: StringPair = { label: "Drain (Channel)", drain: -3, };
+  static readonly DRAINCHENNEL: StringPair = {
+    label: "Drain (Channel)",
+    drain: -3,
+  };
   static readonly DRAINTHREE: StringPair = { label: "Drain + 3", drain: -2 };
-  static readonly MAGIFAITHHOURS: StringPair = { label: "24 / Magic/Faith Hours", drain: 0, };
+  static readonly MAGIFAITHHOURS: StringPair = {
+    label: "24 / Magic/Faith Hours",
+    drain: 0,
+  };
 
   private constructor(
     private readonly label: string,
@@ -1321,12 +1371,15 @@ export class SpellTarget {
     drain: 0,
   };
   static readonly SINGLE: StringPair = { label: "Single Target", drain: 1 };
-  static readonly DAOE: StringPair = { label: "Diminishing Area Of Effect ", drain: 1, };
-  static readonly MULTI: StringPair = { label: "Multiple Targets", drain: 4, };
-  static readonly AOE: StringPair = { label: "Area Of Effect", drain: 2, };
-  static readonly CASTER: StringPair = { label: "Caster", drain: 3, };
-  static readonly TARGET: StringPair = { label: "Caster Or Target", drain: 3, };
-  static readonly LINE: StringPair = { label: "Straight Line", drain: 2, };
+  static readonly DAOE: StringPair = {
+    label: "Diminishing Area Of Effect",
+    drain: 1,
+  };
+  static readonly MULTI: StringPair = { label: "Multiple Targets", drain: 4 };
+  static readonly AOE: StringPair = { label: "Area Of Effect", drain: 2 };
+  static readonly CASTER: StringPair = { label: "Caster", drain: 3 };
+  static readonly TARGET: StringPair = { label: "Caster Or Target", drain: 3 };
+  static readonly LINE: StringPair = { label: "Straight Line", drain: 2 };
 
   private constructor(
     private readonly label: string,
@@ -1372,12 +1425,27 @@ export class SpellDuration {
     label: "",
     drain: 0,
   };
-  static readonly CONCENTRATION: StringPair = { label: "concentration", drain: 0, };
-  static readonly INSTANTANEOUS: StringPair = { label: "instantaneous", drain: 1, };
+  static readonly CONCENTRATION: StringPair = {
+    label: "concentration",
+    drain: 0,
+  };
+  static readonly INSTANTANEOUS: StringPair = {
+    label: "instantaneous",
+    drain: 1,
+  };
   static readonly PERMANENT: StringPair = { label: "permanent", drain: 1 };
-  static readonly FIXEDTICKS: StringPair = { label: "fixed # of ticks", drain: 1, };
-  static readonly FIXEDROUNDS: StringPair = { label: "fixed # of rounds", drain: 2, };
-  static readonly FIXEDHOURS: StringPair = { label: "fixed # of hours", drain: 2, };
+  static readonly FIXEDTICKS: StringPair = {
+    label: "fixed # of ticks",
+    drain: 1,
+  };
+  static readonly FIXEDROUNDS: StringPair = {
+    label: "fixed # of rounds",
+    drain: 2,
+  };
+  static readonly FIXEDHOURS: StringPair = {
+    label: "fixed # of hours",
+    drain: 2,
+  };
   static readonly CHANNEL: StringPair = { label: "channel", drain: -1 };
 
   private constructor(
@@ -1424,9 +1492,15 @@ export class SpellSchool {
     label: "",
     drain: 0,
   };
-  static readonly TRANSMUTATION: StringPair = { label: "Transmutation", drain: 1, };
+  static readonly TRANSMUTATION: StringPair = {
+    label: "Transmutation",
+    drain: 1,
+  };
   static readonly EVOCATION: StringPair = { label: "Evocation", drain: 0 };
-  static readonly FORTIFICATION: StringPair = { label: "Fortification", drain: 1, };
+  static readonly FORTIFICATION: StringPair = {
+    label: "Fortification",
+    drain: 1,
+  };
   static readonly HEX: StringPair = { label: "Hex", drain: 1 };
   static readonly ILLUSION: StringPair = { label: "Illusion", drain: 1 };
   static readonly CONJURATION: StringPair = { label: "Conjuration", drain: 2 };
