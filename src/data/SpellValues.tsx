@@ -959,6 +959,16 @@ export class SpellProjectileType {
       SpellProjectileType.LASSO.label,
     ];
   };
+  static getAllSingle = (): string[] => {
+    return [
+      SpellProjectileType.NONE.label,
+      SpellProjectileType.MISSILE.label,
+      SpellProjectileType.BOLT.label,
+      SpellProjectileType.RAY.label,
+      SpellProjectileType.SPRAY.label,
+      SpellProjectileType.LASSO.label,
+    ];
+  };
 }
 
 export class SpellTargetingType {

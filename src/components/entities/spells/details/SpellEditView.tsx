@@ -191,68 +191,76 @@ const SpellEditView = ({ spell, onEdit }: $Props) => {
             );
           }}
         />
-        <SelectField
-          value={spell.projectileType.label}
-          options={SpellProjectileType.getAll()}
-          label={"Projectile Type"}
-          onChange={(value: string) => {
-            onEdit(
-              Spell.calcDrain({
-                ...spell,
-                projectileType: SpellProjectileType.find(value),
-              })
-            );
-          }}
-        />
-        {spell.projectileType.label !== SpellProjectileType.SPRAY.label && (
+        {spell.range.label === SpellRange.LOSAURA.label && (
           <SelectField
-            value={spell.projectileNumber.label}
-            options={SpellProjectileNumber.getAll()}
-            label={"Projectile Number"}
+            value={spell.projectileType.label}
+            options={
+              spell.spellTarget.label === SpellTarget.AOE.label
+                ? SpellProjectileType.getAll()
+                : SpellProjectileType.getAllSingle()
+            }
+            label={"Projectile Type"}
             onChange={(value: string) => {
               onEdit(
                 Spell.calcDrain({
                   ...spell,
-                  projectileNumber: SpellProjectileNumber.find(value),
+                  projectileType: SpellProjectileType.find(value),
                 })
               );
             }}
           />
         )}
-        {(spell.range.label !== SpellRange.SONIC.label ||
-          spell.range.label !== SpellRange.TOUCH.label ||
-          spell.range.label !== SpellRange.RADIUS90.label ||
-          spell.range.label !== SpellRange.RADIUS360.label) && (
-          <SelectField
-            value={spell.losRange.label}
-            options={SpellLosRange.getAll()}
-            label={"Line of Sight Range"}
-            onChange={(value: string) => {
-              onEdit(
-                Spell.calcDrain({
-                  ...spell,
-                  losRange: SpellLosRange.find(value),
-                })
-              );
-            }}
-          />
-        )}
-        {(spell.range.label !== SpellRange.TOUCH.label ||
-          spell.range.label !== SpellRange.LOSMANIPULATE.label) && (
-          <SelectField
-            value={spell.aoeRadius.label}
-            options={SpellAoeRadius.getAll()}
-            label={"Area of Effect Radius"}
-            onChange={(value: string) => {
-              onEdit(
-                Spell.calcDrain({
-                  ...spell,
-                  aoeRadius: SpellAoeRadius.find(value),
-                })
-              );
-            }}
-          />
-        )}
+        {spell.range.label === SpellRange.LOSAURA.label &&
+          spell.projectileType.label !== SpellProjectileType.SPRAY.label && (
+            <SelectField
+              value={spell.projectileNumber.label}
+              options={SpellProjectileNumber.getAll()}
+              label={"Projectile Number"}
+              onChange={(value: string) => {
+                onEdit(
+                  Spell.calcDrain({
+                    ...spell,
+                    projectileNumber: SpellProjectileNumber.find(value),
+                  })
+                );
+              }}
+            />
+          )}
+        {spell.range.label !== SpellRange.SONIC.label &&
+          spell.range.label !== SpellRange.TOUCH.label &&
+          spell.range.label !== SpellRange.RADIUS90.label &&
+          spell.range.label !== SpellRange.RADIUS360.label && (
+            <SelectField
+              value={spell.losRange.label}
+              options={SpellLosRange.getAll()}
+              label={"Line of Sight Range"}
+              onChange={(value: string) => {
+                onEdit(
+                  Spell.calcDrain({
+                    ...spell,
+                    losRange: SpellLosRange.find(value),
+                  })
+                );
+              }}
+            />
+          )}
+        {spell.spellTarget.label === SpellTarget.AOE.label &&
+          spell.range.label !== SpellRange.TOUCH.label &&
+          spell.range.label !== SpellRange.LOSMANIPULATE.label && (
+            <SelectField
+              value={spell.aoeRadius.label}
+              options={SpellAoeRadius.getAll()}
+              label={"Area of Effect Radius"}
+              onChange={(value: string) => {
+                onEdit(
+                  Spell.calcDrain({
+                    ...spell,
+                    aoeRadius: SpellAoeRadius.find(value),
+                  })
+                );
+              }}
+            />
+          )}
         <Separator />
         <SelectField
           value={spell.damage[0]?.label}
