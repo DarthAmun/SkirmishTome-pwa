@@ -131,6 +131,7 @@ export default class Spell implements IEntity {
 
   static calcDrain = (spell: Spell): Spell => {
     let drain = 0;
+    drain += spell.castTime ? spell.castTime.drain : 0;
     drain += spell.drainType ? spell.drainType.drain : 0;
     drain += spell.school ? spell.school.drain : 0;
     drain += spell.duration ? spell.duration.drain : 0;
