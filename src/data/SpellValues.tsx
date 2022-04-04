@@ -1012,7 +1012,7 @@ export class SpellCastTime {
     drain: 0,
   };
   static readonly SIXMINUSMYSTBROUNDS: StringPair = { label: "6 - Mystb Rounds", drain: 2, };
-  static readonly NINETHREE: StringPair = { label: "9 + 3", drain: -4 };
+  static readonly NINETHREE: StringPair = { label: "9 + 3", drain: -5 };
   static readonly NINETHREECHANNEL: StringPair = { label: "9 + 3 (Channel)", drain: -3, };
   static readonly SEVENTHREE: StringPair = { label: "7 + 3", drain: -1 };
   static readonly FIVETHREE: StringPair = { label: "5 + 3", drain: 1 };
