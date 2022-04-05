@@ -3,7 +3,11 @@ import { useHistory } from "react-router";
 import styled from "styled-components";
 
 import IEntity from "../../../data/IEntity";
-import { remove, updateWithCallback, createNewWithId } from "../../../services/DatabaseService";
+import {
+  remove,
+  updateWithCallback,
+  createNewWithId,
+} from "../../../services/DatabaseService";
 
 import {
   faArrowLeft,
@@ -43,6 +47,7 @@ const EntityDetail = ({ entity, tableName, isNew, view }: $Props) => {
   const [showAlert, setAlert] = useState<boolean>(false);
   const [message, setMessage] = useState<string>("");
   const [unsavedChanges, setUnsavedChanges] = useState<boolean>(false);
+  const [canBeSaved, setCanBeSaved] = useState<boolean>(true);
   let history = useHistory();
 
   const deleteEntity = (entityId: number | undefined) => {
@@ -57,26 +62,37 @@ const EntityDetail = ({ entity, tableName, isNew, view }: $Props) => {
   }, [entityObj, entity]);
 
   const updateEntity = (entityObj: IEntity, msg: string) => {
-    updateWithCallback(tableName, entityObj, (result) => {
-      if (result > 0) {
-        setUnsavedChanges(false);
-        setMessage(msg);
-        setAlert(true);
-      } else {
-        setMessage("Something went wrong!");
-        setAlert(true);
-      }
+    if (canBeSaved) {
+      updateWithCallback(tableName, entityObj, (result) => {
+        if (result > 0) {
+          setUnsavedChanges(false);
+          setMessage(msg);
+          setAlert(true);
+        } else {
+          setMessage("Something went wrong!");
+          setAlert(true);
+        }
+        setTimeout(() => {
+          setAlert(false);
+        }, 3000);
+      });
+    } else {
+      setMessage("Please fill out all required fields.");
+      setAlert(true);
       setTimeout(() => {
         setAlert(false);
       }, 3000);
-    });
+    }
   };
 
   const duplicateEntity = (obj: IEntity) => {
     let newObj = { ...obj };
     delete newObj.id;
     createNewWithId(tableName, newObj, (id) => {
-      editAndSaveEntity({ ...entity, name: entity.name + " [Clone]" }, "Cloning successful!");
+      editAndSaveEntity(
+        { ...entity, name: entity.name + " [Clone]" },
+        "Cloning successful!"
+      );
     });
   };
 
@@ -128,9 +144,16 @@ const EntityDetail = ({ entity, tableName, isNew, view }: $Props) => {
             <IconButton
               onClick={() => updateEntity(entityObj, "Saved successful!")}
               icon={faSave}
+              disabled={!canBeSaved}
             />
-            <IconButton onClick={() => duplicateEntity(entityObj)} icon={faClone} />
-            <IconButton onClick={() => deleteEntity(entityObj.id)} icon={faTrash} />
+            <IconButton
+              onClick={() => duplicateEntity(entityObj)}
+              icon={faClone}
+            />
+            <IconButton
+              onClick={() => deleteEntity(entityObj.id)}
+              icon={faTrash}
+            />
             {message && showAlert && <Message>{message}</Message>}
           </>
         )}
@@ -138,11 +161,13 @@ const EntityDetail = ({ entity, tableName, isNew, view }: $Props) => {
       {editMode
         ? React.createElement(views[view + "EditView"], {
             [view.toLocaleLowerCase()]: entityObj,
+            canBeSaved: (val: boolean) => setCanBeSaved(val),
             onEdit: (value: any) => editEntity(value),
           })
         : React.createElement(views[view + "View"], {
             [view.toLocaleLowerCase()]: entityObj,
-            onEdit: (value: any) => editAndSaveEntity(value, "Saved successful!"),
+            onEdit: (value: any) =>
+              editAndSaveEntity(value, "Saved successful!"),
           })}
     </>
   );

@@ -52,6 +52,7 @@ const TalentEditView = ({ talent, onEdit }: $Props) => {
             TalentCategory.social,
           ]}
           label={"Category"}
+          onClear={() => onEdit({ ...talent, category: "" })}
           onChange={(category: string) =>
             onEdit({ ...talent, category: category })
           }

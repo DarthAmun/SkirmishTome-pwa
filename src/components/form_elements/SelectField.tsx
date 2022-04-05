@@ -15,13 +15,16 @@ interface $Props {
   icon?: IconDefinition;
   transform?: string | Transform;
   onChange: (value: string) => void;
+  onClear: () => void;
 }
 
-const SelectField = ({ value, options, label, icon, transform, onChange }: $Props) => {
+const SelectField = ({ value, options, label, icon, transform, onChange, onClear }: $Props) => {
   const [opts, setOptions] = useState<{ value: string; label: string }[]>([]);
   const handleChange = (option: { value: string; label: string } | null) => {
     if (option !== null && option !== undefined) {
       onChange(option.value);
+    } else {
+      onClear();
     }
   };
 
@@ -44,6 +47,7 @@ const SelectField = ({ value, options, label, icon, transform, onChange }: $Prop
           classNamePrefix="react-select"
           options={opts}
           onChange={(options: { value: string; label: string }) => handleChange(options)}
+          onC
         />
       )}
     </Field>

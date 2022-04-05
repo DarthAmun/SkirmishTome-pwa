@@ -1,6 +1,6 @@
 {
   "name": "skirmishtome",
-  "version": "0.2.10",
+  "version": "0.3.1",
   "private": true,
   "homepage": "https://darthamun.github.io/SkirmishTome-pwa/",
   "devDependencies": {
