@@ -40,7 +40,7 @@ export class SpellPureDamage {
   static readonly FIRE: StringPair = { label: "Fire", drain: 0 };
   static readonly LIGHTNING: StringPair = { label: "Lightning", drain: 0 };
   static readonly RADIANT: StringPair = { label: "Radiant", drain: 0 };
-  static readonly ARCANE: StringPair = { label: "Arcane", drain: 1 };
+  static readonly ARCANE: StringPair = { label: "Arcane", drain: 0 };
   static readonly POISON: StringPair = { label: "Poison", drain: 0 };
 
   private constructor(
