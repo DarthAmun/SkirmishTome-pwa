@@ -30,6 +30,8 @@ import RaceView from "../../entities/races/details/RaceView";
 import RaceEditView from "../../entities/races/details/RaceEditView";
 import SpellView from "../../entities/spells/details/SpellView";
 import SpellEditView from "../../entities/spells/details/SpellEditView";
+import PowerEditView from "../../entities/power/details/PowerEditView";
+import PowerView from "../../entities/power/details/PowerView";
 
 interface $Props {
   entity: IEntity;
@@ -107,6 +109,8 @@ const EntityDetail = ({ entity, tableName, isNew, view }: $Props) => {
   const views: viewOptions = {
     TalentView: TalentView,
     TalentEditView: TalentEditView,
+    PowerView: PowerView,
+    PowerEditView: PowerEditView,
     SpellView: SpellView,
     SpellEditView: SpellEditView,
     RaceView: RaceView,

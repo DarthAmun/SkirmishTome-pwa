@@ -82,7 +82,6 @@ const Prop = styled.div`
   overflow: hidden;
 
   &:nth-child(odd) {
-  margin: 0 0 5px 0px;
+    margin: 0 0 5px 0px;
   }
-}
 `;

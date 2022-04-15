@@ -17,6 +17,8 @@ import RaceSearchBar from "../entities/races/RaceSearchBar";
 import RaceTile from "../entities/races/RaceTile";
 import SpellTile from "../entities/spells/SpellTile";
 import SpellSearchBar from "../entities/spells/SpellSearchBar";
+import PowerSearchBar from "../entities/power/PowerSearchBar";
+import PowerTile from "../entities/power/PowerTile";
 
 const EntityOverview = ({ match }: RouteComponentProps) => {
   const rawFilters = useQuery().get("filter");
@@ -90,6 +92,7 @@ const EntityOverview = ({ match }: RouteComponentProps) => {
     talent: TalentSearchBar,
     spell: SpellSearchBar,
     race: RaceSearchBar,
+    power: PowerSearchBar,
     randomTable: RandomTableSearchBar,
   };
 
@@ -100,6 +103,7 @@ const EntityOverview = ({ match }: RouteComponentProps) => {
     talent: TalentTile,
     spell: SpellTile,
     race: RaceTile,
+    power: PowerTile,
     randomTable: RandomTableTile,
   };
 

@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCog, faChartPie, faHome, faTable, faMeteor } from "@fortawesome/free-solid-svg-icons";
 
 import { RightTooltip } from "../SearchbarStyle";
-import { GiSwordsPower, GiWomanElfFace } from "react-icons/gi";
+import { GiAura, GiSwordsPower, GiWomanElfFace } from "react-icons/gi";
 
 interface $Props {
   open: boolean;
@@ -52,6 +52,13 @@ const NavMenu = ({ open }: $Props) => {
           >
             <GiSwordsPower />
             <RightTooltip>Talents</RightTooltip>
+          </Link>
+          <Link
+            to="/power-overview"
+            className={location.pathname === "/power-overview" ? "menuItemActiv" : ""}
+          >
+            <GiAura />
+            <RightTooltip>Power</RightTooltip>
           </Link>
           <Link
             to="/race-overview"

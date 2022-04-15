@@ -1,49 +1,49 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import Power from "../../../data/Power";
 
-import Talent from "../../../data/Talent";
 import SmallFormatedText from "../../general_elements/SmallFormatedText";
 
 interface $Props {
-  talent: Talent;
+  power: Power;
 }
 
-const TalentTile = ({ talent }: $Props) => {
+const PowerTile = ({ power }: $Props) => {
   return (
-    <Tile to={"/talent-detail/id/" + talent.id} $isflaw={talent.isFlaw}>
-      <Cost>
-        <b>{talent.cost}</b>
-      </Cost>
+    <Tile to={"/power-detail/id/" + power.id}>
+      <Flag>
+        <b>{power.cost}</b>
+      </Flag>
+      <Flag>
+        <b>{power.isAdept ? "A" : ""}</b>
+      </Flag>
 
       <Name>
-        <b>{talent.name}</b>
+        <b>{power.name}</b>
       </Name>
 
       <PropWrapper>
-        <Prop>{talent.type ? talent.stress : "Passive"}</Prop>
-        <SmallFormatedText text={talent.prerequisite} />
+        <Prop>{power.path}</Prop>
+        <Prop>{power.type ? "Active" : "Passive"}</Prop>
+        {power.type && <Prop>{power.ticks}</Prop>}
+        <SmallFormatedText text={power.prerequisite} />
       </PropWrapper>
     </Tile>
   );
 };
 
-export default TalentTile;
+export default PowerTile;
 
 type type = {
   $isflaw: boolean;
 };
 
-const Tile = styled(Link)<type>`
+const Tile = styled(Link)`
   flex: 1 1 15em;
   color: ${({ theme }) => theme.tile.color};
-  ${(props) => {
-    if (props.$isflaw) {
-      return `background-color: ${props.theme.input.backgroundColor};`;
-    } else {
-      return `background-color: ${props.theme.tile.backgroundColor};`;
-    }
-  }}
+  background-color: ${({ theme }) => theme.tile.backgroundColor};
+
   margin: 0.5em;
   border-radius: 10px;
   box-shadow: ${({ theme }) => theme.tile.boxShadow};
@@ -61,7 +61,7 @@ const Tile = styled(Link)<type>`
   );
 `;
 
-const Cost = styled.div`
+const Flag = styled.div`
   height: auto;
   float: left;
   padding: 10px;

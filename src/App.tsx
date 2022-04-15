@@ -30,7 +30,10 @@ const App = () => {
               <Route path="/race-overview" component={EntityOverview}></Route>
               <Route path="/talent-detail/name/:name" component={ToEntity}></Route>
               <Route path="/talent-detail/id/:id" component={ToEntity}></Route>
-              <Route path="/talent-overview" component={EntityOverview}></Route>
+              <Route path="/power-overview" component={EntityOverview}></Route>
+              <Route path="/power-detail/name/:name" component={ToEntity}></Route>
+              <Route path="/power-detail/id/:id" component={ToEntity}></Route>
+              <Route path="/power-overview" component={EntityOverview}></Route>
               <Route path="/randomTable-detail/name/:name" component={ToEntity}></Route>
               <Route path="/randomTable-detail/id/:id" component={ToEntity}></Route>
               <Route path="/randomTable-overview" component={EntityOverview}></Route>
