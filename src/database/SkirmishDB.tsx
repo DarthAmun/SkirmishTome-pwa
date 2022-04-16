@@ -2,6 +2,7 @@ import Dexie from "dexie";
 import Power from "../data/Power";
 import Race from "../data/Race";
 import RandomTable from "../data/RandomTable";
+import Skill from "../data/Skill";
 import Spell from "../data/Spell";
 import Talent from "../data/Talent";
 
@@ -11,6 +12,7 @@ export class SkirmishDB extends Dexie {
   races: Dexie.Table<Race, number>;
   spells: Dexie.Table<Spell, number>;
   powers: Dexie.Table<Power, number>;
+  skills: Dexie.Table<Skill, number>;
 
   constructor() {
     super("SkirmishTomeDB");
@@ -48,11 +50,24 @@ export class SkirmishDB extends Dexie {
       powers:
         "++id, name, source, isAdept, path, cost, prerequisite, effect, type, stress, ticks",
     });
+    this.version(6).stores({
+      talents:
+        "++id, name, isFlaw, cost, prerequisite, effect, type, stress, ticks",
+      races: "++id, name, hp, abilityModifier, size, stamina, talents, flaws",
+      randomTables: "++id, name, rows, header",
+      spells:
+        "++id, name, source, castTime, rite, duration, durationText, range, school, effect, damage, mastery, resist, drain, masteryDrain",
+      powers:
+        "++id, name, source, isAdept, path, cost, prerequisite, effect, type, stress, ticks",
+      skills:
+        "++id, name, source, details, die, bonus, mod, disadvantage, advantage",
+    });
 
     this.talents = this.table("talents");
     this.spells = this.table("spells");
     this.races = this.table("races");
     this.powers = this.table("powers");
+    this.skills = this.table("skills");
     this.randomTables = this.table("randomTables");
   }
 }

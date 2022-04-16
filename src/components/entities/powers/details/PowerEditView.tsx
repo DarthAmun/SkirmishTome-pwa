@@ -7,7 +7,6 @@ import TextField from "../../../form_elements/TextField";
 import CheckField from "../../../form_elements/CheckField";
 
 import { faBookOpen } from "@fortawesome/free-solid-svg-icons";
-import SelectField from "../../../form_elements/SelectField";
 import Power from "../../../../data/Power";
 
 interface $Props {

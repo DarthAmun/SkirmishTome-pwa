@@ -22,7 +22,7 @@ export default Navigation;
 const Nav = styled.div`
   max-width: 100px;
   height: auto;
-  background-color: ${({ theme }) => theme.main.backgroundColor}
+  background-color: ${({ theme }) => theme.main.backgroundColor};
   display: flex;
   flex-wrap: wrap;
 `;

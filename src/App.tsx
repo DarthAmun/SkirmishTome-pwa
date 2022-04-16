@@ -22,6 +22,9 @@ const App = () => {
             <Switch>
               <Route exact path="/" component={Home}></Route>
               <Route exact path="/home" component={Home}></Route>
+              <Route path="/skill-detail/name/:name" component={ToEntity}></Route>
+              <Route path="/skill-detail/id/:id" component={ToEntity}></Route>
+              <Route path="/skill-overview" component={EntityOverview}></Route>
               <Route path="/spell-detail/name/:name" component={ToEntity}></Route>
               <Route path="/spell-detail/id/:id" component={ToEntity}></Route>
               <Route path="/spell-overview" component={EntityOverview}></Route>

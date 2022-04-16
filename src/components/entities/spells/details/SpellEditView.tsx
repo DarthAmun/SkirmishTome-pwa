@@ -57,7 +57,7 @@ const SpellEditView = ({ spell, canBeSaved, onEdit }: $Props) => {
     } else {
       canBeSaved(false);
     }
-  }, [spell]);
+  }, [spell, canBeSaved]);
 
   return (
     <CenterWrapper>
