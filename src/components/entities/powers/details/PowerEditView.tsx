@@ -37,7 +37,7 @@ const PowerEditView = ({ power, onEdit }: $Props) => {
             onChange={(type) => onEdit({ ...power, type: type })}
           />
           {power.type && (
-            <NumberField
+            <StringField
               value={power.ticks}
               label="Ticks"
               onChange={(cost) => onEdit({ ...power, ticks: cost })}

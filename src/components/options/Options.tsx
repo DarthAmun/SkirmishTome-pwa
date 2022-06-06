@@ -21,7 +21,7 @@ import ImportField, { ImportModus } from "../form_elements/ImportField";
 import DiscordOptions from "./DiscordOptions";
 import { useCSVDownloader, usePapaParse } from "react-papaparse";
 import FileField from "../form_elements/FileField";
-import { scanImportedSpellCsv } from "../../services/CsvService";
+import { scanImportedTalentCsv, scanImportedPowerCsv, scanImportedRaceCsv, scanImportedSpellCsv } from "../../services/CsvService";
 import Spell from "../../data/Spell";
 import Race from "../../data/Race";
 import SpellsOptions from "./SpellsOptions";
@@ -54,6 +54,69 @@ const Options = () => {
             const csv: Array<any> = results.data;
             console.log(csv);
             scanImportedSpellCsv(csv, file.name);
+            console.log("---------");
+          },
+        });
+      }
+    };
+    fileReader.readAsText(file);
+  };
+
+  const handlePowersCsvUpload = (files: any) => {
+    const file: File = files[0];
+    let fileReader = new FileReader();
+    fileReader.onloadend = function () {
+      const content = fileReader.result;
+      if (content !== null) {
+        readString(content.toString(), {
+          worker: true,
+          complete: (results) => {
+            console.log("Csv loaded from " + file.name);
+            const csv: Array<any> = results.data;
+            console.log(csv);
+            scanImportedPowerCsv(csv, file.name);
+            console.log("---------");
+          },
+        });
+      }
+    };
+    fileReader.readAsText(file);
+  };
+
+  const handleTalentsCsvUpload = (files: any) => {
+    const file: File = files[0];
+    let fileReader = new FileReader();
+    fileReader.onloadend = function () {
+      const content = fileReader.result;
+      if (content !== null) {
+        readString(content.toString(), {
+          worker: true,
+          complete: (results) => {
+            console.log("Csv loaded from " + file.name);
+            const csv: Array<any> = results.data;
+            console.log(csv);
+            scanImportedTalentCsv(csv, file.name);
+            console.log("---------");
+          },
+        });
+      }
+    };
+    fileReader.readAsText(file);
+  };
+
+  const handleRacesCsvUpload = (files: any) => {
+    const file: File = files[0];
+    let fileReader = new FileReader();
+    fileReader.onloadend = function () {
+      const content = fileReader.result;
+      if (content !== null) {
+        readString(content.toString(), {
+          worker: true,
+          complete: (results) => {
+            console.log("Csv loaded from " + file.name);
+            const csv: Array<any> = results.data;
+            console.log(csv);
+            scanImportedRaceCsv(csv, file.name);
             console.log("---------");
           },
         });
@@ -194,6 +257,36 @@ const Options = () => {
               accept={".csv"}
               icon={faFileImport}
               onChange={(file) => handleSpellCsvUpload(file)}
+            />
+          </OptionSection>
+          <OptionSection>
+            <SelectionTitle>Import Races CSV</SelectionTitle>
+            <FileField
+              label=""
+              isMulti={true}
+              accept={".csv"}
+              icon={faFileImport}
+              onChange={(file) => handleRacesCsvUpload(file)}
+            />
+          </OptionSection>
+          <OptionSection>
+            <SelectionTitle>Import Talents CSV</SelectionTitle>
+            <FileField
+              label=""
+              isMulti={true}
+              accept={".csv"}
+              icon={faFileImport}
+              onChange={(file) => handleTalentsCsvUpload(file)}
+            />
+          </OptionSection>
+          <OptionSection>
+            <SelectionTitle>Import Powers CSV</SelectionTitle>
+            <FileField
+              label=""
+              isMulti={true}
+              accept={".csv"}
+              icon={faFileImport}
+              onChange={(file) => handlePowersCsvUpload(file)}
             />
           </OptionSection>
         </OptionTab>

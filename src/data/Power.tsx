@@ -10,7 +10,7 @@ export default class Power implements IEntity {
   effect: string;
   type: boolean;
   stress: string;
-  ticks: number;
+  ticks: string;
 
   constructor(
     id?: number,
@@ -22,7 +22,7 @@ export default class Power implements IEntity {
     effect?: string,
     type?: boolean,
     stress?: string,
-    ticks?: number
+    ticks?: string
   ) {
     this.id = id;
     this.name = name || "";
@@ -33,7 +33,7 @@ export default class Power implements IEntity {
     this.effect = effect || "";
     this.type = type || false;
     this.stress = stress || "";
-    this.ticks = ticks || 0;
+    this.ticks = ticks || "";
   }
 
   static makeCsv = (power: Power): any[] => {
@@ -60,7 +60,7 @@ export function isPower(arg: any): arg is Power {
   const triggerFrequencyCheck =
     arg.triggerFrequency !== undefined &&
     typeof arg.triggerFrequency == "string";
-  const ticksCheck = arg.ticks !== undefined && typeof arg.ticks == "number";
+  const ticksCheck = arg.ticks !== undefined && typeof arg.ticks == "string";
 
   return (
     arg &&

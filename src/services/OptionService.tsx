@@ -198,9 +198,15 @@ export const exportAllFromTable = (tableName: string, filename: string) => {
 
 export const exportAll = async (filename: string) => {
   const spells = await reciveAllPromise("spells");
+  const powers = await reciveAllPromise("powers");
+  const talents = await reciveAllPromise("talents");
+  const races = await reciveAllPromise("races");
 
   let all: any = {
     spells: spells,
+    powers: powers,
+    talents: talents,
+    races: races,
   };
 
   let contentType = "application/json;charset=utf-8;";

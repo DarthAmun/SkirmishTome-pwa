@@ -31,6 +31,7 @@ const App = () => {
               <Route path="/race-detail/name/:name" component={ToEntity}></Route>
               <Route path="/race-detail/id/:id" component={ToEntity}></Route>
               <Route path="/race-overview" component={EntityOverview}></Route>
+              <Route path="/talent-overview" component={EntityOverview}></Route>
               <Route path="/talent-detail/name/:name" component={ToEntity}></Route>
               <Route path="/talent-detail/id/:id" component={ToEntity}></Route>
               <Route path="/power-overview" component={EntityOverview}></Route>
