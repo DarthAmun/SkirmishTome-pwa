@@ -34,6 +34,10 @@ import PowerEditView from "../../entities/powers/details/PowerEditView";
 import PowerView from "../../entities/powers/details/PowerView";
 import SkillView from "../../entities/skills/details/SkillView";
 import SkillEditView from "../../entities/skills/details/SkillEditView";
+import ItemView from "../../entities/items/details/ItemView";
+import ItemEditView from "../../entities/items/details/ItemEditView";
+import TraditionEditView from "../../entities/tradtitons/details/TradtitionEditView";
+import TraditionView from "../../entities/tradtitons/details/TradtitionView";
 
 interface $Props {
   entity: IEntity;
@@ -119,8 +123,12 @@ const EntityDetail = ({ entity, tableName, isNew, view }: $Props) => {
     SpellEditView: SpellEditView,
     RaceView: RaceView,
     RaceEditView: RaceEditView,
+    ItemView: ItemView,
+    ItemEditView: ItemEditView,
     RandomTableView: RandomTableView,
     RandomTableEditView: RandomTableEditView,
+    TraditionView: TraditionView,
+    TraditionEditView: TraditionEditView,
   };
 
   return (

@@ -38,6 +38,12 @@ const App = () => {
               <Route path="/power-detail/name/:name" component={ToEntity}></Route>
               <Route path="/power-detail/id/:id" component={ToEntity}></Route>
               <Route path="/power-overview" component={EntityOverview}></Route>
+              <Route path="/item-detail/name/:name" component={ToEntity}></Route>
+              <Route path="/item-detail/id/:id" component={ToEntity}></Route>
+              <Route path="/item-overview" component={EntityOverview}></Route>
+              <Route path="/tradition-detail/name/:name" component={ToEntity}></Route>
+              <Route path="/tradition-detail/id/:id" component={ToEntity}></Route>
+              <Route path="/tradition-overview" component={EntityOverview}></Route>
               <Route path="/randomTable-detail/name/:name" component={ToEntity}></Route>
               <Route path="/randomTable-detail/id/:id" component={ToEntity}></Route>
               <Route path="/randomTable-overview" component={EntityOverview}></Route>

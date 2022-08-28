@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCog, faChartPie, faHome, faTable, faMeteor } from "@fortawesome/free-solid-svg-icons";
 
 import { RightTooltip } from "../SearchbarStyle";
-import { GiAura, GiSkills, GiSwordsPower, GiWomanElfFace } from "react-icons/gi";
+import { GiAura, GiBackpack, GiInterstellarPath, GiSkills, GiSwordsPower, GiWomanElfFace } from "react-icons/gi";
 
 interface $Props {
   open: boolean;
@@ -73,6 +73,20 @@ const NavMenu = ({ open }: $Props) => {
           >
             <GiWomanElfFace />
             <RightTooltip>Races</RightTooltip>
+          </Link>
+          <Link
+            to="/item-overview"
+            className={location.pathname === "/item-overview" ? "menuItemActiv" : ""}
+          >
+            <GiBackpack />
+            <RightTooltip>Items</RightTooltip>
+          </Link>
+          <Link
+            to="/tradition-overview"
+            className={location.pathname === "/tradition-overview" ? "menuItemActiv" : ""}
+          >
+            <GiInterstellarPath />
+            <RightTooltip>Traditions</RightTooltip>
           </Link>
         </RightSide>
       </MiddleSide>

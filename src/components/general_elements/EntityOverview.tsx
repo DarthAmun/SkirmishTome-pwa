@@ -21,6 +21,10 @@ import PowerSearchBar from "../entities/powers/PowerSearchBar";
 import PowerTile from "../entities/powers/PowerTile";
 import SkillSearchBar from "../entities/skills/SkillSearchBar";
 import SkillTile from "../entities/skills/SkillTile";
+import ItemSearchBar from "../entities/items/ItemSearchBar";
+import ItemTile from "../entities/items/ItemTile";
+import TraditionSearchBar from "../entities/tradtitons/TradtitionSearchBar";
+import TraditionTile from "../entities/tradtitons/TradtitionTile";
 
 const EntityOverview = ({ match }: RouteComponentProps) => {
   const rawFilters = useQuery().get("filter");
@@ -97,6 +101,8 @@ const EntityOverview = ({ match }: RouteComponentProps) => {
     power: PowerSearchBar,
     skill: SkillSearchBar,
     randomTable: RandomTableSearchBar,
+    item: ItemSearchBar,
+    tradition: TraditionSearchBar
   };
 
   type tileOptions = {
@@ -109,6 +115,8 @@ const EntityOverview = ({ match }: RouteComponentProps) => {
     power: PowerTile,
     skill: SkillTile,
     randomTable: RandomTableTile,
+    item: ItemTile,
+    tradition: TraditionTile,
   };
 
   return (
