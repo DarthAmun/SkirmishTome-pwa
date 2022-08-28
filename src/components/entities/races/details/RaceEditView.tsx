@@ -1,13 +1,16 @@
 import React from "react";
 import styled from "styled-components";
-import Race from "../../../../data/Race";
+import Race, { RaceLimits } from "../../../../data/Race";
 
 import StringField from "../../../form_elements/StringField";
 import NumberField from "../../../form_elements/NumberField";
 import AutoStringField from "../../../form_elements/AutoStringField";
 import IconButton from "../../../form_elements/IconButton";
-import { faTrash, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faTrash, faPlus, faBookOpen } from "@fortawesome/free-solid-svg-icons";
 import TextButton from "../../../form_elements/TextButton";
+import SelectField from "../../../form_elements/SelectField";
+import { makeEnumSelectable } from "../../../../services/EnumService";
+import TextField from "../../../form_elements/TextField";
 
 interface $Props {
   race: Race;
@@ -63,6 +66,11 @@ const RaceEditView = ({ race, onEdit }: $Props) => {
           label="Stamina"
           onChange={(value) => onEdit({ ...race, stamina: value })}
         />
+        <NumberField
+          value={race.sprint}
+          label="Sprint"
+          onChange={(value) => onEdit({ ...race, sprint: value })}
+        />
         <StringField
           value={race.size}
           label="Size"
@@ -71,7 +79,24 @@ const RaceEditView = ({ race, onEdit }: $Props) => {
         <StringField
           value={race.abilityModifier}
           label="Ability Modifier"
-          onChange={(abilityModifier) => onEdit({ ...race, abilityModifier: abilityModifier })}
+          onChange={(abilityModifier) =>
+            onEdit({ ...race, abilityModifier: abilityModifier })
+          }
+        />
+        <SelectField
+          value={race.limit}
+          options={makeEnumSelectable(RaceLimits)}
+          label={"Limit"}
+          onClear={() => onEdit({ ...race, limit: RaceLimits.empty })}
+          onChange={(value: string) => {
+            onEdit({ ...race, limit: value });
+          }}
+        />
+        <TextField
+          value={race.description}
+          label="Effect"
+          icon={faBookOpen}
+          onChange={(description) => onEdit({ ...race, description: description })}
         />
         {race.talents.map((talent: string, index: number) => {
           return (
@@ -87,7 +112,11 @@ const RaceEditView = ({ race, onEdit }: $Props) => {
             </Container>
           );
         })}
-        <TextButton text={"Add new Talent"} icon={faPlus} onClick={() => addNewTalent()} />
+        <TextButton
+          text={"Add new Talent"}
+          icon={faPlus}
+          onClick={() => addNewTalent()}
+        />
 
         {race.flaws.map((flaw: string, index: number) => {
           return (
@@ -103,7 +132,11 @@ const RaceEditView = ({ race, onEdit }: $Props) => {
             </Container>
           );
         })}
-        <TextButton text={"Add new Flaw"} icon={faPlus} onClick={() => addNewFlaw()} />
+        <TextButton
+          text={"Add new Flaw"}
+          icon={faPlus}
+          onClick={() => addNewFlaw()}
+        />
       </View>
     </CenterWrapper>
   );

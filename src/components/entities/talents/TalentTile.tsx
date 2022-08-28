@@ -21,7 +21,7 @@ const TalentTile = ({ talent }: $Props) => {
       </Name>
 
       <PropWrapper>
-        <Prop>{talent.type ? talent.stress : "Passive"}</Prop>
+        <Prop>{talent.type}</Prop>
         <SmallFormatedText text={talent.prerequisite} />
       </PropWrapper>
     </Tile>

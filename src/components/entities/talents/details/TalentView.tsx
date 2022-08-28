@@ -38,16 +38,6 @@ const TalentView = ({ talent }: $Props) => {
                 inline: true,
               },
               {
-                name: "Ticks",
-                value: talent.ticks ? talent.ticks : "-",
-                inline: true,
-              },
-              {
-                name: "Stress",
-                value: talent.type ? talent.stress : "passive",
-                inline: true,
-              },
-              {
                 name: "Prerequisite",
                 value: formatDiscordText(talent.prerequisite),
               },
@@ -89,27 +79,17 @@ const TalentView = ({ talent }: $Props) => {
           <FormatedText text={talent.prerequisite} />
         </Text>
         <Text>
+          <PropTitle>Type: </PropTitle>
+          <FormatedText text={talent.type} />
+        </Text>
+        <Text>
           <PropTitle>Effect: </PropTitle>
           <FormatedText text={talent.effect} />
         </Text>
         {talent.isFlaw && talent.type && (
-          <>
-            <Text>
-              <PropTitle>Trigger: </PropTitle>
-              <FormatedText text={talent.trigger} />
-            </Text>
-            <PropWrapper>
-              <PropTitle>Trigger Frequency: </PropTitle>
-              <Prop>{talent.triggerFrequency}</Prop>
-            </PropWrapper>
-          </>
-        )}
-        {!talent.isFlaw && talent.type && (
           <PropWrapper>
-            <Prop>
-              <PropTitle>Swtress: </PropTitle>
-              {talent.stress}
-            </Prop>
+            <PropTitle>Trigger Frequency: </PropTitle>
+            <Prop>{talent.triggerFrequency}</Prop>
           </PropWrapper>
         )}
         <PropWrapper>

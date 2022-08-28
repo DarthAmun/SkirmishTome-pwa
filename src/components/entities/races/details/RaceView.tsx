@@ -11,6 +11,7 @@ import { faDiscord } from "@fortawesome/free-brands-svg-icons";
 import { useHistory } from "react-router";
 import Talent from "../../../../data/Talent";
 import { reciveAll } from "../../../../services/DatabaseService";
+import FormatedText from "../../../general_elements/FormatedText";
 
 interface $Props {
   race: Race;
@@ -78,9 +79,21 @@ const RaceView = ({ race }: $Props) => {
             {race.size}
           </Prop>
           <Prop>
+            <PropTitle>Sprint: </PropTitle>
+            {race.sprint}
+          </Prop>
+          <Prop>
             <PropTitle>Ability Modifier: </PropTitle>
             {race.abilityModifier}
           </Prop>
+          <Prop>
+            <PropTitle>Limits: </PropTitle>
+            {race.limit}
+          </Prop>
+        <Text>
+          <PropTitle>Stress: </PropTitle>
+          <FormatedText text={race.description} />
+        </Text>
         </PropWrapper>
 
         <PropWrapper>
@@ -224,4 +237,23 @@ const TalentLink = styled.span`
   margin: 5px;
   padding: 5px;
   cursor: pointer;
+`;
+
+const Text = styled.div`
+  height: auto;
+  width: calc(100% - 30px);
+  margin: 10px 5px 5px 5px;
+  float: left;
+  line-height: 18px;
+  padding: 10px;
+  --notchSize: 15px;
+  clip-path: polygon(
+    0% var(--notchSize),
+    var(--notchSize) 0%,
+    100% 0%,
+    100% calc(100% - var(--notchSize)),
+    calc(100% - var(--notchSize)) 100%,
+    0 100%
+  );
+  background-color: ${({ theme }) => theme.tile.backgroundColor};
 `;

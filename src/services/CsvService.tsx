@@ -84,6 +84,7 @@ export const scanImportedRaceCsv = (csv: Array<any>, filename: string) => {
   csv.slice(1).forEach((row: Array<string>) => {
     if (row.length > 1) {
       const talents = row[6].split(",").map((t) => t.trim());
+      const flaws = row[7].split(",").map((t) => t.trim());
       let newRace = new Race(
         0,
         row[0],
@@ -91,7 +92,10 @@ export const scanImportedRaceCsv = (csv: Array<any>, filename: string) => {
         row[4],
         row[3],
         +row[2],
-        talents
+        talents,
+        flaws,
+        row[5],
+        +row[8]
       );
       listOfRaces.push(newRace);
     }
@@ -108,16 +112,13 @@ export const scanImportedTalentCsv = (csv: Array<any>, filename: string) => {
       let newTalent = new Talent(
         0,
         row[0],
-        row[10],
+        row[9],
         row[2] === "Flaw",
-        +row[3],
+        row[2] === "Flaw" ? +row[4] : +row[3],
         row[5],
         row[6],
-        false,
-        "?",
-        row[9],
-        "?",
-        0
+        row[7],
+        row[8]
       );
       listOfTalents.push(newTalent);
     }
@@ -140,7 +141,7 @@ export const scanImportedPowerCsv = (csv: Array<any>, filename: string) => {
         row[3],
         row[4],
         row[5] === "Active",
-        "?",
+        row[9],
         row[6]
       );
       listOfPowers.push(newPower);

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
@@ -6,10 +6,7 @@ import FormatedText from "../../../general_elements/FormatedText";
 import P2PSender from "../../../p2p/P2PSender";
 import TextButton from "../../../form_elements/TextButton";
 import { useWebhook } from "../../../../hooks/webhookHook";
-import {
-  formatDiscordText,
-  sendEmbedMessage,
-} from "../../../../services/DiscordService";
+import { sendEmbedMessage } from "../../../../services/DiscordService";
 import { faDiscord } from "@fortawesome/free-brands-svg-icons";
 import Skill from "../../../../data/Skill";
 

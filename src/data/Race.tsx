@@ -1,5 +1,11 @@
 import IEntity from "./IEntity";
 
+export enum RaceLimits {
+  empty = "-", // -
+  magicNull = "> 0", // > 0
+  magicFour = "<= 4", // <= 4
+}
+
 export default class Race implements IEntity {
   id?: number;
   name: string;
@@ -9,6 +15,9 @@ export default class Race implements IEntity {
   stamina: number;
   talents: string[];
   flaws: string[];
+  limit: string;
+  sprint: number;
+  description: string;
 
   constructor(
     id?: number,
@@ -18,7 +27,10 @@ export default class Race implements IEntity {
     size?: string,
     stamina?: number,
     talents?: string[],
-    flaws?: string[]
+    flaws?: string[],
+    limit?: string,
+    sprint?: number,
+    description?: string,
   ) {
     this.id = id;
     this.name = name || "";
@@ -28,6 +40,9 @@ export default class Race implements IEntity {
     this.stamina = stamina || 0;
     this.talents = talents || [];
     this.flaws = flaws || [];
+    this.limit = limit || RaceLimits.empty;
+    this.sprint = sprint || 0;
+    this.description = description || "";
   }
 
   static makeCsv = (race: Race): any[] => {

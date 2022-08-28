@@ -7,6 +7,13 @@ export enum TalentCategory {
   magical = "magical",
 }
 
+export enum TalentType {
+  passiv = "passiv",
+  reaction = "reaction",
+  triggered = "triggered"
+}
+
+
 export default class Talent implements IEntity {
   id?: number;
   name: string;
@@ -15,11 +22,8 @@ export default class Talent implements IEntity {
   cost: number;
   prerequisite: string;
   effect: string;
-  type: boolean;
-  stress: string;
-  trigger: string;
   triggerFrequency: string;
-  ticks: number;
+  type: string;
 
   constructor(
     id?: number,
@@ -29,11 +33,8 @@ export default class Talent implements IEntity {
     cost?: number,
     prerequisite?: string,
     effect?: string,
-    type?: boolean,
-    stress?: string,
-    trigger?: string,
+    type?: string,
     triggerFrequency?: string,
-    ticks?: number
   ) {
     this.id = id;
     this.name = name || "";
@@ -42,11 +43,8 @@ export default class Talent implements IEntity {
     this.cost = cost || 0;
     this.prerequisite = prerequisite || "";
     this.effect = effect || "";
-    this.type = type || false;
-    this.stress = stress || "";
-    this.trigger = trigger || "";
     this.triggerFrequency = triggerFrequency || "";
-    this.ticks = ticks || 0;
+    this.type = type || TalentType.passiv;
   }
 
   static makeCsv = (talent: Talent): any[] => {
@@ -59,10 +57,7 @@ export default class Talent implements IEntity {
       talent.prerequisite,
       talent.effect,
       talent.type,
-      talent.stress,
-      talent.trigger,
       talent.triggerFrequency,
-      talent.ticks,
     ];
   };
 }
