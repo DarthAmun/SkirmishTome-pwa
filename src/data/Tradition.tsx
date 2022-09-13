@@ -16,7 +16,7 @@ export default class Tradition implements IEntity {
     druidic: boolean;
     psychic: boolean;
   };
-  powers: Power[];
+  powers: string[];
 
   constructor(
     id?: number,
@@ -33,7 +33,7 @@ export default class Tradition implements IEntity {
       druidic: boolean;
       psychic: boolean;
     },
-    powers?: Power[]
+    powers?: string[]
   ) {
     this.id = id;
     this.name = name || "";

@@ -25,6 +25,8 @@ import ItemSearchBar from "../entities/items/ItemSearchBar";
 import ItemTile from "../entities/items/ItemTile";
 import TraditionSearchBar from "../entities/tradtitons/TradtitionSearchBar";
 import TraditionTile from "../entities/tradtitons/TradtitionTile";
+import CharacterSearchBar from "../entities/characters/CharacterSearchBar";
+import CharacterTile from "../entities/characters/CharacterTile";
 
 const EntityOverview = ({ match }: RouteComponentProps) => {
   const rawFilters = useQuery().get("filter");
@@ -102,7 +104,8 @@ const EntityOverview = ({ match }: RouteComponentProps) => {
     skill: SkillSearchBar,
     randomTable: RandomTableSearchBar,
     item: ItemSearchBar,
-    tradition: TraditionSearchBar
+    tradition: TraditionSearchBar,
+    character: CharacterSearchBar,
   };
 
   type tileOptions = {
@@ -117,6 +120,7 @@ const EntityOverview = ({ match }: RouteComponentProps) => {
     randomTable: RandomTableTile,
     item: ItemTile,
     tradition: TraditionTile,
+    character: CharacterTile,
   };
 
   return (

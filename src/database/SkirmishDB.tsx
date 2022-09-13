@@ -1,4 +1,5 @@
 import Dexie from "dexie";
+import Character from "../data/Character";
 import Item from "../data/Item";
 import Power from "../data/Power";
 import Race from "../data/Race";
@@ -17,6 +18,7 @@ export class SkirmishDB extends Dexie {
   skills: Dexie.Table<Skill, number>;
   items: Dexie.Table<Item, number>;
   traditions: Dexie.Table<Tradition, number>;
+  characters: Dexie.Table<Character, number>;
 
   constructor() {
     super("SkirmishTomeDB");
@@ -80,6 +82,22 @@ export class SkirmishDB extends Dexie {
       items: "++id, name, description, quality",
       traditions: "++id, name, isPath, availablleSpellSources, powers",
     });
+    this.version(8).stores({
+      talents:
+        "++id, name, isFlaw, cost, prerequisite, effect, type, stress, ticks",
+      races: "++id, name, hp, abilityModifier, size, stamina, talents, flaws",
+      randomTables: "++id, name, rows, header",
+      spells:
+        "++id, name, source, castTime, rite, duration, durationText, range, school, effect, damage, mastery, resist, drain, masteryDrain",
+      powers:
+        "++id, name, source, isAdept, path, cost, prerequisite, effect, type, stress, ticks",
+      skills:
+        "++id, name, source, details, die, bonus, mod, disadvantage, advantage",
+      items: "++id, name, description, quality",
+      traditions: "++id, name, isPath, availablleSpellSources, powers",
+      characters:
+        "++id, name, house, title, player, totalXPSpent, xpToSpend, charLevel, race, archetype, origin, appearance, abilityRating, arcaneAffinity, actions, money, socialTraits, talents, flaws, baseAbilitySkills, skills, weaponSkills, knowledgeSkills, spells, adeptPowers, ascensionPowers, items  ",
+    });
 
     this.talents = this.table("talents");
     this.spells = this.table("spells");
@@ -89,5 +107,6 @@ export class SkirmishDB extends Dexie {
     this.items = this.table("items");
     this.traditions = this.table("traditions");
     this.randomTables = this.table("randomTables");
+    this.characters = this.table("characters");
   }
 }

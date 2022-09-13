@@ -2,25 +2,32 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
-import FormatedText from "../../../general_elements/FormatedText";
 import P2PSender from "../../../p2p/P2PSender";
 import TextButton from "../../../form_elements/TextButton";
 import { useWebhook } from "../../../../hooks/webhookHook";
-import {
-  formatDiscordText,
-  sendEmbedMessage,
-} from "../../../../services/DiscordService";
+import { useHistory } from "react-router";
+import { sendEmbedMessage } from "../../../../services/DiscordService";
 import { faDiscord } from "@fortawesome/free-brands-svg-icons";
 import Tradition from "../../../../data/Tradition";
+import Power from "../../../../data/Power";
+import { reciveAll } from "../../../../services/DatabaseService";
 
 interface $Props {
   tradition: Tradition;
 }
 
 const TraditionView = ({ tradition }: $Props) => {
+  let history = useHistory();
   let webhook = useWebhook();
   const [json, setJson] = useState<string>("");
   const [send, setSend] = useState<boolean>(false);
+  const [powers, setPowers] = useState<Power[]>([]);
+
+  useEffect(() => {
+    reciveAll("powers", (results: any[]) => {
+      setPowers(results);
+    });
+  }, [tradition]);
 
   useEffect(() => {
     if (webhook !== undefined) {
@@ -49,7 +56,7 @@ const TraditionView = ({ tradition }: $Props) => {
     <CenterWrapper>
       <View>
         <Cost>
-          <b>{tradition.isPath? "P": "-"}</b>
+          <b>{tradition.isPath ? "P" : "-"}</b>
         </Cost>
 
         <Name>
@@ -74,6 +81,19 @@ const TraditionView = ({ tradition }: $Props) => {
               onClick={() => setSend(true)}
             />
           )}
+          <PropWrapper>
+            {tradition.powers.length > 0 &&
+              tradition.powers.map((power, index: number) => {
+                const link: string =
+                  "/power-detail/id/" +
+                  powers.filter((pow) => pow.name === power)[0]?.id;
+                return (
+                  <PowerLink key={index} onClick={() => history.push(link)}>
+                    {power}
+                  </PowerLink>
+                );
+              })}
+          </PropWrapper>
           {!!send && <P2PSender data={tradition} mode={"THIS"} />}
         </PropWrapper>
       </View>
@@ -142,39 +162,10 @@ const PropWrapper = styled.div`
   justify-content: space-around;
 `;
 
-const Prop = styled.div`
-  flex: 1 1 auto;
-  max-width: 100%;
-  height: auto;
-  margin: 2px;
-  float: left;
-  padding: 10px;
-  --notchSize: 15px;
-  clip-path: polygon(
-    0% var(--notchSize),
-    var(--notchSize) 0%,
-    100% 0%,
-    100% calc(100% - var(--notchSize)),
-    calc(100% - var(--notchSize)) 100%,
-    0 100%
-  );
-  background-color: ${({ theme }) => theme.tile.backgroundColor};
-`;
-
-const PropTitle = styled.span`
+const PowerLink = styled.span`
   display: inline-block;
-  color: ${({ theme }) => theme.tile.backgroundColorLink};
-  text-decoration: none;
-  margin: 0px 5px 0px 5px;
-`;
+  background-color: ${({ theme }) => theme.tile.backgroundColorLink};
 
-const Text = styled.div`
-  height: auto;
-  width: calc(100% - 30px);
-  margin: 10px 5px 5px 5px;
-  float: left;
-  line-height: 18px;
-  padding: 10px;
   --notchSize: 15px;
   clip-path: polygon(
     0% var(--notchSize),
@@ -184,5 +175,11 @@ const Text = styled.div`
     calc(100% - var(--notchSize)) 100%,
     0 100%
   );
-  background-color: ${({ theme }) => theme.tile.backgroundColor};
+
+  text-decoration: none;
+  color: ${({ theme }) => theme.tile.backgroundColor};
+  font-size: 16px;
+  margin: 5px;
+  padding: 5px;
+  cursor: pointer;
 `;

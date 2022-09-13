@@ -2,12 +2,13 @@ import React from "react";
 import styled from "styled-components";
 
 import StringField from "../../../form_elements/StringField";
-import NumberField from "../../../form_elements/NumberField";
-import TextField from "../../../form_elements/TextField";
 import CheckField from "../../../form_elements/CheckField";
 
-import { faBookOpen } from "@fortawesome/free-solid-svg-icons";
+import { faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
 import Tradition from "../../../../data/Tradition";
+import AutoStringField from "../../../form_elements/AutoStringField";
+import IconButton from "../../../form_elements/IconButton";
+import TextButton from "../../../form_elements/TextButton";
 
 interface $Props {
   tradition: Tradition;
@@ -15,6 +16,21 @@ interface $Props {
 }
 
 const TraditionEditView = ({ tradition, onEdit }: $Props) => {
+  const removePower = (oldPower: string) => {
+    let newPowerList = tradition.powers.filter((power) => power !== oldPower);
+    onEdit({ ...tradition, powers: newPowerList });
+  };
+  const addNewPower = () => {
+    let newPowerList = [...tradition.powers];
+    newPowerList.push("");
+    onEdit({ ...tradition, powers: newPowerList });
+  };
+  const onChangePower = (newPower: string, i: number) => {
+    let powers = [...tradition.powers];
+    powers[i] = newPower;
+    onEdit({ ...tradition, powers: powers });
+  };
+
   return (
     <CenterWrapper>
       <View>
@@ -32,6 +48,24 @@ const TraditionEditView = ({ tradition, onEdit }: $Props) => {
             onChange={(type) => onEdit({ ...tradition, isPath: type })}
           />
         </FieldGroup>
+        {tradition.powers.map((power: string, index: number) => {
+          return (
+            <Container key={index}>
+              <AutoStringField
+                optionTable={"powers"}
+                value={power}
+                label="Power"
+                onChange={(newPower) => onChangePower(newPower, index)}
+              />
+              <IconButton icon={faTrash} onClick={() => removePower(power)} />
+            </Container>
+          );
+        })}
+        <TextButton
+          text={"Add new Power"}
+          icon={faPlus}
+          onClick={() => addNewPower()}
+        />
       </View>
     </CenterWrapper>
   );
@@ -63,4 +97,11 @@ const View = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+`;
+
+const Container = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  flex: 1 1 100%;
 `;

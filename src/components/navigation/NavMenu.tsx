@@ -3,10 +3,24 @@ import styled from "styled-components";
 import { Link, useLocation } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCog, faChartPie, faHome, faTable, faMeteor } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCog,
+  faChartPie,
+  faHome,
+  faTable,
+  faMeteor,
+  faUsers,
+} from "@fortawesome/free-solid-svg-icons";
 
 import { RightTooltip } from "../SearchbarStyle";
-import { GiAura, GiBackpack, GiInterstellarPath, GiSkills, GiSwordsPower, GiWomanElfFace } from "react-icons/gi";
+import {
+  GiAura,
+  GiBackpack,
+  GiInterstellarPath,
+  GiSkills,
+  GiSwordsPower,
+  GiWomanElfFace,
+} from "react-icons/gi";
 
 interface $Props {
   open: boolean;
@@ -21,7 +35,9 @@ const NavMenu = ({ open }: $Props) => {
         <Link
           to="/home"
           className={
-            location.pathname === "/home" || location.pathname === "/" ? "menuItemActiv" : ""
+            location.pathname === "/home" || location.pathname === "/"
+              ? "menuItemActiv"
+              : ""
           }
         >
           <FontAwesomeIcon icon={faHome} />
@@ -32,7 +48,11 @@ const NavMenu = ({ open }: $Props) => {
         <LeftSide>
           <Link
             to="/randomTable-overview"
-            className={location.pathname === "/randomTable-overview" ? "menuItemActiv" : ""}
+            className={
+              location.pathname === "/randomTable-overview"
+                ? "menuItemActiv"
+                : ""
+            }
           >
             <FontAwesomeIcon icon={faTable} />
             <RightTooltip>Random Tables</RightTooltip>
@@ -41,52 +61,75 @@ const NavMenu = ({ open }: $Props) => {
         <RightSide>
           <Link
             to="/spell-overview"
-            className={location.pathname === "/spell-overview" ? "menuItemActiv" : ""}
+            className={
+              location.pathname === "/spell-overview" ? "menuItemActiv" : ""
+            }
           >
             <FontAwesomeIcon icon={faMeteor} />
             <RightTooltip>Spells</RightTooltip>
           </Link>
           <Link
             to="/talent-overview"
-            className={location.pathname === "/talent-overview" ? "menuItemActiv" : ""}
+            className={
+              location.pathname === "/talent-overview" ? "menuItemActiv" : ""
+            }
           >
             <GiSwordsPower />
             <RightTooltip>Talents</RightTooltip>
           </Link>
           <Link
             to="/power-overview"
-            className={location.pathname === "/power-overview" ? "menuItemActiv" : ""}
+            className={
+              location.pathname === "/power-overview" ? "menuItemActiv" : ""
+            }
           >
             <GiAura />
             <RightTooltip>Power</RightTooltip>
           </Link>
           <Link
             to="/skill-overview"
-            className={location.pathname === "/skill-overview" ? "menuItemActiv" : ""}
+            className={
+              location.pathname === "/skill-overview" ? "menuItemActiv" : ""
+            }
           >
             <GiSkills />
             <RightTooltip>Skill</RightTooltip>
           </Link>
           <Link
             to="/race-overview"
-            className={location.pathname === "/race-overview" ? "menuItemActiv" : ""}
+            className={
+              location.pathname === "/race-overview" ? "menuItemActiv" : ""
+            }
           >
             <GiWomanElfFace />
             <RightTooltip>Races</RightTooltip>
           </Link>
           <Link
             to="/item-overview"
-            className={location.pathname === "/item-overview" ? "menuItemActiv" : ""}
+            className={
+              location.pathname === "/item-overview" ? "menuItemActiv" : ""
+            }
           >
             <GiBackpack />
             <RightTooltip>Items</RightTooltip>
           </Link>
           <Link
             to="/tradition-overview"
-            className={location.pathname === "/tradition-overview" ? "menuItemActiv" : ""}
+            className={
+              location.pathname === "/tradition-overview" ? "menuItemActiv" : ""
+            }
           >
             <GiInterstellarPath />
             <RightTooltip>Traditions</RightTooltip>
+          </Link>
+          <Link
+            to="/character-overview"
+            className={
+              location.pathname === "/character-overview" ? "menuItemActiv" : ""
+            }
+          >
+            <FontAwesomeIcon icon={faUsers} />
+            <RightTooltip>Characters</RightTooltip>
           </Link>
         </RightSide>
       </MiddleSide>
@@ -99,7 +142,10 @@ const NavMenu = ({ open }: $Props) => {
           <FontAwesomeIcon icon={faChartPie} />
           <RightTooltip>Statistics</RightTooltip>
         </Link>
-        <Link to="/options" className={location.pathname === "/options" ? "menuItemActiv" : ""}>
+        <Link
+          to="/options"
+          className={location.pathname === "/options" ? "menuItemActiv" : ""}
+        >
           <FontAwesomeIcon icon={faCog} />
           <RightTooltip>Options</RightTooltip>
         </Link>

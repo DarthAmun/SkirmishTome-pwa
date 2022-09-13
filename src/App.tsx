@@ -4,6 +4,7 @@ import { MyThemeProvider } from "./components/theme/MyThemeProvider";
 import { CompleteLoadingSpinner } from "./components/Loading";
 import AppWrapper from "./components/AppWrapper";
 import { HashRouter } from "react-router-dom";
+import CharLab from "./components/entities/characters/lab/CharLab";
 
 const ToEntity = lazy(() => import("./components/general_elements/details/ToEntity"));
 const EntityOverview = lazy(() => import("./components/general_elements/EntityOverview"));
@@ -47,6 +48,10 @@ const App = () => {
               <Route path="/randomTable-detail/name/:name" component={ToEntity}></Route>
               <Route path="/randomTable-detail/id/:id" component={ToEntity}></Route>
               <Route path="/randomTable-overview" component={EntityOverview}></Route>
+              <Route path="/character-lab" component={CharLab}></Route>
+              <Route path="/character-detail/name/:name" component={ToEntity}></Route>
+              <Route path="/character-detail/id/:id" component={ToEntity}></Route>
+              <Route path="/character-overview" component={EntityOverview}></Route>
               <Route path="/statistics" component={Statistics}></Route>
               <Route path="/options" component={Options}></Route>
               <Route path="/help" component={Help}></Route>

@@ -38,6 +38,8 @@ import ItemView from "../../entities/items/details/ItemView";
 import ItemEditView from "../../entities/items/details/ItemEditView";
 import TraditionEditView from "../../entities/tradtitons/details/TradtitionEditView";
 import TraditionView from "../../entities/tradtitons/details/TradtitionView";
+import CharacterView from "../../entities/characters/details/CharacterView";
+import CharacterEditView from "../../entities/characters/details/CharacterEditView";
 
 interface $Props {
   entity: IEntity;
@@ -129,6 +131,8 @@ const EntityDetail = ({ entity, tableName, isNew, view }: $Props) => {
     RandomTableEditView: RandomTableEditView,
     TraditionView: TraditionView,
     TraditionEditView: TraditionEditView,
+    CharacterView: CharacterView,
+    CharacterEditView: CharacterEditView,
   };
 
   return (
