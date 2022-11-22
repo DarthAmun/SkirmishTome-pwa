@@ -63,32 +63,17 @@ const SkillView = ({ skill }: $Props) => {
   return (
     <CenterWrapper>
       <View>
-        <Cost>
-          <b>{skill.die}</b>
-        </Cost>
-
         <Name>
           <b>{skill.name}</b>
         </Name>
-
-        <PropWrapper>
-          <Prop>
-            <PropTitle>Bonus: </PropTitle>
-            {skill.bonus}
-          </Prop>
-          <Prop>
-            <PropTitle>Mod: </PropTitle>
-            {skill.mod}
-          </Prop>
-          <Prop>
-            <PropTitle>Advantage: </PropTitle>
-            {skill.advantage}
-          </Prop>
-          <Prop>
-            <PropTitle>Disadvantage: </PropTitle>
-            {skill.disadvantage}
-          </Prop>
-        </PropWrapper>
+        <Prop>
+          <PropTitle>Group: </PropTitle>
+          {skill.group}
+        </Prop>
+        <Prop>
+          <PropTitle>Category: </PropTitle>
+          {skill.category}
+        </Prop>
         <Text>
           <PropTitle>Details: </PropTitle>
           <FormatedText text={skill.details} />
@@ -135,20 +120,6 @@ const View = styled.div`
   margin-right: auto;
 `;
 
-const Cost = styled.div`
-  height: auto;
-  padding: 10px;
-  width: 20px;
-  height: 20px;
-  line-height: 20px;
-  float: left;
-  text-align: center;
-  border-top-right-radius: 3px;
-  border-radius: 30px;
-  margin: 0px 5px 5px 5px;
-  background-color: ${({ theme }) => theme.tile.backgroundColor};
-`;
-
 const Name = styled.div`
   height: auto;
   float: left;
@@ -186,6 +157,7 @@ const Prop = styled.div`
   margin: 2px;
   float: left;
   padding: 10px;
+
   --notchSize: 15px;
   clip-path: polygon(
     0% var(--notchSize),
@@ -195,6 +167,7 @@ const Prop = styled.div`
     calc(100% - var(--notchSize)) 100%,
     0 100%
   );
+
   background-color: ${({ theme }) => theme.tile.backgroundColor};
 `;
 

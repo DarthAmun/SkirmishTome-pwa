@@ -1,6 +1,7 @@
 import Dexie from "dexie";
 import Character from "../data/Character";
 import Item from "../data/Item";
+import Origin from "../data/Origin";
 import Power from "../data/Power";
 import Race from "../data/Race";
 import RandomTable from "../data/RandomTable";
@@ -19,6 +20,7 @@ export class SkirmishDB extends Dexie {
   items: Dexie.Table<Item, number>;
   traditions: Dexie.Table<Tradition, number>;
   characters: Dexie.Table<Character, number>;
+  origins: Dexie.Table<Origin, number>;
 
   constructor() {
     super("SkirmishTomeDB");
@@ -98,6 +100,22 @@ export class SkirmishDB extends Dexie {
       characters:
         "++id, name, house, title, player, totalXPSpent, xpToSpend, charLevel, race, archetype, origin, appearance, abilityRating, arcaneAffinity, actions, money, socialTraits, talents, flaws, baseAbilitySkills, skills, weaponSkills, knowledgeSkills, spells, adeptPowers, ascensionPowers, items  ",
     });
+    this.version(9).stores({
+      talents:
+        "++id, name, isFlaw, cost, prerequisite, effect, type, stress, ticks",
+      races: "++id, name, hp, abilityModifier, size, stamina, talents, flaws",
+      randomTables: "++id, name, rows, header",
+      spells:
+        "++id, name, source, castTime, rite, duration, durationText, range, school, effect, damage, mastery, resist, drain, masteryDrain",
+      powers:
+        "++id, name, source, isAdept, path, cost, prerequisite, effect, type, stress, ticks",
+      skills: "++id, name, source, details",
+      origins: "++id, name, background, education, casteOne, casteTwo",
+      items: "++id, name, description, quality",
+      traditions: "++id, name, isPath, availablleSpellSources, powers",
+      characters:
+        "++id, name, house, title, player, totalXPSpent, xpToSpend, charLevel, race, archetype, origin, appearance, abilityRating, arcaneAffinity, actions, money, socialTraits, talents, flaws, baseAbilitySkills, skills, weaponSkills, knowledgeSkills, spells, adeptPowers, ascensionPowers, items  ",
+    });
 
     this.talents = this.table("talents");
     this.spells = this.table("spells");
@@ -108,5 +126,6 @@ export class SkirmishDB extends Dexie {
     this.traditions = this.table("traditions");
     this.randomTables = this.table("randomTables");
     this.characters = this.table("characters");
+    this.origins = this.table("origins");
   }
 }

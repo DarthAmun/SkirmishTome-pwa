@@ -10,18 +10,13 @@ interface $Props {
 const SkillTile = ({ skill }: $Props) => {
   return (
     <Tile to={"/skill-detail/id/" + skill.id}>
-      <Flag>
-        <b>{skill.die}</b>
-      </Flag>
       <Name>
         <b>{skill.name}</b>
       </Name>
 
       <PropWrapper>
-        <Prop>{skill.bonus}</Prop>
-        <Prop>{skill.mod}</Prop>
-        <Prop>{skill.advantage}</Prop>
-        <Prop>{skill.disadvantage}</Prop>
+        <Prop>{skill.group}</Prop>
+        <Prop>{skill.category}</Prop>
       </PropWrapper>
     </Tile>
   );

@@ -10,42 +10,25 @@ import CharLabGeneral from "./CharLabGeneral";
 import { useQuery } from "../../../../hooks/QueryHook";
 import Character from "../../../../data/Character";
 import CharacterView from "../details/CharacterView";
+import CharLabMatrix from "./CharLabMatrix";
 
 const CharLab = () => {
   let history = useHistory();
   const name = useQuery().get("name");
   const [activeTab, setTab] = useState<string>("General");
-  const [newChar, updateChar] = useState<Character>(new Character(-1, name !== null ? name : ""));
+  const [newChar, updateChar] = useState<Character>(
+    new Character(-1, name !== null ? name : "")
+  );
 
   const [completedGeneral, setGeneral] = useState<boolean>(false);
-  const [completedClass, setClass] = useState<boolean>(false);
-  const [completedRace, setRace] = useState<boolean>(false);
-  const [completedBackground, setBackground] = useState<boolean>(false);
-  const [completedAbilities, setAbilities] = useState<boolean>(false);
-  const [completedEquipment, setEquipment] = useState<boolean>(false);
+  const [completedMatrix, setMatrix] = useState<boolean>(false);
 
   const updateGeneral = (value: boolean, nextTab: string) => {
     setGeneral(value);
     setTab(nextTab);
   };
-  const updateClass = (value: boolean, nextTab: string) => {
-    setClass(value);
-    setTab(nextTab);
-  };
-  const updateRace = (value: boolean, nextTab: string) => {
-    setRace(value);
-    setTab(nextTab);
-  };
-  const updateBackground = (value: boolean, nextTab: string) => {
-    setBackground(value);
-    setTab(nextTab);
-  };
-  const updateAbilities = (value: boolean, nextTab: string) => {
-    setAbilities(value);
-    setTab(nextTab);
-  };
-  const updateEquipment = (value: boolean, nextTab: string) => {
-    setEquipment(value);
+  const updateMatrix = (value: boolean, nextTab: string) => {
+    setMatrix(value);
     setTab(nextTab);
   };
 
@@ -61,7 +44,7 @@ const CharLab = () => {
   return (
     <>
       <TabBar
-        children={["General", "Finished"]}
+        children={["General", "Matrix", "Finished"]}
         onChange={(tab: string) => setTab(tab)}
         activeTab={activeTab}
       />
@@ -70,7 +53,11 @@ const CharLab = () => {
           {activeTab === "General" && (
             <>
               {!completedGeneral && (
-                <CharLabGeneral char={newChar} onChange={updateChar} completed={updateGeneral} />
+                <CharLabGeneral
+                  char={newChar}
+                  onChange={updateChar}
+                  completed={updateGeneral}
+                />
               )}
               {completedGeneral && (
                 <PropWrapper>
@@ -80,37 +67,45 @@ const CharLab = () => {
               )}
             </>
           )}
+          {activeTab === "Matrix" && (
+            <>
+              {!completedMatrix && (
+                <CharLabMatrix
+                  char={newChar}
+                  onChange={updateChar}
+                  completed={updateGeneral}
+                />
+              )}
+              {completedMatrix && (
+                <PropWrapper>
+                  <Prop>Would you like to edit matrix again? </Prop>
+                  <IconButton icon={faEdit} onClick={() => setMatrix(false)} />
+                </PropWrapper>
+              )}
+            </>
+          )}
           {activeTab === "Finished" && (
             <>
-              {(!completedGeneral ||
-                !completedClass ||
-                !completedRace ||
-                !completedBackground ||
-                !completedAbilities ||
-                !completedGeneral ||
-                !completedEquipment) && (
+              {(!completedGeneral || !completedMatrix) && (
                 <PropWrapper>
                   <Prop>Somthing is not finished!</Prop>
                 </PropWrapper>
               )}
-              {completedGeneral &&
-                completedClass &&
-                completedRace &&
-                completedBackground &&
-                completedAbilities &&
-                completedGeneral &&
-                completedEquipment && (
-                  <>
-                    <PropWrapper>
-                      <Prop>Create Char?</Prop>
-                      <IconButton icon={faCheckCircle} onClick={() => saveChar()} />
-                    </PropWrapper>
-                    <CharacterView
-                      character={newChar}
-                      // saveChar={() => undefined}
-                    ></CharacterView>
-                  </>
-                )}
+              {completedGeneral && completedMatrix && (
+                <>
+                  <PropWrapper>
+                    <Prop>Create Char?</Prop>
+                    <IconButton
+                      icon={faCheckCircle}
+                      onClick={() => saveChar()}
+                    />
+                  </PropWrapper>
+                  <CharacterView
+                    character={newChar}
+                    // saveChar={() => undefined}
+                  ></CharacterView>
+                </>
+              )}
             </>
           )}
         </View>

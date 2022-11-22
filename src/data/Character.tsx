@@ -101,6 +101,8 @@ export default class Character implements IEntity {
   race: string;
   archetype: string;
   origin: CharOrigin;
+  background: string;
+  education: string;
   appearance: CharAppearance;
   abilityRating: CharAbilityRating;
   arcaneAffinity: CharArcaneAffinity;
@@ -132,6 +134,8 @@ export default class Character implements IEntity {
     race?: string,
     archetype?: string,
     origin?: CharOrigin,
+    background?: string,
+    education?: string,
     appearance?: CharAppearance,
     abilityRating?: CharAbilityRating,
     arcaneAffinity?: CharArcaneAffinity,
@@ -166,6 +170,8 @@ export default class Character implements IEntity {
       education: "",
       caste: "",
     };
+    this.background = background || "";
+    this.education = education || "";
     this.appearance = appearance || {
       age: 0,
       height: "",

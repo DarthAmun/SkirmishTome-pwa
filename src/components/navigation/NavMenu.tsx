@@ -20,6 +20,7 @@ import {
   GiSkills,
   GiSwordsPower,
   GiWomanElfFace,
+  GiFamilyTree,
 } from "react-icons/gi";
 
 interface $Props {
@@ -121,6 +122,15 @@ const NavMenu = ({ open }: $Props) => {
           >
             <GiInterstellarPath />
             <RightTooltip>Traditions</RightTooltip>
+          </Link>
+          <Link
+            to="/origin-overview"
+            className={
+              location.pathname === "/origin-overview" ? "menuItemActiv" : ""
+            }
+          >
+            <GiFamilyTree />
+            <RightTooltip>Origins</RightTooltip>
           </Link>
           <Link
             to="/character-overview"

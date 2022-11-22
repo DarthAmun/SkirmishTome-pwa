@@ -25,41 +25,16 @@ const SkillEditView = ({ skill, onEdit }: $Props) => {
             onChange={(name) => onEdit({ ...skill, name: name })}
           />
         </FieldGroup>
-        <FieldGroup>
-          <SelectField
-            value={skill.die}
-            options={[
-              SkillDie.dfour,
-              SkillDie.dsix,
-              SkillDie.deight,
-              SkillDie.dten,
-              SkillDie.dtwelve,
-            ]}
-            label={"Die"}
-            onClear={() => onEdit({ ...skill, die: "" })}
-            onChange={(category: string) => onEdit({ ...skill, die: category })}
-          />
-          <NumberField
-            value={skill.bonus}
-            label="Bonus"
-            onChange={(cost) => onEdit({ ...skill, bonus: cost })}
-          />
-          <StringField
-            value={skill.mod}
-            label="Mod"
-            onChange={(name) => onEdit({ ...skill, mod: name })}
-          />
-          <NumberField
-            value={skill.advantage}
-            label="Advantage"
-            onChange={(cost) => onEdit({ ...skill, advantage: cost })}
-          />
-          <NumberField
-            value={skill.disadvantage}
-            label="Disadvantage"
-            onChange={(cost) => onEdit({ ...skill, disadvantage: cost })}
-          />
-        </FieldGroup>
+        <StringField
+          value={skill.group}
+          label="Group"
+          onChange={(value) => onEdit({ ...skill, group: value })}
+        />
+        <StringField
+          value={skill.category}
+          label="Category"
+          onChange={(value) => onEdit({ ...skill, category: value })}
+        />
         <TextField
           value={skill.details}
           label="Details"

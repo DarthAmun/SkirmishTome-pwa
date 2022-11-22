@@ -8,7 +8,7 @@ export enum SkillDie {
   dtwelve = "d12",
 }
 
-export default class Skill implements IEntity {
+export interface CharSkill {
   id?: number;
   name: string;
   details: string;
@@ -17,25 +17,21 @@ export default class Skill implements IEntity {
   mod: string; //+x
   disadvantage: number; // + x Dis
   advantage: number; // + x Adv
+}
 
-  constructor(
-    id?: number,
-    name?: string,
-    details?: string,
-    die?: string,
-    bonus?: number, //+1, +2, +3
-    mod?: string, //+x
-    disadvantage?: number, // + x Dis
-    advantage?: number // + x Adv
-  ) {
+export default class Skill implements IEntity {
+  id?: number;
+  name: string;
+  details: string;
+  group: string;
+  category: string;
+
+  constructor(id?: number, name?: string, details?: string, group?: string, category?: string) {
     this.id = id;
     this.name = name || "";
     this.details = details || "";
-    this.die = die || SkillDie.dfour;
-    this.bonus = bonus || 0;
-    this.mod = mod || "";
-    this.disadvantage = disadvantage || 0;
-    this.advantage = advantage || 0;
+    this.group = group || "";
+    this.category = category || "";
   }
 
   static makeCsv = (power: Skill): any[] => {

@@ -42,6 +42,9 @@ const App = () => {
               <Route path="/item-detail/name/:name" component={ToEntity}></Route>
               <Route path="/item-detail/id/:id" component={ToEntity}></Route>
               <Route path="/item-overview" component={EntityOverview}></Route>
+              <Route path="/origin-detail/name/:name" component={ToEntity}></Route>
+              <Route path="/origin-detail/id/:id" component={ToEntity}></Route>
+              <Route path="/origin-overview" component={EntityOverview}></Route>
               <Route path="/tradition-detail/name/:name" component={ToEntity}></Route>
               <Route path="/tradition-detail/id/:id" component={ToEntity}></Route>
               <Route path="/tradition-overview" component={EntityOverview}></Route>
