@@ -1,6 +1,6 @@
 import IEntity from "./IEntity";
 
-export enum OriginKaste {
+export enum Kaste {
   Slave = "Slave",
   Outlore = "Outlore",
   Worker = "Worker",
@@ -10,29 +10,36 @@ export enum OriginKaste {
   Royal = "Royal",
 }
 
-export default class Origin implements IEntity {
+export default class Education implements IEntity {
   id?: number;
   name: string;
-  casteOne: string;
-  casteTwo: string;
+  caste: string;
+  skills: string[];
+  group: string;
+  talent: string | undefined;
 
   constructor(
     id?: number,
-    casteOne?: string,
-    casteTwo?: string
+    name?: string,
+    caste?: string,
+    skills?: string[],
+    group?: string, // From Skill Group
+    talent?: string | undefined,
   ) {
     this.id = id;
-    this.casteOne = casteOne || OriginKaste.Slave;
-    this.casteTwo = casteTwo || OriginKaste.Outlore;
-    this.name = casteOne + "/" + casteTwo;
+    this.name = name || "";
+    this.caste = caste || Kaste.Slave;
+    this.skills = skills || [];
+    this.group = group || "";
+    this.talent = talent;
   }
 
-  static makeCsv = (power: Origin): any[] => {
+  static makeCsv = (power: Education): any[] => {
     return [power.id];
   };
 }
 
-export function isOrigin(arg: any): arg is Origin {
+export function isEducation(arg: any): arg is Education {
   const nameCheck = arg.name !== undefined && typeof arg.name == "string";
   const costCheck = arg.cost !== undefined && typeof arg.cost == "number";
   const isFlawCheck =

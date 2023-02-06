@@ -23,9 +23,9 @@ import {
   ExportButton,
   LeftTooltip,
 } from "../../SearchbarStyle";
-import Origin from "../../../data/Origin";
+import Education from "../../../data/Education";
 
-const OriginSearchBar = () => {
+const EducationSearchBar = () => {
   let history = useHistory();
   const [open, setOpen] = useState(false);
   const [filters, setFilters] = useState<Filter[]>([]);
@@ -57,7 +57,7 @@ const OriginSearchBar = () => {
 
     setFilters(newFilters);
     setOpen(false);
-    history.push(`/origin-overview?filter=${JSON.stringify(newFilters)}`);
+    history.push(`/education-overview?filter=${JSON.stringify(newFilters)}`);
   };
 
   const reset = () => {
@@ -70,19 +70,19 @@ const OriginSearchBar = () => {
         sort: 0,
       });
     });
-    history.push(`/origin-overview`);
+    history.push(`/education-overview`);
   };
 
-  const createNewOrigin = () => {
-    let newOrigin = new Origin();
-    delete newOrigin.id;
-    createNewWithId("origins", newOrigin, (id) => {
-      history.push(`/origin-detail/id/${id}`);
+  const createNewEducation = () => {
+    let newEducation = new Education();
+    delete newEducation.id;
+    createNewWithId("educations", newEducation, (id) => {
+      history.push(`/education-detail/id/${id}`);
     });
   };
 
   const exportFiltered = () => {
-    exportFilteredFromTable("origins", filters, "SkirmishTome_filtered_origins.json");
+    exportFilteredFromTable("educations", filters, "SkirmishTome_filtered_educations.json");
   };
 
   return (
@@ -105,7 +105,7 @@ const OriginSearchBar = () => {
           <FontAwesomeIcon icon={faSearch} rotation={90} />
         </SearchBar>
       </FixedBar>
-      <CreateButton onClick={() => createNewOrigin()}>
+      <CreateButton onClick={() => createNewEducation()}>
         <FontAwesomeIcon icon={faPlusCircle} />
         <LeftTooltip>Add new</LeftTooltip>
       </CreateButton>
@@ -117,4 +117,4 @@ const OriginSearchBar = () => {
   );
 };
 
-export default OriginSearchBar;
+export default EducationSearchBar;

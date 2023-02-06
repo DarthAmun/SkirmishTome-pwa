@@ -67,6 +67,10 @@ const RaceView = ({ race }: $Props) => {
 
         <PropWrapper>
           <Prop>
+            <PropTitle>Rarity: </PropTitle>
+            {race.rarity}
+          </Prop>
+          <Prop>
             <PropTitle>Hp: </PropTitle>
             {race.hp}
           </Prop>

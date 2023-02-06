@@ -40,8 +40,8 @@ import TraditionEditView from "../../entities/tradtitons/details/TradtitionEditV
 import TraditionView from "../../entities/tradtitons/details/TradtitionView";
 import CharacterView from "../../entities/characters/details/CharacterView";
 import CharacterEditView from "../../entities/characters/details/CharacterEditView";
-import OriginEditView from "../../entities/origins/details/OriginEditView";
-import OriginView from "../../entities/origins/details/OriginView";
+import EducationEditView from "../../entities/education/details/EducationEditView";
+import EducationView from "../../entities/education/details/EducationView";
 
 interface $Props {
   entity: IEntity;
@@ -135,8 +135,8 @@ const EntityDetail = ({ entity, tableName, isNew, view }: $Props) => {
     TraditionEditView: TraditionEditView,
     CharacterView: CharacterView,
     CharacterEditView: CharacterEditView,
-    OriginView: OriginView,
-    OriginEditView: OriginEditView,
+    EducationView: EducationView,
+    EducationEditView: EducationEditView,
   };
 
   return (

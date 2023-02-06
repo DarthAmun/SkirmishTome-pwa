@@ -124,13 +124,13 @@ const NavMenu = ({ open }: $Props) => {
             <RightTooltip>Traditions</RightTooltip>
           </Link>
           <Link
-            to="/origin-overview"
+            to="/education-overview"
             className={
-              location.pathname === "/origin-overview" ? "menuItemActiv" : ""
+              location.pathname === "/education-overview" ? "menuItemActiv" : ""
             }
           >
             <GiFamilyTree />
-            <RightTooltip>Origins</RightTooltip>
+            <RightTooltip>Educations</RightTooltip>
           </Link>
           <Link
             to="/character-overview"

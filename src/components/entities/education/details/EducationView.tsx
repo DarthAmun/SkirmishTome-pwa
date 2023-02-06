@@ -1,23 +1,38 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
-import FormatedText from "../../../general_elements/FormatedText";
 import P2PSender from "../../../p2p/P2PSender";
 import TextButton from "../../../form_elements/TextButton";
 import { useWebhook } from "../../../../hooks/webhookHook";
 import { sendEmbedMessage } from "../../../../services/DiscordService";
 import { faDiscord } from "@fortawesome/free-brands-svg-icons";
-import Origin from "../../../../data/Origin";
+import Education from "../../../../data/Education";
+import Skill from "../../../../data/Skill";
+import { reciveAll } from "../../../../services/DatabaseService";
+import { useHistory } from "react-router";
+import Talent from "../../../../data/Talent";
 
 interface $Props {
-  origin: Origin;
+  education: Education;
 }
 
-const OriginView = ({ origin }: $Props) => {
+const EducationView = ({ education }: $Props) => {
   let webhook = useWebhook();
   const [json, setJson] = useState<string>("");
   const [send, setSend] = useState<boolean>(false);
+  const [skills, setSkills] = useState<Skill[]>([]);
+  const [talents, setTalents] = useState<Talent[]>([]);
+  let history = useHistory();
+
+  useEffect(() => {
+    reciveAll("skills", (results: any[]) => {
+      setSkills(results);
+    });
+    reciveAll("talents", (results: any[]) => {
+      setTalents(results);
+    });
+  }, [education]);
 
   // useEffect(() => {
   //   if (webhook !== undefined) {
@@ -26,31 +41,31 @@ const OriginView = ({ origin }: $Props) => {
   //       embeds: [
   //         {
   //           author: {
-  //             name: origin.name,
+  //             name: education.name,
   //           },
   //           fields: [
   //             {
   //               name: "Cost",
-  //               value: origin.cost ? origin.cost : "-",
+  //               value: education.cost ? education.cost : "-",
   //               inline: true,
   //             },
   //             {
   //               name: "Ticks",
-  //               value: origin.ticks ? origin.ticks : "-",
+  //               value: education.ticks ? education.ticks : "-",
   //               inline: true,
   //             },
   //             {
   //               name: "Stress",
-  //               value: origin.type ? origin.stress : "passive",
+  //               value: education.type ? education.stress : "passive",
   //               inline: true,
   //             },
   //             {
   //               name: "Prerequisite",
-  //               value: formatDiscordText(origin.prerequisite),
+  //               value: formatDiscordText(education.prerequisite),
   //             },
   //             {
   //               name: "Effect",
-  //               value: formatDiscordText(origin.effect),
+  //               value: formatDiscordText(education.effect),
   //             },
   //           ],
   //         },
@@ -58,23 +73,47 @@ const OriginView = ({ origin }: $Props) => {
   //     };
   //     setJson(JSON.stringify(newJson));
   //   }
-  // }, [origin, webhook]);
+  // }, [education, webhook]);
 
   return (
     <CenterWrapper>
       <View>
         <Name>
-          <b>{origin.name}</b>
+          <b>{education.name}</b>
         </Name>
         <PropWrapper>
           <Prop>
-            <PropTitle>Kaste 1: </PropTitle>
-            {origin.casteOne}
+            <PropTitle>Kaste: </PropTitle>
+            {education.caste}
           </Prop>
           <Prop>
-            <PropTitle>Kaste 2: </PropTitle>
-            {origin.casteTwo}
+            <PropTitle>Talent: </PropTitle>
+            <SkillLink
+              onClick={() =>
+                history.push(
+                  "/talent-detail/id/" +
+                    talents.filter((tal) => tal.name === education.name)[0]?.id
+                )
+              }
+            >
+              {education.talent}
+            </SkillLink>
+            {education.talent}
           </Prop>
+        </PropWrapper>
+
+        <PropWrapper>
+          {education.skills.length > 0 &&
+            education.skills.map((skill, index: number) => {
+              const link: string =
+                "/skill-detail/id/" +
+                skills.filter((ski) => ski.name === skill)[0]?.id;
+              return (
+                <SkillLink key={index} onClick={() => history.push(link)}>
+                  {skill}
+                </SkillLink>
+              );
+            })}
         </PropWrapper>
 
         <PropWrapper>
@@ -83,26 +122,26 @@ const OriginView = ({ origin }: $Props) => {
               style={{
                 backgroundColor: "#7289da",
               }}
-              text={`Cast ${origin.name}`}
+              text={`Cast ${education.name}`}
               icon={faDiscord}
               onClick={() => sendEmbedMessage(webhook, json)}
             />
           )}
           {!send && (
             <TextButton
-              text={`Send ${origin.name}`}
+              text={`Send ${education.name}`}
               icon={faPaperPlane}
               onClick={() => setSend(true)}
             />
           )}
-          {!!send && <P2PSender data={origin} mode={"THIS"} />}
+          {!!send && <P2PSender data={education} mode={"THIS"} />}
         </PropWrapper>
       </View>
     </CenterWrapper>
   );
 };
 
-export default OriginView;
+export default EducationView;
 
 const CenterWrapper = styled.div`
   overflow: hidden;
@@ -194,4 +233,26 @@ const Text = styled.div`
     0 100%
   );
   background-color: ${({ theme }) => theme.tile.backgroundColor};
+`;
+
+const SkillLink = styled.span`
+  display: inline-block;
+  background-color: ${({ theme }) => theme.tile.backgroundColorLink};
+
+  --notchSize: 15px;
+  clip-path: polygon(
+    0% var(--notchSize),
+    var(--notchSize) 0%,
+    100% 0%,
+    100% calc(100% - var(--notchSize)),
+    calc(100% - var(--notchSize)) 100%,
+    0 100%
+  );
+
+  text-decoration: none;
+  color: ${({ theme }) => theme.tile.backgroundColor};
+  font-size: 16px;
+  margin: 5px;
+  padding: 5px;
+  cursor: pointer;
 `;

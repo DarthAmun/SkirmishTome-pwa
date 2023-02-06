@@ -1,23 +1,32 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import Origin from "../../../data/Origin";
+import Education from "../../../data/Education";
 
 interface $Props {
-  origin: Origin;
+  education: Education;
 }
 
-const OriginTile = ({ origin }: $Props) => {
+const EducationTile = ({ education }: $Props) => {
   return (
-    <Tile to={"/origin-detail/id/" + origin.id}>
+    <Tile to={"/education-detail/id/" + education.id}>
+      <Talent>
+        <b>{education.talent ? "T": ""}</b>
+      </Talent>
+
       <Name>
-        <b>{origin.name}</b>
+        <b>{education.name}</b>
       </Name>
+
+      <PropWrapper>
+        <Prop>{education.caste}</Prop>
+        <Prop>Skills: {education.skills.length}</Prop>
+      </PropWrapper>
     </Tile>
   );
 };
 
-export default OriginTile;
+export default EducationTile;
 
 type type = {
   $isflaw: boolean;
@@ -97,4 +106,19 @@ const Prop = styled.div`
   &:nth-child(odd) {
     margin: 0 0 5px 0px;
   }
+`;
+
+const Talent = styled.div`
+  height: auto;
+  float: left;
+  padding: 10px;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  float: right;
+  text-align: center;
+  border-top-right-radius: 3px;
+  border-radius: 30px;
+  border-bottom: solid 1px ${({ theme }) => theme.main.highlight};
+  margin: 5px;
 `;

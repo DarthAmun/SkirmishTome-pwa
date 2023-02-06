@@ -51,6 +51,12 @@ const RaceEditView = ({ race, onEdit }: $Props) => {
   return (
     <CenterWrapper>
       <View>
+        <NumberField
+          value={race.rarity}
+          label="Rarity"
+          max={5}
+          onChange={(value) => onEdit({ ...race, rarity: value })}
+        />
         <StringField
           value={race.name}
           label="Name"

@@ -9,6 +9,7 @@ export enum RaceLimits {
 export default class Race implements IEntity {
   id?: number;
   name: string;
+  rarity: number;
   hp: number;
   abilityModifier: string;
   size: string;
@@ -22,6 +23,7 @@ export default class Race implements IEntity {
   constructor(
     id?: number,
     name?: string,
+    rarity?: number,
     hp?: number,
     abilityModifier?: string,
     size?: string,
@@ -34,6 +36,7 @@ export default class Race implements IEntity {
   ) {
     this.id = id;
     this.name = name || "";
+    this.rarity = rarity || 0;
     this.hp = hp || 0;
     this.abilityModifier = abilityModifier || "";
     this.size = size || "";
@@ -49,6 +52,7 @@ export default class Race implements IEntity {
     return [
       race.id,
       race.name,
+      race.rarity,
       race.hp,
       race.abilityModifier,
       race.size,

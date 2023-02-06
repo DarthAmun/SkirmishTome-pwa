@@ -2,51 +2,44 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 
 import SelectField from "../../../form_elements/SelectField";
-import Origin, { OriginKaste } from "../../../../data/Origin";
+import Education, { Kaste } from "../../../../data/Education";
 import { makeEnumSelectable } from "../../../../services/EnumService";
 
 interface $Props {
-  origin: Origin;
-  onEdit: (value: Origin) => void;
+  education: Education;
+  onEdit: (value: Education) => void;
 }
 
-const OriginEditView = ({ origin, onEdit }: $Props) => {
-
-  useEffect(()=> {
-    const newName = origin.casteOne + "/" + origin.casteTwo;
-    if(origin.name !== newName) {
-      onEdit({ ...origin, name: newName });
-    }
-  },[origin])
+const EducationEditView = ({ education, onEdit }: $Props) => {
 
   return (
     <CenterWrapper>
       <View>
         <FieldGroup>
           <Name>
-            <b>{origin.name}</b>
+            <b>{education.name}</b>
           </Name>
         </FieldGroup>
-        <SelectField
-          value={origin.casteOne}
-          options={makeEnumSelectable(OriginKaste)}
+        {/* <SelectField
+          value={education.casteOne}
+          options={makeEnumSelectable(EducationKaste)}
           label={"Kaste 1"}
-          onClear={() => onEdit({ ...origin, casteOne: OriginKaste.Slave })}
-          onChange={(category: string) => onEdit({ ...origin, casteOne: category })}
+          onClear={() => onEdit({ ...education, casteOne: EducationKaste.Slave })}
+          onChange={(category: string) => onEdit({ ...education, casteOne: category })}
         />
         <SelectField
-          value={origin.casteTwo}
-          options={makeEnumSelectable(OriginKaste)}
+          value={education.casteTwo}
+          options={makeEnumSelectable(EducationKaste)}
           label={"Kaste 2"}
-          onClear={() => onEdit({ ...origin, casteTwo: OriginKaste.Slave })}
-          onChange={(category: string) => onEdit({ ...origin, casteTwo: category })}
-        />
+          onClear={() => onEdit({ ...education, casteTwo: EducationKaste.Slave })}
+          onChange={(category: string) => onEdit({ ...education, casteTwo: category })}
+        /> */}
       </View>
     </CenterWrapper>
   );
 };
 
-export default OriginEditView;
+export default EducationEditView;
 
 const Name = styled.div`
   height: auto;

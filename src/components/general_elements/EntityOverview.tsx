@@ -27,8 +27,8 @@ import TraditionSearchBar from "../entities/tradtitons/TradtitionSearchBar";
 import TraditionTile from "../entities/tradtitons/TradtitionTile";
 import CharacterSearchBar from "../entities/characters/CharacterSearchBar";
 import CharacterTile from "../entities/characters/CharacterTile";
-import OriginSearchBar from "../entities/origins/OriginSearchBar";
-import OriginTile from "../entities/origins/OriginTile";
+import EducationSearchBar from "../entities/education/EducationSearchBar";
+import EducationTile from "../entities/education/EducationTile";
 
 const EntityOverview = ({ match }: RouteComponentProps) => {
   const rawFilters = useQuery().get("filter");
@@ -108,7 +108,7 @@ const EntityOverview = ({ match }: RouteComponentProps) => {
     item: ItemSearchBar,
     tradition: TraditionSearchBar,
     character: CharacterSearchBar,
-    origin: OriginSearchBar,
+    education: EducationSearchBar,
   };
 
   type tileOptions = {
@@ -124,7 +124,7 @@ const EntityOverview = ({ match }: RouteComponentProps) => {
     item: ItemTile,
     tradition: TraditionTile,
     character: CharacterTile,
-    origin: OriginTile,
+    education: EducationTile,
   };
 
   return (

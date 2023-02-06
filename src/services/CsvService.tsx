@@ -89,6 +89,7 @@ export const scanImportedRaceCsv = (csv: Array<any>, filename: string) => {
         0,
         row[0],
         +row[1],
+        +row[9],
         row[4],
         row[3],
         +row[2],

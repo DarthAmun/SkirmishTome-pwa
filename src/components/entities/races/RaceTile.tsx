@@ -10,6 +10,11 @@ interface $Props {
 const RaceTile = ({ race }: $Props) => {
   return (
     <Tile to={"/race-detail/id/" + race.id}>
+
+      <Rarity>
+        <b>{race.rarity}</b>
+      </Rarity>
+
       <Name>
         <b>{race.name}</b>
       </Name>
@@ -84,4 +89,19 @@ const Prop = styled.div`
   &:nth-child(odd) {
     margin: 0 0 5px 0px;
   }
+`;
+
+const Rarity = styled.div`
+  height: auto;
+  float: left;
+  padding: 10px;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  float: right;
+  text-align: center;
+  border-top-right-radius: 3px;
+  border-radius: 30px;
+  border-bottom: solid 1px ${({ theme }) => theme.main.highlight};
+  margin: 5px;
 `;
