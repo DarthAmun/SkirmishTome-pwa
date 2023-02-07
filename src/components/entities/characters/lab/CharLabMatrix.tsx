@@ -42,9 +42,19 @@ const CharLabMatrix = ({ char, onChange, completed }: $Props) => {
         newSelection[i][j] = false;
       }
     }
-    
+
     newSelection[row][col] = true;
     setSelection(Array.from(newSelection));
+  }
+
+  const isValid = () => {
+    let valids: number = 0;
+    for(let i: number = 0; i<6; i++) {
+      for(let j: number = 0; j<6; j++) {
+        if(selection[i][j]) valids++;
+      }
+    }
+    return valids >= 6;
   }
 
   return (
@@ -196,7 +206,7 @@ const CharLabMatrix = ({ char, onChange, completed }: $Props) => {
 
         <IconButton
           icon={faCheckCircle}
-          disabled={!(char && char.name.length > 1 && char.player.length > 1)}
+          disabled={!(char && char.name.length > 1 && char.player.length > 1 && isValid())}
           onClick={() => completed(true, "Class")}
         />
       </CharView>
