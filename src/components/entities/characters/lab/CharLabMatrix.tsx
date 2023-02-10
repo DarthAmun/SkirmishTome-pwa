@@ -3,17 +3,17 @@ import styled from "styled-components";
 
 import IconButton from "../../../form_elements/IconButton";
 import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
-import Character from "../../../../data/Character";
 import Race from "../../../../data/Race";
 import { reciveAll } from "../../../../services/DatabaseService";
+import Lab from "../../../../data/Lab";
 
 interface $Props {
-  char: Character;
-  onChange: (character: Character) => void;
+  lab: Lab;
+  onChange: (lab: Lab) => void;
   completed: (completed: boolean, nextTab: string) => void;
 }
 
-const CharLabMatrix = ({ char, onChange, completed }: $Props) => {
+const CharLabMatrix = ({ lab, onChange, completed }: $Props) => {
 
   const [selection, setSelection] = useState<boolean[][]>(Array(6).fill(Array(6).fill(false)));
   const [races, setRaces] = useState<Race[]>([]);
@@ -57,6 +57,11 @@ const CharLabMatrix = ({ char, onChange, completed }: $Props) => {
     return valids >= 6;
   }
 
+  const finish = () => {
+    onChange({...lab, matrix: selection});
+    completed(true, "Class");
+  }
+
   return (
     <CenterWrapper>
       <CharView>
@@ -97,7 +102,7 @@ const CharLabMatrix = ({ char, onChange, completed }: $Props) => {
               Knight/Noble <br></br> 350 Neekon
             </MatrixSection>
             <MatrixSection type={selection[1][1]} onClick={() => makeSelection(1,1)}>
-              {races.filter((race) => race.rarity === 1)}
+              {races.filter((race) => race.rarity === 1).map((race) => race.name)}
               <br></br> or any of the races below +1 TalentPoint
             </MatrixSection>
             <MatrixSection type={selection[2][1]} onClick={() => makeSelection(2,1)}>
@@ -120,7 +125,7 @@ const CharLabMatrix = ({ char, onChange, completed }: $Props) => {
               Noble/Scholar <br></br> 250 Neekon
             </MatrixSection>
             <MatrixSection type={selection[1][2]} onClick={() => makeSelection(1,2)}>
-              {races.filter((race) => race.rarity === 2)}
+              {races.filter((race) => race.rarity === 2).map((race) => race.name)}
               <br></br> or any of the races below +1 TalentPoint
             </MatrixSection>
             <MatrixSection type={selection[2][2]} onClick={() => makeSelection(2,2)}>
@@ -143,7 +148,7 @@ const CharLabMatrix = ({ char, onChange, completed }: $Props) => {
               Scholar/Worker <br></br> 200 Neekon
             </MatrixSection>
             <MatrixSection type={selection[1][3]} onClick={() => makeSelection(1,3)}>
-              {races.filter((race) => race.rarity === 3)} <br></br> or any of
+              {races.filter((race) => race.rarity === 3).map((race) => race.name)} <br></br> or any of
               the races below +1 TalentPoint
             </MatrixSection>
             <MatrixSection type={selection[2][3]} onClick={() => makeSelection(2,3)}>
@@ -165,7 +170,7 @@ const CharLabMatrix = ({ char, onChange, completed }: $Props) => {
               Worker/Outlaw <br></br> 150 Neekon
             </MatrixSection>
             <MatrixSection type={selection[1][4]} onClick={() => makeSelection(1,4)}>
-              {races.filter((race) => race.rarity === 4)} <br></br> or any of
+              {races.filter((race) => race.rarity === 4).map((race) => race.name)} <br></br> or any of
               the races below +1 TalentPoint
             </MatrixSection>
             <MatrixSection type={selection[2][4]} onClick={() => makeSelection(2,4)}>
@@ -187,7 +192,7 @@ const CharLabMatrix = ({ char, onChange, completed }: $Props) => {
               Ourlaw/Slave <br></br> 75 Neekon
             </MatrixSection>
             <MatrixSection type={selection[1][5]} onClick={() => makeSelection(1,5)}>
-              {races.filter((race) => race.rarity === 5)}
+              {races.filter((race) => race.rarity === 5).map((race) => race.name)}
             </MatrixSection>
             <MatrixSection type={selection[2][5]} onClick={() => makeSelection(2,5)}>
               3x D8<br></br>
@@ -206,8 +211,8 @@ const CharLabMatrix = ({ char, onChange, completed }: $Props) => {
 
         <IconButton
           icon={faCheckCircle}
-          disabled={!(char && char.name.length > 1 && char.player.length > 1 && isValid())}
-          onClick={() => completed(true, "Class")}
+          disabled={!(isValid())}
+          onClick={() => finish()}
         />
       </CharView>
     </CenterWrapper>

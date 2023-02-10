@@ -4,37 +4,37 @@ import styled from "styled-components";
 import IconButton from "../../../form_elements/IconButton";
 import StringField from "../../../form_elements/StringField";
 import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
-import Character from "../../../../data/Character";
+import Lab from "../../../../data/Lab";
 
 interface $Props {
-  char: Character;
-  onChange: (character: Character) => void;
+  lab: Lab;
+  onChange: (lab: Lab) => void;
   completed: (completed: boolean, nextTab: string) => void;
 }
 
-const CharLabGeneral = ({ char, onChange, completed }: $Props) => {
+const CharLabGeneral = ({ lab, onChange, completed }: $Props) => {
   return (
     <CenterWrapper>
       <CharView>
         <StringField
-          value={char.name}
+          value={lab.char.name}
           label="Name *"
-          onChange={(name) => onChange({ ...char, name: name })}
+          onChange={(name) => onChange({ ...lab, char: {...lab.char, name: name }})}
         />
         <StringField
-          value={char.player}
+          value={lab.char.player}
           label="Player *"
-          onChange={(player) => onChange({ ...char, player: player })}
+          onChange={(player) => onChange({ ...lab, char: {...lab.char, player: player }})}
         />
         <StringField
-          value={char.pic}
+          value={lab.char.pic}
           label="Picture"
-          onChange={(pic) => onChange({ ...char, pic: pic })}
+          onChange={(pic) => onChange({ ...lab, char: {...lab.char, pic: pic  }})}
         />
         <IconButton
           icon={faCheckCircle}
-          disabled={!(char && char.name.length > 1 && char.player.length > 1)}
-          onClick={() => completed(true, "Class")}
+          disabled={!(lab.char && lab.char.name.length > 1 && lab.char.player.length > 1)}
+          onClick={() => completed(true, "Matrix")}
         />
       </CharView>
     </CenterWrapper>

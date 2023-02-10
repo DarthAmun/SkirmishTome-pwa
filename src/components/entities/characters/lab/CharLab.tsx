@@ -11,13 +11,15 @@ import { useQuery } from "../../../../hooks/QueryHook";
 import Character from "../../../../data/Character";
 import CharacterView from "../details/CharacterView";
 import CharLabMatrix from "./CharLabMatrix";
+import Lab from "../../../../data/Lab";
 
 const CharLab = () => {
   let history = useHistory();
   const name = useQuery().get("name");
   const [activeTab, setTab] = useState<string>("General");
-  const [newChar, updateChar] = useState<Character>(
-    new Character(-1, name !== null ? name : "")
+
+  const [lab, updateLab] = useState<Lab>(
+    new Lab([], new Character(-1, name !== null ? name : ""))
   );
 
   const [completedGeneral, setGeneral] = useState<boolean>(false);
@@ -33,7 +35,7 @@ const CharLab = () => {
   };
 
   const saveChar = () => {
-    // recalcClasses(newChar).then((updatedChar) => {
+    // recalcClasses(lab).then((updatedChar) => {
     //   delete updatedChar["id"];
     //   saveWithCallback("chars", updatedChar, (result) => {
     //     history.push(`/char-detail/id/${result}`);
@@ -54,8 +56,8 @@ const CharLab = () => {
             <>
               {!completedGeneral && (
                 <CharLabGeneral
-                  char={newChar}
-                  onChange={updateChar}
+                  lab={lab}
+                  onChange={updateLab}
                   completed={updateGeneral}
                 />
               )}
@@ -71,8 +73,8 @@ const CharLab = () => {
             <>
               {!completedMatrix && (
                 <CharLabMatrix
-                  char={newChar}
-                  onChange={updateChar}
+                  lab={lab}
+                  onChange={updateLab}
                   completed={updateGeneral}
                 />
               )}
@@ -101,7 +103,7 @@ const CharLab = () => {
                     />
                   </PropWrapper>
                   <CharacterView
-                    character={newChar}
+                    character={lab.char}
                     // saveChar={() => undefined}
                   ></CharacterView>
                 </>

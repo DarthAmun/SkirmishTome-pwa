@@ -1,3 +1,4 @@
+import Education from "../data/Education";
 import IEntity from "../data/IEntity";
 import Power from "../data/Power";
 import Race from "../data/Race";
@@ -126,6 +127,28 @@ export const scanImportedTalentCsv = (csv: Array<any>, filename: string) => {
   });
   console.log("Processed Talents", listOfTalents);
   saveInDB("talents", listOfTalents, filename);
+};
+
+export const scanImportedEducationCsv = (csv: Array<any>, filename: string) => {
+  let listOfEducations: Array<Education> = [];
+  console.log("Raw", csv);
+  csv.slice(1).forEach((row: Array<string>) => {
+    if (row.length > 1) {
+      const kowledgeskills = row[2].split(",").map((t) => t.trim());
+      const skills = row[3].split(",").map((t) => t.trim());
+      let newEducation = new Education(
+        0,
+        row[0],
+        row[1],
+        [...skills, ...kowledgeskills],
+        row[5],
+        row[4]
+      );
+      listOfEducations.push(newEducation);
+    }
+  });
+  console.log("Processed Educations", listOfEducations);
+  saveInDB("educations", listOfEducations, filename);
 };
 
 export const scanImportedPowerCsv = (csv: Array<any>, filename: string) => {

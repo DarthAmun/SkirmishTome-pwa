@@ -21,7 +21,7 @@ import ImportField, { ImportModus } from "../form_elements/ImportField";
 import DiscordOptions from "./DiscordOptions";
 import { useCSVDownloader, usePapaParse } from "react-papaparse";
 import FileField from "../form_elements/FileField";
-import { scanImportedTalentCsv, scanImportedPowerCsv, scanImportedRaceCsv, scanImportedSpellCsv } from "../../services/CsvService";
+import { scanImportedTalentCsv, scanImportedPowerCsv, scanImportedRaceCsv, scanImportedSpellCsv, scanImportedEducationCsv } from "../../services/CsvService";
 import Spell from "../../data/Spell";
 import Race from "../../data/Race";
 import SpellsOptions from "./SpellsOptions";
@@ -75,6 +75,27 @@ const Options = () => {
             const csv: Array<any> = results.data;
             console.log(csv);
             scanImportedPowerCsv(csv, file.name);
+            console.log("---------");
+          },
+        });
+      }
+    };
+    fileReader.readAsText(file);
+  };
+
+  const handleEducationsCsvUpload = (files: any) => {
+    const file: File = files[0];
+    let fileReader = new FileReader();
+    fileReader.onloadend = function () {
+      const content = fileReader.result;
+      if (content !== null) {
+        readString(content.toString(), {
+          worker: true,
+          complete: (results) => {
+            console.log("Csv loaded from " + file.name);
+            const csv: Array<any> = results.data;
+            console.log(csv);
+            scanImportedEducationCsv(csv, file.name);
             console.log("---------");
           },
         });
@@ -287,6 +308,16 @@ const Options = () => {
               accept={".csv"}
               icon={faFileImport}
               onChange={(file) => handlePowersCsvUpload(file)}
+            />
+          </OptionSection>
+          <OptionSection>
+            <SelectionTitle>Import Education CSV</SelectionTitle>
+            <FileField
+              label=""
+              isMulti={true}
+              accept={".csv"}
+              icon={faFileImport}
+              onChange={(file) => handleEducationsCsvUpload(file)}
             />
           </OptionSection>
         </OptionTab>
